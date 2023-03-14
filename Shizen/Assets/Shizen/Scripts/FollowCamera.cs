@@ -44,7 +44,7 @@ public class FollowCamera : MonoBehaviour
             if (GeneralSettings.InvertMouseX) player.transform.Rotate(0, -addToX, 0);
             else player.transform.Rotate(0, addToX, 0);
 
-            if (!player.Moving)
+            if (!player.IsMoving)
             {
                 if (GeneralSettings.InvertMouseX) playerModel.Rotate(0, addToX, 0);
                 else playerModel.Rotate(0, -addToX, 0);
