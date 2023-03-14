@@ -13,20 +13,30 @@ public class PlayerAnimatorController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        if (!playerMovement.IsGrounded) animator.SetTrigger("Falling");
-        else
+        if (playerMovement.IsGrounded)
         {
+            Debug.Log("grounded");
             if (playerMovement.IsRunning) animator.SetTrigger("Move");
             if (!playerMovement.IsMoving) animator.SetTrigger("Idle");
         }
 
         if (playerMovement.IsDashing) animator.SetTrigger("Dash");
 
+        if (playerMovement.IsJumping) animator.SetBool("Jump", true);
+         animator.SetBool("Falling", !playerMovement.IsGrounded);
 
-        animator.SetBool("Jump", playerMovement.IsJumping);
-        if (playerMovement.IsJumping) Debug.Log("Jump");
+    }
 
+    public void StopJump()
+    {
+        animator.SetBool("Jump", false);
+        playerMovement.StopJump();
+    }
+
+    public void Jump()
+    {
+        playerMovement.Jump();
     }
 }

@@ -51,8 +51,14 @@ public class FollowCamera : MonoBehaviour
             }
             else
             {
-                var Y = Vector3.RotateTowards(playerModel.forward, player.transform.forward, 1 * Time.unscaledDeltaTime * 15, 0f);
-                playerModel.rotation = Quaternion.LookRotation(Y);
+                //OLD
+                //var Y = Vector3.RotateTowards(playerModel.forward, player.transform.forward, 1 * Time.unscaledDeltaTime * 15, 0f);
+                // playerModel.rotation = Quaternion.LookRotation( player.transform.TransformDirection(player.Movement));
+
+                //NEW
+                 var Y = Quaternion.LookRotation(player.transform.TransformDirection(player.Movement));
+                if(!player.IsRunning)Y = Quaternion.LookRotation(playerModel.transform.forward);
+                 playerModel.rotation = Quaternion.RotateTowards(playerModel.rotation, Y, 1 * Time.unscaledDeltaTime * 500);
             }
         }
     }

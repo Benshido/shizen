@@ -33,12 +33,13 @@ public class PlayerMovement : MonoBehaviour
 
     private CharacterController charController;
 
-    private bool isGrounded = true;
+    [SerializeField] bool isGrounded = true;
+    [SerializeField] LayerMask groundedMask;
     public bool IsGrounded { get { return isGrounded; } }
-    private float groundedTimer = 0;
 
     // private Rigidbody rig;
     private Vector3 movement;
+    public Vector3 Movement { get { return movement; } }
     private bool canMove = true;
     private Vector3 externalForces;
     private Vector3 dashMovement;
@@ -57,21 +58,20 @@ public class PlayerMovement : MonoBehaviour
         maxFallSpd = Physics.gravity.y + (Physics.gravity.y * (weight / 75));
 
         externalForces.y = maxFallSpd;
-        waitforThisGrounded = charController.isGrounded;
     }
-
-    private bool waitforThisGrounded = false;
 
     // Update is called once per frame
     void Update()
     {
-        groundedTimer += Time.unscaledDeltaTime;
-        if (charController.isGrounded != waitforThisGrounded) { groundedTimer = 0; waitforThisGrounded = charController.isGrounded; }
-        if (waitforThisGrounded != isGrounded && groundedTimer >= 0.2f)
-        {           
-            isGrounded = charController.isGrounded;
+        //grounded check (character controller isGrounded is too glitchy)
+        Vector3 origin = transform.position + charController.center;
+        origin.y -= (charController.height / 2) - 0.03f;
+        if (Physics.Raycast(origin, -transform.up, 0.3f, groundedMask))
+        {
+            isGrounded = true;
         }
-        Debug.Log(isGrounded);
+        else isGrounded = false;
+        Debug.DrawRay(origin, -transform.up, Color.red);
 
 
         movement = Vector3.zero;
@@ -93,14 +93,16 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetKeyDown(jump) && charController.isGrounded)
         {
-            Jump();
+            jumping = true;
+            //Jump();
+           // StartCoroutine(JumpTimer());
         }
         if (Input.GetKeyDown(dash) && dashAvailable)
         {
             Dash();
         }
 
-        if (!charController.isGrounded)
+        if (!isGrounded)
         {
             if (externalForces.y > maxFallSpd)
             {
@@ -143,13 +145,19 @@ public class PlayerMovement : MonoBehaviour
     public void Jump()
     {
         externalForces.y = jumpForce;
-        StartCoroutine(JumpTimer());
+        // StartCoroutine(JumpTimer());
     }
 
-    private IEnumerator JumpTimer()
+   /* private IEnumerator JumpTimer()
     {
         jumping = true;
-        yield return new WaitForSecondsRealtime(0.1f);
+        yield return new WaitForEndOfFrame();
+        yield return 1;
+        jumping = false;
+    }
+   */
+   public void StopJump()
+    {
         jumping = false;
     }
 
