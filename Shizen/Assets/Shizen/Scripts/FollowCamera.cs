@@ -21,6 +21,7 @@ public class FollowCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //quick temporary hotkeys for inverting axis
         if (Input.GetKeyDown(KeyCode.Y)) GeneralSettings.InvertMouseY = !GeneralSettings.InvertMouseY;
         if (Input.GetKeyDown(KeyCode.X)) GeneralSettings.InvertMouseX = !GeneralSettings.InvertMouseX;
 
@@ -35,30 +36,32 @@ public class FollowCamera : MonoBehaviour
             else pitchRotation -= Input.GetAxis("Mouse Y") * GeneralSettings.CameraYSpeed * Time.unscaledDeltaTime * camSpeedMultiplier;
 
             float addToX = Input.GetAxis("Mouse X") * GeneralSettings.CameraXSpeed * Time.unscaledDeltaTime * camSpeedMultiplier;
+            if (GeneralSettings.InvertMouseX) addToX = -addToX;
 
+            //apply camera pitch limits
             if (pitchRotation > tiltUpLim) pitchRotation = tiltUpLim;
             else if (pitchRotation < tiltLowLim) pitchRotation = tiltLowLim;
 
+            //adjust pitch of the camera
             target.localEulerAngles = new Vector3(pitchRotation, 0, 0);
 
-            if (GeneralSettings.InvertMouseX) player.transform.Rotate(0, -addToX, 0);
-            else player.transform.Rotate(0, addToX, 0);
+            //rotate player to face away from the camera
+            player.transform.Rotate(0, addToX, 0);
 
             if (!player.IsMoving)
             {
-                if (GeneralSettings.InvertMouseX) playerModel.Rotate(0, addToX, 0);
-                else playerModel.Rotate(0, -addToX, 0);
+                //Keep the player model facing the same direction by rotating it the oposite direction
+                playerModel.Rotate(0, -addToX, 0);
             }
             else
-            {
-                //OLD
-                //var Y = Vector3.RotateTowards(playerModel.forward, player.transform.forward, 1 * Time.unscaledDeltaTime * 15, 0f);
-                // playerModel.rotation = Quaternion.LookRotation( player.transform.TransformDirection(player.Movement));
+            {   
+                //When dashing or running the rotation should match the expectations of the player
+                var dashLookDir = player.DashMovement;
+                if (player.BackStep) dashLookDir = -dashLookDir;
+                var Y = Quaternion.LookRotation(player.transform.TransformDirection(player.Movement + dashLookDir));
+                if (!player.IsRunning && !player.IsDashing) Y = Quaternion.LookRotation(playerModel.transform.forward);
 
-                //NEW
-                 var Y = Quaternion.LookRotation(player.transform.TransformDirection(player.Movement));
-                if(!player.IsRunning)Y = Quaternion.LookRotation(playerModel.transform.forward);
-                 playerModel.rotation = Quaternion.RotateTowards(playerModel.rotation, Y, 1 * Time.unscaledDeltaTime * 500);
+                playerModel.rotation = Quaternion.RotateTowards(playerModel.rotation, Y, 1 * Time.unscaledDeltaTime * 800);
             }
         }
     }

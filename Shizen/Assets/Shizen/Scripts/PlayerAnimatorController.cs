@@ -3,38 +3,54 @@ using UnityEngine;
 public class PlayerAnimatorController : MonoBehaviour
 {
     [SerializeField] PlayerMovement playerMovement;
-    Animator animator;
-    // Start is called before the first frame update
+    [Tooltip("If null will grab from this object")]
+    [SerializeField] Animator animator;
+
     void Start()
     {
-        animator = GetComponent<Animator>();
+        if (animator == null) animator = GetComponent<Animator>();
 
         animator.SetTrigger("Idle");
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (playerMovement.IsGrounded)
+        if (playerMovement.HP.IsAlive)
         {
-            Debug.Log("grounded");
-            if (playerMovement.IsRunning) animator.SetTrigger("Move");
-            if (!playerMovement.IsMoving) animator.SetTrigger("Idle");
+            animator.SetBool("BackStep", playerMovement.BackStep);
+
+            if (playerMovement.IsDashing)
+            {
+                StopJump();
+                animator.SetTrigger("Dash");
+                animator.SetBool("Falling", false);
+            }
+            else
+            {
+                if (playerMovement.IsGrounded)
+                {
+                    if (playerMovement.IsRunning) animator.SetTrigger("Move");
+                    if (!playerMovement.IsMoving) animator.SetTrigger("Idle");
+                }
+
+                if (playerMovement.IsJumping) animator.SetBool("Jump", true);
+                animator.SetBool("Falling", !playerMovement.IsGrounded);
+            }
         }
-
-        if (playerMovement.IsDashing) animator.SetTrigger("Dash");
-
-        if (playerMovement.IsJumping) animator.SetBool("Jump", true);
-         animator.SetBool("Falling", !playerMovement.IsGrounded);
-
+        else
+        {
+            //animator.SetTrigger("Dead");
+        }
     }
 
+    //Can be called from animation events
     public void StopJump()
     {
         animator.SetBool("Jump", false);
         playerMovement.StopJump();
     }
 
+    //Can be called from animation events
     public void Jump()
     {
         playerMovement.Jump();

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Key Binds")]
     [SerializeField]
     KeyCode moveForward = KeyCode.W,
         moveBack = KeyCode.S,
@@ -27,7 +26,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float dashMultiplier = 3;
     [SerializeField] float dashDuration = 1;
     [SerializeField] float dashCooldown = 1;
+    /// <summary>
+    /// Will be set to false on knockbacks
+    /// </summary>
     private bool dashAvailable = true;
+    private bool backStep = false;
+    public bool BackStep { get { return backStep; } }
     [Header("Other")]
     [SerializeField] float weight = 70;
 
@@ -37,16 +41,20 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask groundedMask;
     public bool IsGrounded { get { return isGrounded; } }
 
-    // private Rigidbody rig;
+    private Vector3 finalMovement;
     private Vector3 movement;
-    public Vector3 Movement { get { return movement; } }
+    public Vector3 Movement { get { return finalMovement; } }
     private bool canMove = true;
     private Vector3 externalForces;
+    public Vector3 ExternalForces { get { return externalForces; } }
     private Vector3 dashMovement;
+    public Vector3 DashMovement { get { return dashMovement; } }
 
     public bool IsMoving { get { if (IsRunning || IsDashing || IsJumping) return true; return false; } }
     public bool IsRunning { get { if (movement != Vector3.zero) return true; return false; } }
     public bool IsDashing { get { if (dashMovement != Vector3.zero) return true; return false; } }
+    public PlayerHP HP { get { return hp; } }
+    private PlayerHP hp;
 
     private float maxFallSpd = 0;
     private int dashCount = 0;
@@ -55,6 +63,9 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         charController = GetComponent<CharacterController>();
+        hp = GetComponentInChildren<PlayerHP>();
+
+        //calculate maximum fall speed using gravity and weight
         maxFallSpd = Physics.gravity.y + (Physics.gravity.y * (weight / 75));
 
         externalForces.y = maxFallSpd;
@@ -66,60 +77,81 @@ public class PlayerMovement : MonoBehaviour
         //grounded check (character controller isGrounded is too glitchy)
         Vector3 origin = transform.position + charController.center;
         origin.y -= (charController.height / 2) - 0.03f;
-        if (Physics.Raycast(origin, -transform.up, 0.3f, groundedMask))
+        if (Physics.OverlapSphere(origin, charController.radius, groundedMask).Length > 0)
         {
             isGrounded = true;
         }
         else isGrounded = false;
-        Debug.DrawRay(origin, -transform.up, Color.red);
 
+        if (hp.IsAlive)
+        {
+            //reset movement before trying to see if we should be moving
+            movement = Vector3.zero;
 
-        movement = Vector3.zero;
-        if (Input.GetKey(moveForward))
-        {
-            MoveForward();
-        }
-        if (Input.GetKey(moveBack))
-        {
-            MoveBack();
-        }
-        if (Input.GetKey(moveLeft))
-        {
-            MoveLeft();
-        }
-        if (Input.GetKey(moveRight))
-        {
-            MoveRight();
-        }
-        if (Input.GetKeyDown(jump) && charController.isGrounded)
-        {
-            jumping = true;
-            //Jump();
-           // StartCoroutine(JumpTimer());
-        }
-        if (Input.GetKeyDown(dash) && dashAvailable)
-        {
-            Dash();
-        }
-
-        if (!isGrounded)
-        {
-            if (externalForces.y > maxFallSpd)
+            //when oposite keys are pressed at the same time it should act like neither are pressed
+            if (Input.GetKey(moveForward) && !Input.GetKey(moveBack))
             {
-                externalForces.y = Mathf.MoveTowards(externalForces.y, maxFallSpd, Time.unscaledDeltaTime * 60);
+                MoveForward();
             }
+            if (Input.GetKey(moveBack) && !Input.GetKey(moveForward))
+            {
+                MoveBack();
+            }
+            if (Input.GetKey(moveLeft) && !Input.GetKey(moveRight))
+            {
+                MoveLeft();
+            }
+            if (Input.GetKey(moveRight) && !Input.GetKey(moveLeft))
+            {
+                MoveRight();
+            }
+
+            //evens out movement when multiple directions are being moved towards
+            float movementDivider = 1.5f;
+            if (movement.x != 0) movement.z /= movementDivider;
+            if (movement.z != 0) movement.x /= movementDivider;
+
+            //Player can only jump when grounded
+            if (Input.GetKeyDown(jump) && isGrounded)
+            {
+                jumping = true;
+            }
+
+            if (Input.GetKeyDown(dash) && dashAvailable)
+            {
+                Dash();
+            }
+
+            if (!isGrounded)
+            {
+                //increases fall speed over time when falling
+                if (externalForces.y > maxFallSpd)
+                {
+                    externalForces.y = Mathf.MoveTowards(externalForces.y, maxFallSpd, Time.unscaledDeltaTime * 60);
+                }
+            }
+            //The player needs to have some downward force while grounded for slopes when not trying to jump
+            else if (!jumping) externalForces.y = maxFallSpd / 5;
+
+            //When dashing the player should not fall
+            if (dashCount > 0) externalForces.y = 0;
+
+            //smooth movement
+            if (isGrounded || IsDashing) finalMovement = Vector3.MoveTowards(finalMovement, movement, Time.unscaledDeltaTime * 30);
+            else finalMovement = Vector3.MoveTowards(finalMovement, movement, Time.unscaledDeltaTime * 15);
+
+
+            var movementAndDir = Vector3.zero;
+            if (canMove) movementAndDir = transform.rotation * (finalMovement + dashMovement);
+
+            //External force can be used for jumping and knockbacks
+            charController.Move((externalForces + movementAndDir) * Time.unscaledDeltaTime);
         }
-        else if (!jumping) externalForces.y = maxFallSpd / 5;
 
-        if (dashCount > 0) externalForces.y = 0;
-
-        var movementAndDir = Vector3.zero;
-        if (canMove) movementAndDir = transform.rotation * (movement + dashMovement);
-
-        charController.Move((externalForces + movementAndDir) * Time.unscaledDeltaTime);
-
+        //quick test on time slowing/speeding up
         if (Input.GetKeyDown(KeyCode.Q)) Time.timeScale = 0.02f;
         if (Input.GetKeyDown(KeyCode.E)) Time.timeScale = 1;
+
     }
 
     public void MoveForward()
@@ -145,18 +177,9 @@ public class PlayerMovement : MonoBehaviour
     public void Jump()
     {
         externalForces.y = jumpForce;
-        // StartCoroutine(JumpTimer());
     }
 
-   /* private IEnumerator JumpTimer()
-    {
-        jumping = true;
-        yield return new WaitForEndOfFrame();
-        yield return 1;
-        jumping = false;
-    }
-   */
-   public void StopJump()
+    public void StopJump()
     {
         jumping = false;
     }
@@ -164,10 +187,20 @@ public class PlayerMovement : MonoBehaviour
     public void Dash()
     {
         dashMovement = movement * dashMultiplier;
-        if (dashMovement == Vector3.zero) dashMovement.z = -(moveSpeed * dashMultiplier);
+
+        //If not moving, the backstep will be used instead
+        if (dashMovement == Vector3.zero)
+        {
+            dashMovement.z = -(moveSpeed * dashMultiplier);
+            backStep = true;
+        }
         StartCoroutine(DashForceReset());
     }
 
+    /// <summary>
+    /// Sets DashForce to Vector3.zero
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator DashForceReset()
     {
         dashCount++;
@@ -175,13 +208,13 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSecondsRealtime(dashDuration);
 
         dashCount--;
-        if (dashCount == 0) dashMovement = Vector3.zero;
+        if (dashCount == 0) { dashMovement = Vector3.zero; backStep = false; }
     }
 
     private IEnumerator DashCooldown()
     {
         dashAvailable = false;
-        yield return new WaitForSecondsRealtime(dashCooldown);
+        yield return new WaitForSecondsRealtime(dashCooldown + dashDuration);
         dashAvailable = true;
     }
 }
