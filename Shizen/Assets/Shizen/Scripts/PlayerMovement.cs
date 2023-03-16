@@ -131,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
             //The player needs to have some downward force while grounded for slopes when not trying to jump
-            else if (!jumping) externalForces.y = maxFallSpd / 5;
+            else if (!jumping) externalForces.y = maxFallSpd / 3;
 
             //When dashing the player should not fall
             if (dashCount > 0) externalForces.y = 0;
