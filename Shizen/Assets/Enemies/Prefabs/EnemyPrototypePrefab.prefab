@@ -195,7 +195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7249792487531440977}
   - component: {fileID: 7249792487531440976}
-  - component: {fileID: 7249792487531440983}
+  - component: {fileID: 509625684298250236}
   - component: {fileID: 7249792487531440982}
   m_Layer: 0
   m_Name: EnemyObject
@@ -242,7 +242,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7249792487531440983
+--- !u!114 &509625684298250236
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -251,38 +251,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 7249792487531440981}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc6ac9b820d02e8409f400198cd4c79d, type: 3}
+  m_Script: {fileID: 11500000, guid: a990ab86d04d1cd4cb8a7170ca514828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  alertedTimer: 5
-  attacks:
-  - name: BasicAttack
-    animationIndex: 0
-    range: 2
-    damage: 2
-    maxAmmo: 4
-    reloadTime: 1
-    hasInfiniteAmmo: 1
-    reloadMaxAmmo: 0
-    canNotReload: 1
-    MeleeHitArea: {fileID: 7249792487789697002}
-    Projectile: {fileID: 0}
-    projectileSpeed: 0
-  lookAt: 1
-  baseHearingRange: 2
-  hearingAlertedStateIncrease: 8
-  hearingRange: 0
-  baseVisionRange: 10
-  visionAlertedStateIncrease: 5
-  visionRange: 0
-  visionAngle: 30
-  ObstructionLayers:
+  agent: {fileID: 0}
+  player: {fileID: 0}
+  whatIsGround:
     serializedVersion: 2
-    m_Bits: 129
-  AttackMask:
+    m_Bits: 1
+  whatIsPlayer:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 64
+  health: 120
+  walkPoint: {x: 0, y: 0, z: 0}
+  walkPointRange: 5
+  waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  timeBetweenAttacks: 0.5
+  projectile: {fileID: 0}
+  sightRange: 10
+  attackRange: 5
+  playerInSightRange: 0
+  playerInAttackRange: 0
 --- !u!95 &7249792487531440982
 Animator:
   serializedVersion: 5
@@ -439,5 +431,5 @@ Transform:
   - {fileID: 7249792486662752493}
   - {fileID: 7249792487531440977}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
