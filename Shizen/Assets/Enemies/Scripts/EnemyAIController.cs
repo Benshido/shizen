@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
@@ -12,6 +14,12 @@ public class EnemyAIController : MonoBehaviour
     public float health;
     private Animator anim;
 
+    [SerializeField] EnemyAttack[] attacks;
+    [Tooltip("Make sure to use correct animation transition conditions")]
+    private int currentAttackType = 0;
+    private bool hasAvailableAtk = false;
+    [SerializeField] bool lookAt = true;
+
     //Patrolling
     public Vector3 walkPoint;
     bool walkPointSet;
@@ -19,6 +27,8 @@ public class EnemyAIController : MonoBehaviour
     //Waypoints patrol
     public Transform[] waypoints;
     int m_CurrentWaypointIndex;
+
+    bool m_GroupCalled = false;
 
     //Attacking
     public float timeBetweenAttacks;
@@ -43,12 +53,21 @@ public class EnemyAIController : MonoBehaviour
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
         if (!playerInSightRange && !playerInAttackRange) Patrolling();
-        if (playerInSightRange && !playerInAttackRange) ChasePlayer();
+        if (playerInSightRange && !playerInAttackRange) 
+        {
+            if (!m_GroupCalled)
+            {
+                CallGroup();
+                m_GroupCalled = true;
+            }
+            ChasePlayer();
+        }
         if (playerInSightRange && playerInAttackRange) AttackPlayer();
     }
 
     private void Patrolling()
     {
+        m_GroupCalled = false;
         if (!walkPointSet) SearchWalkPoint();
         else agent.SetDestination(walkPoint);
 
@@ -68,7 +87,15 @@ public class EnemyAIController : MonoBehaviour
             walkPointSet = true;
     }
 
-    private void ChasePlayer()
+    public void AlertWalkpoint()
+    {
+        walkPoint = player.position;
+
+        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+            walkPointSet = true;
+    }
+
+    public void ChasePlayer()
     {
         if (!anim.GetBool("Attack"))
         {
@@ -78,12 +105,27 @@ public class EnemyAIController : MonoBehaviour
         anim.SetBool("Attack", false);
     }
 
+    public void LastPlayerLocation()
+    {
+        agent.SetDestination(player.position);
+    }
+
+    public void CallGroup()
+    {
+        // Get the parent of the parent of the parent of the child object
+        GameObject grandParentObject = gameObject.transform.parent.parent.gameObject;
+        //Debug.Log(gameObject.transform.parent.parent.gameObject.name);
+        grandParentObject.GetComponent<AlertGroup>().Alert();
+    }
+
     private void AttackPlayer()
     {
         //Make sure enemy doesn't move
         agent.SetDestination(transform.position);
 
         transform.LookAt(player);
+        anim.SetBool("Attack", true);
+        anim.SetInteger("AttackType", currentAttackType);
 
         if (!alreadyAttacked)
         {
