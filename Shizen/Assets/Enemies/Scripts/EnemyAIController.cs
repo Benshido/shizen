@@ -39,11 +39,15 @@ public class EnemyAIController : MonoBehaviour
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
+    public bool alerted = false;
+    private float standardSightRange;
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
+        standardSightRange = sightRange;
     }
 
     private void Update()
@@ -52,21 +56,35 @@ public class EnemyAIController : MonoBehaviour
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if (!playerInSightRange && !playerInAttackRange) Patrolling();
-        if (playerInSightRange && !playerInAttackRange) 
+        if (alerted)
         {
-            if (!m_GroupCalled)
+            sightRange = 50;
+        }
+
+        if (!playerInSightRange && !playerInAttackRange)
+        {
+            if (alerted)
             {
-                CallGroup();
-                m_GroupCalled = true;
+                StartCoroutine(WaitForNextAction(5));
             }
+            Patrolling();
+        }
+        if (playerInSightRange && !playerInAttackRange)
+        {
+            if (!alerted) CallGroup();
             ChasePlayer();
         }
-        if (playerInSightRange && playerInAttackRange) AttackPlayer();
+        if (playerInSightRange && playerInAttackRange)
+        {
+            AttackPlayer();
+        }
     }
 
     private void Patrolling()
     {
+        //alerted = false;
+        //sightRange = standardSightRange;
+
         m_GroupCalled = false;
         if (!walkPointSet) SearchWalkPoint();
         else agent.SetDestination(walkPoint);
@@ -75,21 +93,15 @@ public class EnemyAIController : MonoBehaviour
 
         //walkpoint reached
         if (distanceToWalkPoint.magnitude < 1f)
+        {
             walkPointSet = false;
+        }
     }
 
     private void SearchWalkPoint()
     {
         m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
         walkPoint = waypoints[m_CurrentWaypointIndex].position;
-
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
-            walkPointSet = true;
-    }
-
-    public void AlertWalkpoint()
-    {
-        walkPoint = player.position;
 
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
             walkPointSet = true;
@@ -120,6 +132,12 @@ public class EnemyAIController : MonoBehaviour
 
     private void AttackPlayer()
     {
+        //if (alerted)
+        //{
+        //    alerted = false;
+        //    sightRange = standardSightRange;
+        //}
+
         //Make sure enemy doesn't move
         agent.SetDestination(transform.position);
 
@@ -155,5 +173,16 @@ public class EnemyAIController : MonoBehaviour
     private void DestroyEnemy()
     {
         Destroy(gameObject);
+    }
+
+    IEnumerator WaitForNextAction(float time)
+    {
+        yield return new WaitForSeconds(time);
+        if (!playerInSightRange && !playerInAttackRange)
+        {
+            Debug.Log("test");
+            sightRange = standardSightRange;
+            alerted = false;
+        }
     }
 }
