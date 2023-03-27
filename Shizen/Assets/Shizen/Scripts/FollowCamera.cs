@@ -2,15 +2,20 @@ using UnityEngine;
 
 public class FollowCamera : MonoBehaviour
 {
-    public Transform target = null;
-    public Transform playerModel = null;
-    public PlayerMovement player = null;
+    [SerializeField] Transform target = null;
+    [SerializeField] Transform playerModel = null;
+    [SerializeField] PlayerMovement player = null;
 
-    public float tiltUpLim;
-    public float tiltLowLim;
+    [SerializeField] float tiltUpLim;
+    [SerializeField] float tiltLowLim;
 
     private float pitchRotation;
-    private int camSpeedMultiplier = 60;
+    [SerializeField] float targetZoom = -5;
+    [SerializeField] float camSpeedMultiplier = 60;
+    [SerializeField] float zoomSpeedDivider = 5f;
+    [SerializeField] float cameraMinDistance = -3;
+    [SerializeField] float cameraMaxDistance = -15;
+
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +37,7 @@ public class FollowCamera : MonoBehaviour
         else
         {
             CursorLock();
+            //MOUSE LOOK
             if (GeneralSettings.InvertMouseY) pitchRotation += Input.GetAxis("Mouse Y") * GeneralSettings.CameraYSpeed * Time.unscaledDeltaTime * camSpeedMultiplier;
             else pitchRotation -= Input.GetAxis("Mouse Y") * GeneralSettings.CameraYSpeed * Time.unscaledDeltaTime * camSpeedMultiplier;
 
@@ -54,7 +60,7 @@ public class FollowCamera : MonoBehaviour
                 playerModel.Rotate(0, -addToX, 0);
             }
             else
-            {   
+            {
                 //When dashing or running the rotation should match the expectations of the player
                 var dashLookDir = player.DashMovement;
                 if (player.BackStep) dashLookDir = -dashLookDir;
@@ -63,6 +69,13 @@ public class FollowCamera : MonoBehaviour
 
                 playerModel.rotation = Quaternion.RotateTowards(playerModel.rotation, Y, 1 * Time.unscaledDeltaTime * 800);
             }
+
+            //ZOOMING
+            targetZoom += Input.mouseScrollDelta.y / zoomSpeedDivider;
+            if (Mathf.Abs(targetZoom) > Mathf.Abs(cameraMaxDistance)) targetZoom = cameraMaxDistance;
+            if (Mathf.Abs(targetZoom) < Mathf.Abs(cameraMinDistance)) targetZoom = cameraMinDistance;
+
+            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, 0, targetZoom), Time.unscaledDeltaTime * 8);
         }
     }
 
