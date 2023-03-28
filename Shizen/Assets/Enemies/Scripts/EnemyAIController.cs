@@ -28,8 +28,6 @@ public class EnemyAIController : MonoBehaviour
     public Transform[] waypoints;
     int m_CurrentWaypointIndex;
 
-    bool m_GroupCalled = false;
-
     //Attacking
     public float timeBetweenAttacks;
     bool alreadyAttacked;
@@ -85,7 +83,6 @@ public class EnemyAIController : MonoBehaviour
         //alerted = false;
         //sightRange = standardSightRange;
 
-        m_GroupCalled = false;
         if (!walkPointSet) SearchWalkPoint();
         else agent.SetDestination(walkPoint);
 
