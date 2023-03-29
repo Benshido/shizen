@@ -45,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 movement;
     public Vector3 Movement { get { return finalMovement; } }
     private bool canMove = true;
+    private bool isStaggered = false;
     private Vector3 externalForces;
     public Vector3 ExternalForces { get { return externalForces; } }
     private Vector3 dashMovement;
@@ -89,21 +90,24 @@ public class PlayerMovement : MonoBehaviour
             movement = Vector3.zero;
 
             //when oposite keys are pressed at the same time it should act like neither are pressed
-            if (Input.GetKey(moveForward) && !Input.GetKey(moveBack))
+            if (canMove)
             {
-                MoveForward();
-            }
-            if (Input.GetKey(moveBack) && !Input.GetKey(moveForward))
-            {
-                MoveBack();
-            }
-            if (Input.GetKey(moveLeft) && !Input.GetKey(moveRight))
-            {
-                MoveLeft();
-            }
-            if (Input.GetKey(moveRight) && !Input.GetKey(moveLeft))
-            {
-                MoveRight();
+                if (Input.GetKey(moveForward) && !Input.GetKey(moveBack))
+                {
+                    MoveForward();
+                }
+                if (Input.GetKey(moveBack) && !Input.GetKey(moveForward))
+                {
+                    MoveBack();
+                }
+                if (Input.GetKey(moveLeft) && !Input.GetKey(moveRight))
+                {
+                    MoveLeft();
+                }
+                if (Input.GetKey(moveRight) && !Input.GetKey(moveLeft))
+                {
+                    MoveRight();
+                }
             }
 
             //evens out movement when multiple directions are being moved towards
@@ -142,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
 
 
             var movementAndDir = Vector3.zero;
-            if (canMove) movementAndDir = transform.rotation * (finalMovement + dashMovement);
+            if (!isStaggered) movementAndDir = transform.rotation * (finalMovement + dashMovement);
 
             //External force can be used for jumping and knockbacks
             charController.Move((externalForces + movementAndDir) * Time.unscaledDeltaTime);
@@ -197,6 +201,11 @@ public class PlayerMovement : MonoBehaviour
         StartCoroutine(DashForceReset());
     }
 
+    public void CanMove(bool value)
+    {
+        canMove = value;
+    }
+
     /// <summary>
     /// Sets DashForce to Vector3.zero
     /// </summary>
@@ -217,4 +226,5 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSecondsRealtime(dashCooldown + dashDuration);
         dashAvailable = true;
     }
+
 }
