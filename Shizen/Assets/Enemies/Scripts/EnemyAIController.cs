@@ -27,6 +27,7 @@ public class EnemyAIController : MonoBehaviour
     //Waypoints patrol
     public Transform[] waypoints;
     int m_CurrentWaypointIndex;
+    //bool wayPointReached = false;
 
     //Attacking
     public float timeBetweenAttacks;
@@ -63,7 +64,7 @@ public class EnemyAIController : MonoBehaviour
         {
             if (alerted)
             {
-                StartCoroutine(WaitForNextAction(5));
+                StartCoroutine(EnemyAggro(5));
             }
             Patrolling();
         }
@@ -89,10 +90,16 @@ public class EnemyAIController : MonoBehaviour
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
         //walkpoint reached
-        if (distanceToWalkPoint.magnitude < 1f)
+        if (distanceToWalkPoint.magnitude < 1f /*&& !wayPointReached*/)
         {
-            walkPointSet = false;
+            StartCoroutine(PatrollingPause(3));
+            //wayPointReached = true;
         }
+
+        //if (wayPointReached && walkPointSet)
+        //{
+        //    StartCoroutine(PatrollingPause(3));
+        //}
     }
 
     private void SearchWalkPoint()
@@ -172,7 +179,7 @@ public class EnemyAIController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    IEnumerator WaitForNextAction(float time)
+    IEnumerator EnemyAggro(float time)
     {
         yield return new WaitForSeconds(time);
         if (!playerInSightRange && !playerInAttackRange)
@@ -180,6 +187,15 @@ public class EnemyAIController : MonoBehaviour
             Debug.Log("test");
             sightRange = standardSightRange;
             alerted = false;
+            StopAllCoroutines();
         }
+    }
+
+    IEnumerator PatrollingPause(float time)
+    {
+        yield return new WaitForSeconds(time);
+        //wayPointReached = false;
+        walkPointSet = false;
+        StopAllCoroutines();
     }
 }
