@@ -13,6 +13,9 @@ public class PlayerSkills : MonoBehaviour
     public int ComboCount { get { return comboCount; } }
     private bool canGoToNextCombo = true;
 
+    private bool attacking = false;
+    public bool Attacking { get { return attacking; } }
+
     private List<string> elementList = Enum.GetNames(typeof(Element)).ToList();
 
     [SerializeField] KeyCode NextElement = KeyCode.E;
@@ -52,7 +55,7 @@ public class PlayerSkills : MonoBehaviour
                 {
                     canGoToNextCombo = false;
                     comboCount++;
-                    Debug.Log("AddedToCombo");
+                    attacking = true;
                 }
             }
         }
@@ -61,19 +64,22 @@ public class PlayerSkills : MonoBehaviour
     public void EndOfComboReset()
     {
         comboCount = 0;
-        Debug.Log("ResetCount");
+        NextComboAvailable();
     }
 
     public IEnumerator ResetCombo(float seconds)
     {
         cancelReset = false;
         yield return new WaitForSecondsRealtime(seconds);
-        if(!cancelReset) comboCount = 0;
-        Debug.Log("Count reset canceled = "+ cancelReset);
+        if (!cancelReset)
+        {
+            EndOfComboReset();
+        }
     }
 
     public void NextComboAvailable()
     {
         canGoToNextCombo = true;
+        attacking = false;
     }
 }

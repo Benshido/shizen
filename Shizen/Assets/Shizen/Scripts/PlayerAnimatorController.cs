@@ -32,6 +32,7 @@ public class PlayerAnimatorController : MonoBehaviour
             animator.SetBool("BackStep", playerMovement.BackStep);
             animator.SetInteger("AttackType", playerSkills.ElementIndex);
             animator.SetInteger("ComboCount", playerSkills.ComboCount);
+            animator.SetBool("Attacking", playerSkills.Attacking);
 
             if (playerMovement.IsDashing)
             {

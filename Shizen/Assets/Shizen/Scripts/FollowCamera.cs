@@ -4,6 +4,7 @@ public class FollowCamera : MonoBehaviour
 {
     [SerializeField] Transform target = null;
     [SerializeField] Transform playerModel = null;
+    public Transform PlayerModel {get {return playerModel; }}
     [SerializeField] PlayerMovement player = null;
 
     [SerializeField] float tiltUpLim;
