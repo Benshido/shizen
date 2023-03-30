@@ -13,9 +13,6 @@ public class PlayerSkills : MonoBehaviour
     public int ComboCount { get { return comboCount; } }
     private bool canGoToNextCombo = true;
 
-    bool attacking = false;
-    public bool Attacking { get { return attacking; } }
-
     private List<string> elementList = Enum.GetNames(typeof(Element)).ToList();
 
     [SerializeField] KeyCode NextElement = KeyCode.E;
@@ -35,7 +32,6 @@ public class PlayerSkills : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        attacking = false;
         if (playerMovement.HP.IsAlive)
         {
             if (Input.GetKeyDown(NextElement))
@@ -51,12 +47,12 @@ public class PlayerSkills : MonoBehaviour
             }
             if (Input.GetKeyDown(NormalAttack) && playerMovement.IsGrounded)
             {
-                attacking = true;
                 cancelReset = true;
                 if (canGoToNextCombo)
                 {
                     canGoToNextCombo = false;
                     comboCount++;
+                    Debug.Log("AddedToCombo");
                 }
             }
         }
@@ -65,6 +61,7 @@ public class PlayerSkills : MonoBehaviour
     public void EndOfComboReset()
     {
         comboCount = 0;
+        Debug.Log("ResetCount");
     }
 
     public IEnumerator ResetCombo(float seconds)
@@ -72,6 +69,7 @@ public class PlayerSkills : MonoBehaviour
         cancelReset = false;
         yield return new WaitForSecondsRealtime(seconds);
         if(!cancelReset) comboCount = 0;
+        Debug.Log("Count reset canceled = "+ cancelReset);
     }
 
     public void NextComboAvailable()

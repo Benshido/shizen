@@ -26,13 +26,12 @@ public class PlayerAnimatorController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(playerSkills.ComboCount);
+        //Debug.Log(playerSkills.ComboCount);
         if (playerMovement.HP.IsAlive)
         {
             animator.SetBool("BackStep", playerMovement.BackStep);
             animator.SetInteger("AttackType", playerSkills.ElementIndex);
             animator.SetInteger("ComboCount", playerSkills.ComboCount);
-            animator.SetBool("Attack", playerSkills.Attacking);
 
             if (playerMovement.IsDashing)
             {
