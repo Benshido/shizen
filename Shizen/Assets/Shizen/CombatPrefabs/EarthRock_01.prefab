@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8386435001745416362}
   - component: {fileID: 4030278897219830722}
-  m_Layer: 0
+  - component: {fileID: 1219834895}
+  m_Layer: 3
   m_Name: EarthRock_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,9 +30,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3766783354967439302}
+  - {fileID: 4622536064265387021}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4030278897219830722
 Animator:
@@ -46,20 +47,72 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8be3a06731524a749b5362b52cc845dd, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 2
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &1219834895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5694841185078473152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2cf99c3ebaf83c48b4375c1348e4834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stickToGround: 1
+  maxGroundRange: 5
+  groundOffset: 1
+  IsGround:
+    serializedVersion: 2
+    m_Bits: 1
+  raycastStart: {fileID: 4622536064265387021}
+  GroundObject: {fileID: 4622536064265387021}
+--- !u!1 &8632425469708687379
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4622536064265387021}
+  m_Layer: 3
+  m_Name: GroundPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4622536064265387021
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8632425469708687379}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3766783354967439302}
+  m_Father: {fileID: 8386435001745416362}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3732627556299264045
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 8386435001745416362}
+    m_TransformParent: {fileID: 4622536064265387021}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 8cce84acf26bce84db44f5500db12714,
         type: 3}
@@ -74,12 +127,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 8cce84acf26bce84db44f5500db12714,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.85
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8cce84acf26bce84db44f5500db12714,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.58
+      value: 4.3000007
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8cce84acf26bce84db44f5500db12714,
         type: 3}
@@ -89,7 +142,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 8cce84acf26bce84db44f5500db12714,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.70710677
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8cce84acf26bce84db44f5500db12714,
         type: 3}
@@ -104,7 +157,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 8cce84acf26bce84db44f5500db12714,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8cce84acf26bce84db44f5500db12714,
         type: 3}
@@ -124,12 +177,17 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8cce84acf26bce84db44f5500db12714,
         type: 3}
       propertyPath: m_Name
-      value: Rock_01 (1)
+      value: Rock_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8cce84acf26bce84db44f5500db12714,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8cce84acf26bce84db44f5500db12714,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -147,6 +205,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 915368147844545931}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8cce84acf26bce84db44f5500db12714,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7834870308946990368}
   m_SourcePrefab: {fileID: 100100000, guid: 8cce84acf26bce84db44f5500db12714, type: 3}
 --- !u!4 &3766783354967439302 stripped
 Transform:
@@ -177,7 +239,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
@@ -199,7 +261,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 1.57
   m_Height: 3.64
@@ -232,3 +294,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &7834870308946990368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4543460418101734780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e008c1230c386c4685bf4732e9844ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  knockbackForce: 2

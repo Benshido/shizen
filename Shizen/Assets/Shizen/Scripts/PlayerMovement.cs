@@ -201,9 +201,10 @@ public class PlayerMovement : MonoBehaviour
         StartCoroutine(DashForceReset());
     }
 
-    public void CanMove(bool value)
+    public void CanMove(int value)
     {
-        canMove = value;
+        if (value == 0) canMove = false;
+        else canMove = true;
     }
 
     /// <summary>
