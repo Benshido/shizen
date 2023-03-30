@@ -209,6 +209,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7834870308946990368}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8cce84acf26bce84db44f5500db12714,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 223179495}
   m_SourcePrefab: {fileID: 100100000, guid: 8cce84acf26bce84db44f5500db12714, type: 3}
 --- !u!4 &3766783354967439302 stripped
 Transform:
@@ -308,3 +312,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   knockbackForce: 2
+--- !u!208 &223179495
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4543460418101734780}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.70400006, y: 1.24, z: 1.22}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.060000002, y: -0.069000006, z: -0.51000005}
+  m_TimeToStationary: 0.5
