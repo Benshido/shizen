@@ -12,6 +12,7 @@ public class PlayerAnimatorController : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] Transform modelTransform;
     [SerializeField] ParticleSystem dashParticles;
+    [SerializeField] ParticleSystem[] sprintParticles;
     private List<List<Animator>> elementAnimators = new();
 
     void Start()
@@ -32,6 +33,23 @@ public class PlayerAnimatorController : MonoBehaviour
         if (playerMovement.HP.IsAlive)
         {
             animator.SetBool("BackStep", playerMovement.BackStep);
+            animator.SetFloat("RunToSprint", playerMovement.SprintAmount);
+
+            if (playerMovement.SprintAmount > 0.5f)
+            {
+                foreach (ParticleSystem p in sprintParticles)
+                {
+                    if (!p.isPlaying) p.Play();
+                }
+            }
+            else
+            {
+                foreach (ParticleSystem p in sprintParticles)
+                {
+                    if (p.isPlaying) p.Stop();
+                }
+            }
+
             animator.SetInteger("AttackType", playerSkills.ElementIndex);
             animator.SetInteger("ComboCount", playerSkills.ComboCount);
             animator.SetBool("Attacking", playerSkills.Attacking);
@@ -100,4 +118,6 @@ public class PlayerAnimatorController : MonoBehaviour
     {
         if (!dashParticles.isPlaying) dashParticles.Play();
     }
+
+
 }

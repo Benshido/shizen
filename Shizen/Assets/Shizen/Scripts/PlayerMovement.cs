@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Move Speed")]
     [SerializeField] float moveSpeed = 10;
+    [SerializeField] float sprintIncrease = 5;
 
     [Header("Jump")]
     [SerializeField] float jumpForce = 20;
@@ -37,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
     public bool BackStep { get { return backStep; } }
     [Header("Other")]
     [SerializeField] float weight = 70;
+    [SerializeField] float timeUntillSprint = 4;
+    private float sprintTimer = 0;
 
     private CharacterController charController;
 
@@ -53,6 +56,8 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 ExternalForces { get { return externalForces; } }
     private Vector3 dashMovement;
     public Vector3 DashMovement { get { return dashMovement; } }
+    public float SprintAmount { get { return sprintAmount; } }
+    private float sprintAmount = 0;
 
     public bool IsMoving { get { if (IsRunning || IsDashing || IsJumping) return true; return false; } }
     public bool IsRunning { get { if (movement != Vector3.zero) return true; return false; } }
@@ -115,6 +120,21 @@ public class PlayerMovement : MonoBehaviour
                 {
                     MoveRight();
                 }
+            }
+            if (IsRunning)
+            {
+                sprintTimer += Time.unscaledDeltaTime;
+
+                if (sprintTimer >= timeUntillSprint)
+                {
+                    if (sprintTimer >= timeUntillSprint * 2) sprintAmount = Mathf.MoveTowards(sprintAmount, 1f, Time.unscaledDeltaTime);
+                    else sprintAmount = Mathf.MoveTowards(sprintAmount, 0.5f, Time.unscaledDeltaTime);
+                }
+            }
+            else
+            {
+                sprintTimer = 0;
+                sprintAmount = 0;
             }
 
             //evens out movement when multiple directions are being moved towards
@@ -188,27 +208,27 @@ public class PlayerMovement : MonoBehaviour
                 return;
             }
         }
-        slopeSlideVelo = Vector3.MoveTowards(slopeSlideVelo,Vector3.zero, Time.unscaledDeltaTime);
+        slopeSlideVelo = Vector3.MoveTowards(slopeSlideVelo, Vector3.zero, Time.unscaledDeltaTime);
     }
 
     public void MoveForward()
     {
-        movement.z = moveSpeed;
+        movement.z = moveSpeed + (sprintIncrease * sprintAmount);
     }
 
     public void MoveBack()
     {
-        movement.z = -moveSpeed;
+        movement.z = -(moveSpeed + (sprintIncrease * sprintAmount));
     }
 
     public void MoveLeft()
     {
-        movement.x = -moveSpeed;
+        movement.x = -(moveSpeed + (sprintIncrease * sprintAmount));
     }
 
     public void MoveRight()
     {
-        movement.x = moveSpeed;
+        movement.x = moveSpeed + (sprintIncrease * sprintAmount);
     }
 
     public void Jump()
