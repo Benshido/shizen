@@ -10,6 +10,7 @@ public class PlayerAnimatorController : MonoBehaviour
     [Tooltip("If null will grab from this object")]
     [SerializeField] Animator animator;
     [SerializeField] Transform modelTransform;
+    [SerializeField] ParticleSystem dashParticles;
     private List<List<Animator>> elementAnimators = new();
 
     void Start()
@@ -89,5 +90,10 @@ public class PlayerAnimatorController : MonoBehaviour
         if (elementAnimators[(int)elem].IndexOf(anim) == elementAnimators[(int)elem].Count - 1)
             playerSkills.EndOfComboReset();
         elementAnimators[(int)elem].Remove(anim);
+    }
+
+    public void DashParticlePlay()
+    {
+       if(!dashParticles.isPlaying) dashParticles.Play();
     }
 }
