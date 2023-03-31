@@ -67,6 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2cf99c3ebaf83c48b4375c1348e4834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  element: 0
   breakComboOnTriggerExit: 1
   stickToGround: 1
   maxGroundRange: 5
@@ -114,7 +115,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4622536064265387021
 Transform:
   m_ObjectHideFlags: 0

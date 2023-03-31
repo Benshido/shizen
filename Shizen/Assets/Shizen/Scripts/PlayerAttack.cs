@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    private PlayerAnimatorController pAnimController;
+    [SerializeField] Element element;
     [SerializeField] bool breakComboOnTriggerExit = false;
     [SerializeField] bool stickToGround;
     [SerializeField] float maxGroundRange = 5f;
@@ -14,14 +16,20 @@ public class PlayerAttack : MonoBehaviour
     private float rotateSpeed = 4;
     private Transform targetRotationObj;
     private Vector3 frozenTargetRot;
+    private Animator animator;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        animator = GetComponent<Animator>();
+        pAnimController = FindObjectOfType<PlayerAnimatorController>();
         targetRotationObj = FindObjectOfType<FollowCamera>().PlayerModel;
         RaycastHit hit;
         if (!Physics.Raycast(raycastStart.position, Vector3.down, out hit, maxGroundRange, IsGround))
+        {
+           // pAnimController.RemoveFromList(element, animator);
             Destroy(gameObject);
+        }
         else
         {
             GroundObject.position = new Vector3(GroundObject.position.x, hit.point.y + groundOffset, GroundObject.position.z);
@@ -34,8 +42,8 @@ public class PlayerAttack : MonoBehaviour
         if (rotate)
         {
             transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, frozenTargetRot, Time.unscaledDeltaTime * rotateSpeed);
-            if(transform.eulerAngles == frozenTargetRot)
-            rotate = false;
+            if (transform.eulerAngles == frozenTargetRot)
+                rotate = false;
         }
         RaycastHit hit;
         if (Physics.Raycast(raycastStart.position, Vector3.down, out hit, maxGroundRange, IsGround))
@@ -50,6 +58,7 @@ public class PlayerAttack : MonoBehaviour
     private IEnumerator Destroying()
     {
         yield return new WaitForSecondsRealtime(10);
+       // pAnimController.RemoveFromList(element, animator);
         Destroy(gameObject);
     }
 
@@ -67,5 +76,9 @@ public class PlayerAttack : MonoBehaviour
             skill.EndOfComboReset();
             gameObject.GetComponent<Collider>().enabled = false;
         }
+    }
+    private void OnDestroy()
+    {
+        pAnimController.RemoveFromList(element, animator);
     }
 }

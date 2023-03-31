@@ -76,10 +76,18 @@ public class PlayerAnimatorController : MonoBehaviour
 
     public void UpdateElementComboIndex(int index)
     {
+       
         var elem = elementAnimators[playerSkills.ElementIndex];
 
         //uses only latest spawned elemental object of said element
         if (elem.Count > 0 && elem != null) elem[elementAnimators[playerSkills.ElementIndex].Count - 1].SetInteger("ComboStage", index);
 
+    }
+
+    public void RemoveFromList(Element elem, Animator anim)
+    {
+        if (elementAnimators[(int)elem].IndexOf(anim) == elementAnimators[(int)elem].Count - 1)
+            playerSkills.EndOfComboReset();
+        elementAnimators[(int)elem].Remove(anim);
     }
 }
