@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 [RequireComponent(typeof(CharacterController))]
 
@@ -21,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool jumping = false;
     public bool IsJumping { get { return jumping; } }
+    private bool inCombat = false;
+    public bool InCombat { get { return inCombat; } }
 
     [Header("Dash")]
     [SerializeField] float dashMultiplier = 3;
@@ -75,10 +78,14 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SetSlopeSlideVelocity();
+
         //grounded check (character controller isGrounded is too glitchy)
         Vector3 origin = transform.position + charController.center;
-        origin.y -= (charController.height / 2) - 0.03f;
-        if (Physics.OverlapSphere(origin, charController.radius, groundedMask).Length > 0)
+        origin.y -= (charController.height / 2) - 0.3f;
+        Debug.DrawLine(origin, new Vector3(origin.x, origin.y - charController.radius, origin.z), Color.red);
+
+        if (Physics.OverlapSphere(origin, charController.radius, groundedMask).Length > 0 && !IsSliding)
         {
             isGrounded = true;
         }
@@ -148,6 +155,13 @@ public class PlayerMovement : MonoBehaviour
             var movementAndDir = Vector3.zero;
             if (!isStaggered) movementAndDir = transform.rotation * (finalMovement + dashMovement);
 
+            if (IsSliding)
+            {
+                float initMovSpdDivider = 20;
+                movementAndDir = new Vector3(slopeSlideVelo.x + movementAndDir.x / initMovSpdDivider, -slopeSlideVelo.y, slopeSlideVelo.z + movementAndDir.z / initMovSpdDivider) * 3;
+                Debug.Log(slopeAngle);
+            }
+
             //External force can be used for jumping and knockbacks
             charController.Move((externalForces + movementAndDir) * Time.unscaledDeltaTime);
         }
@@ -156,6 +170,25 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q)) Time.timeScale = 0.02f;
         if (Input.GetKeyDown(KeyCode.E)) Time.timeScale = 1;
 
+    }
+
+    private Vector3 slopeSlideVelo;
+    private float slopeAngle;
+    private bool IsSliding { get { return slopeAngle > charController.slopeLimit + 1; } }
+    private void SetSlopeSlideVelocity()
+    {
+        var origin = transform.position - charController.center;
+
+        if (Physics.Raycast(origin, Vector3.down, out RaycastHit hit, charController.height, groundedMask))
+        {
+            slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
+            if (slopeAngle >= charController.slopeLimit)
+            {
+                slopeSlideVelo = hit.normal;
+                return;
+            }
+        }
+        slopeSlideVelo = Vector3.MoveTowards(slopeSlideVelo,Vector3.zero, Time.unscaledDeltaTime);
     }
 
     public void MoveForward()
