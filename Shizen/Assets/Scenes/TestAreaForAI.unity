@@ -7061,7 +7061,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: -153830957423991239, guid: a9635c1edbd082b45a67e5c06103d2bf, type: 3}
 --- !u!1001 &1079723767
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7166,7 +7166,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: -153830957423991239, guid: a9635c1edbd082b45a67e5c06103d2bf, type: 3}
 --- !u!1 &1160957153 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4317aa497be08e043bd0277bc363ee35,
