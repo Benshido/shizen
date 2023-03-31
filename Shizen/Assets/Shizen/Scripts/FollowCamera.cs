@@ -4,7 +4,7 @@ public class FollowCamera : MonoBehaviour
 {
     [SerializeField] Transform target = null;
     [SerializeField] Transform playerModel = null;
-    public Transform PlayerModel {get {return playerModel; }}
+    public Transform PlayerModel { get { return playerModel; } }
     [SerializeField] PlayerMovement player = null;
 
     [SerializeField] float tiltUpLim;
@@ -39,10 +39,10 @@ public class FollowCamera : MonoBehaviour
         {
             CursorLock();
             //MOUSE LOOK
-            if (GeneralSettings.InvertMouseY) pitchRotation += Input.GetAxis("Mouse Y") * GeneralSettings.CameraYSpeed /* Time.unscaledDeltaTime */* camSpeedMultiplier;
-            else pitchRotation -= Input.GetAxis("Mouse Y") * GeneralSettings.CameraYSpeed /* Time.unscaledDeltaTime */* camSpeedMultiplier;
+            if (GeneralSettings.InvertMouseY) pitchRotation += Input.GetAxis("Mouse Y") * GeneralSettings.CameraYSpeed * camSpeedMultiplier;
+            else pitchRotation -= Input.GetAxis("Mouse Y") * GeneralSettings.CameraYSpeed * camSpeedMultiplier;
 
-            float addToX = Input.GetAxis("Mouse X") * GeneralSettings.CameraXSpeed /* Time.unscaledDeltaTime */* camSpeedMultiplier;
+            float addToX = Input.GetAxis("Mouse X") * GeneralSettings.CameraXSpeed * camSpeedMultiplier;
             if (GeneralSettings.InvertMouseX) addToX = -addToX;
 
             //apply camera pitch limits

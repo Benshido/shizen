@@ -293,10 +293,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 1.57
-  m_Height: 3.64
-  m_Direction: 2
-  m_Center: {x: -0.059886158, y: -0.4, z: -0.5095901}
+  m_Radius: 0.7040001
+  m_Height: 2.48
+  m_Direction: 1
+  m_Center: {x: -0.06, y: -0.06900001, z: -0.5100001}
 --- !u!54 &915368147844545931
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -337,7 +337,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  knockbackForce: 2
 --- !u!208 &223179495
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -347,7 +346,7 @@ NavMeshObstacle:
   m_GameObject: {fileID: 4543460418101734780}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 1
+  m_Shape: 0
   m_Extents: {x: 0.70400006, y: 1.24, z: 1.22}
   m_MoveThreshold: 0.1
   m_Carve: 0

@@ -25,6 +25,7 @@ public class TargetSystem : MonoBehaviour
         get { return targets; }
     }
     private List<GameObject> targets = new();
+    private GameObject target;
 
     private bool alteredLockonLine = false;
 
@@ -58,17 +59,19 @@ public class TargetSystem : MonoBehaviour
                 //set targeted outline if angle is small enough
                 if (smallestAngle < targetMaxAngle)
                 {
-                    var outline1 = sortedTargList[0].GetComponent<Outline>();
+                    target = sortedTargList[0];
+                    var outline1 = target.GetComponent<Outline>();
                     outline1.OutlineWidth = targetedOutlineWidth;
                     outline1.OutlineColor = targetedOutlineColor;
                 }
+                else target = null;
 
                 targets = sortedTargList;
             }
-            else if (!alteredLockonLine && smallestAngle<targetMaxAngle)
+            else if (!alteredLockonLine && target != null)
             {
                 alteredLockonLine = true;
-                var outline = targets[0].GetComponent<Outline>();
+                var outline = target.GetComponent<Outline>();
                 outline.OutlineWidth = LockedOutlineWidth;
                 outline.OutlineColor = LockedOutlineColor;
             }

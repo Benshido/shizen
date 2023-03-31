@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerDamageColObj : MonoBehaviour
 {
     [SerializeField] float damage;
-    [SerializeField] float knockbackForce;
+   // [SerializeField] float knockbackForce;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))

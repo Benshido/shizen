@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
@@ -70,14 +71,17 @@ public class PlayerAnimatorController : MonoBehaviour
 
     public void SpawnPrefab(GameObject prefab)
     {
-        var pref = Instantiate(prefab, modelTransform);
-        pref.transform.parent = null;
-        elementAnimators[playerSkills.ElementIndex].Add(pref.GetComponentInChildren<Animator>());
+        if (Unlockables.Elements[Enum.GetName(typeof(Element), playerSkills.ElementIndex)] > 0)
+        {
+            var pref = Instantiate(prefab, modelTransform);
+            pref.transform.parent = null;
+            elementAnimators[playerSkills.ElementIndex].Add(pref.GetComponentInChildren<Animator>());
+        }
     }
 
     public void UpdateElementComboIndex(int index)
     {
-       
+
         var elem = elementAnimators[playerSkills.ElementIndex];
 
         //uses only latest spawned elemental object of said element
@@ -94,6 +98,6 @@ public class PlayerAnimatorController : MonoBehaviour
 
     public void DashParticlePlay()
     {
-       if(!dashParticles.isPlaying) dashParticles.Play();
+        if (!dashParticles.isPlaying) dashParticles.Play();
     }
 }

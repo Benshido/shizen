@@ -18634,7 +18634,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8cce84acf26bce84db44f5500db12714,
         type: 3}
       propertyPath: m_Name
-      value: Rock_01
+      value: MeleeAttack
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8cce84acf26bce84db44f5500db12714,
         type: 3}
@@ -18660,6 +18660,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 536002001}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8cce84acf26bce84db44f5500db12714,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2589646833675952933}
   m_SourcePrefab: {fileID: 100100000, guid: 8cce84acf26bce84db44f5500db12714, type: 3}
 --- !u!1 &5970212888297553739 stripped
 GameObject:
@@ -18717,6 +18721,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &2589646833675952933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5970212888297553739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e008c1230c386c4685bf4732e9844ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  knockbackForce: 0
 --- !u!4 &6454120409114568177 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8cce84acf26bce84db44f5500db12714,
