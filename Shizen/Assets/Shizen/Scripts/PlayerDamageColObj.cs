@@ -13,7 +13,6 @@ public class PlayerDamageColObj : MonoBehaviour
             if (other.gameObject.TryGetComponent(out EnemyHP hp))
             {
                 hp.TakeAttack(damage);
-                Debug.Log($"{hp.HitPoints} - {damage}");
             }
         }
     }

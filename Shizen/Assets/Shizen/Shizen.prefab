@@ -32,6 +32,81 @@ Transform:
   m_Father: {fileID: 6781045739010002279}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1744590964
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1744590965}
+  - component: {fileID: 1744590966}
+  - component: {fileID: 8086811866772238747}
+  m_Layer: 6
+  m_Name: TargetingSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1744590965
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744590964}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6781045738938318894}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1744590966
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744590964}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 20
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8086811866772238747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744590964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d47fd9a493391bf4d953796a3fd57f18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LockOn: 102
+  targetMaxAngle: 30
+  inRangeOutline: 1
+  inRangeOutlineWidth: 2
+  inRangeOutlineColor: {r: 0.5471698, g: 0, b: 0, a: 1}
+  targetedOutlineWidth: 3
+  targetedOutlineColor: {r: 1, g: 0, b: 0, a: 1}
+  LockedOutlineWidth: 3
+  LockedOutlineColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &49645488682940244
 GameObject:
   m_ObjectHideFlags: 0
@@ -12052,10 +12127,10 @@ MonoBehaviour:
   target: {fileID: 6781045740209213576}
   playerModel: {fileID: 6781045739010002279}
   player: {fileID: 6781045738938318891}
-  tiltUpLim: 30
-  tiltLowLim: -10
+  tiltUpLim: 70
+  tiltLowLim: -40
   targetZoom: -5
-  camSpeedMultiplier: 60
+  camSpeedMultiplier: 1
   zoomSpeedDivider: 3
   cameraMinDistance: -3
   cameraMaxDistance: -10
@@ -12096,6 +12171,7 @@ Transform:
   m_Children:
   - {fileID: 6781045739010002279}
   - {fileID: 6781045740209213576}
+  - {fileID: 1744590965}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

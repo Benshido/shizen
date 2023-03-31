@@ -12,7 +12,7 @@ public class FollowCamera : MonoBehaviour
 
     private float pitchRotation;
     [SerializeField] float targetZoom = -5;
-    [SerializeField] float camSpeedMultiplier = 60;
+    [SerializeField] float camSpeedMultiplier = 1f;
     [SerializeField] float zoomSpeedDivider = 5f;
     [SerializeField] float cameraMinDistance = -3;
     [SerializeField] float cameraMaxDistance = -15;
@@ -39,10 +39,10 @@ public class FollowCamera : MonoBehaviour
         {
             CursorLock();
             //MOUSE LOOK
-            if (GeneralSettings.InvertMouseY) pitchRotation += Input.GetAxis("Mouse Y") * GeneralSettings.CameraYSpeed * Time.unscaledDeltaTime * camSpeedMultiplier;
-            else pitchRotation -= Input.GetAxis("Mouse Y") * GeneralSettings.CameraYSpeed * Time.unscaledDeltaTime * camSpeedMultiplier;
+            if (GeneralSettings.InvertMouseY) pitchRotation += Input.GetAxis("Mouse Y") * GeneralSettings.CameraYSpeed /* Time.unscaledDeltaTime */* camSpeedMultiplier;
+            else pitchRotation -= Input.GetAxis("Mouse Y") * GeneralSettings.CameraYSpeed /* Time.unscaledDeltaTime */* camSpeedMultiplier;
 
-            float addToX = Input.GetAxis("Mouse X") * GeneralSettings.CameraXSpeed * Time.unscaledDeltaTime * camSpeedMultiplier;
+            float addToX = Input.GetAxis("Mouse X") * GeneralSettings.CameraXSpeed /* Time.unscaledDeltaTime */* camSpeedMultiplier;
             if (GeneralSettings.InvertMouseX) addToX = -addToX;
 
             //apply camera pitch limits
