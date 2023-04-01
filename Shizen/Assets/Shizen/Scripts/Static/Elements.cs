@@ -9,6 +9,6 @@ public static class Unlockables
 {
     public static Dictionary<string, float> Elements = new()
     {
-        {Element.Earth.ToString(), 0},
+        {Element.Earth.ToString(), 1},
     };
 }

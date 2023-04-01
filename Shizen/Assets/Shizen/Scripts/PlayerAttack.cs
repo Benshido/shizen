@@ -27,7 +27,7 @@ public class PlayerAttack : MonoBehaviour
         RaycastHit hit;
         if (!Physics.Raycast(raycastStart.position, Vector3.down, out hit, maxGroundRange, IsGround))
         {
-           // pAnimController.RemoveFromList(element, animator);
+            // pAnimController.RemoveFromList(element, animator);
             Destroy(gameObject);
         }
         else
@@ -58,7 +58,7 @@ public class PlayerAttack : MonoBehaviour
     private IEnumerator Destroying()
     {
         yield return new WaitForSecondsRealtime(10);
-       // pAnimController.RemoveFromList(element, animator);
+        // pAnimController.RemoveFromList(element, animator);
         Destroy(gameObject);
     }
 
@@ -80,5 +80,11 @@ public class PlayerAttack : MonoBehaviour
     private void OnDestroy()
     {
         pAnimController.RemoveFromList(element, animator);
+    }
+
+    public void SpawnPrefab(GameObject prefab)
+    {
+        var inst = Instantiate(prefab, transform);
+        inst.transform.parent = null;
     }
 }
