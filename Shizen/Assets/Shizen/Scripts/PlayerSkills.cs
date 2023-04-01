@@ -47,7 +47,6 @@ public class PlayerSkills : MonoBehaviour
             {
                 runTimer = false;
                 resetTimer = 0;
-                Debug.Log("reset");
                 EndOfComboReset();
             }
         }
