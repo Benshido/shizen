@@ -4905,7 +4905,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   element: 0
-  breakComboOnTriggerExit: 1
+  breakComboOnTriggerExit: 0
   stickToGround: 1
   maxGroundRange: 5
   groundOffset: 1

@@ -82,10 +82,10 @@ public class PlayerAnimatorController : MonoBehaviour
 
     //All below methods can be called from animation events
 
-    public void ResetCombo(float seconds)
+  /*  public void ResetCombo(float seconds)
     {
         StartCoroutine(playerSkills.ResetCombo(seconds));
-    }
+    }*/
 
     public void SpawnPrefab(GameObject prefab)
     {

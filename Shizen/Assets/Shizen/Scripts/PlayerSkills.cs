@@ -25,6 +25,9 @@ public class PlayerSkills : MonoBehaviour
 
     private PlayerMovement playerMovement;
     private bool cancelReset = false;
+    private float resetComboTime = 1;
+    private float resetTimer = 0;
+    private bool runTimer = false;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +38,20 @@ public class PlayerSkills : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (cancelReset) { resetTimer = 0; runTimer = false; }
+
+        if (runTimer)
+        {
+            resetTimer += Time.unscaledDeltaTime;
+            if (resetTimer >= resetComboTime)
+            {
+                runTimer = false;
+                resetTimer = 0;
+                Debug.Log("reset");
+                EndOfComboReset();
+            }
+        }
+
         if (playerMovement.HP.IsAlive)
         {
             if (Input.GetKeyDown(NextElement))
@@ -50,12 +67,13 @@ public class PlayerSkills : MonoBehaviour
             }
             if (Input.GetKeyDown(NormalAttack) && playerMovement.IsGrounded)
             {
-                cancelReset = true;
+                //cancelReset = true;
                 if (canGoToNextCombo)
                 {
                     canGoToNextCombo = false;
                     comboCount++;
                     attacking = true;
+                    StartCoroutine(CancelReset());
                 }
             }
         }
@@ -67,19 +85,24 @@ public class PlayerSkills : MonoBehaviour
         NextComboAvailable();
     }
 
-    public IEnumerator ResetCombo(float seconds)
+    int resetsRunning = 0;
+    public void ResetCombo(float seconds)
     {
-        cancelReset = false;
-        yield return new WaitForSecondsRealtime(seconds);
-        if (!cancelReset)
-        {
-            EndOfComboReset();
-        }
+        runTimer = true;
+        resetComboTime = seconds;
+    }
+
+    private IEnumerator CancelReset()
+    {
+        var combocountNow = ComboCount;
+        yield return new WaitUntil(() => comboCount != combocountNow && comboCount != 0);
+        cancelReset = true;
     }
 
     public void NextComboAvailable()
     {
         canGoToNextCombo = true;
         attacking = false;
+        cancelReset = false;
     }
 }
