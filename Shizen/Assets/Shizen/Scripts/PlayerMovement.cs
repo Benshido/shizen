@@ -178,8 +178,7 @@ public class PlayerMovement : MonoBehaviour
             if (IsSliding)
             {
                 float initMovSpdDivider = 20;
-                movementAndDir = new Vector3(slopeSlideVelo.x + movementAndDir.x / initMovSpdDivider, -slopeSlideVelo.y, slopeSlideVelo.z + movementAndDir.z / initMovSpdDivider) * 3;
-                Debug.Log(slopeAngle);
+                movementAndDir = new Vector3(slopeSlideVelo.x + movementAndDir.x / initMovSpdDivider, -slopeSlideVelo.y, slopeSlideVelo.z + movementAndDir.z / initMovSpdDivider) * 6;
             }
 
             //External force can be used for jumping and knockbacks
