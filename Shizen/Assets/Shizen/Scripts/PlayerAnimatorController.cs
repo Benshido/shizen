@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerAnimatorController : MonoBehaviour
@@ -52,6 +50,7 @@ public class PlayerAnimatorController : MonoBehaviour
 
             animator.SetInteger("AttackType", playerSkills.ElementIndex);
             animator.SetInteger("ComboCount", playerSkills.ComboCount);
+            animator.SetBool("IsHeavyAtk", playerSkills.IsHeavy);
             animator.SetBool("Attacking", playerSkills.Attacking);
 
             if (playerMovement.IsDashing)
@@ -80,12 +79,6 @@ public class PlayerAnimatorController : MonoBehaviour
         }
     }
 
-    //All below methods can be called from animation events
-
-  /*  public void ResetCombo(float seconds)
-    {
-        StartCoroutine(playerSkills.ResetCombo(seconds));
-    }*/
 
     public void SpawnPrefab(GameObject prefab)
     {
@@ -99,7 +92,6 @@ public class PlayerAnimatorController : MonoBehaviour
 
     public void UpdateElementComboIndex(int index)
     {
-
         var elem = elementAnimators[playerSkills.ElementIndex];
 
         //uses only latest spawned elemental object of said element

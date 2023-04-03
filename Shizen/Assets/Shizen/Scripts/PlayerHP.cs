@@ -48,6 +48,7 @@ public class PlayerHP : MonoBehaviour
 
     public bool ComsumeStamina(float stamina)
     {
+        Debug.Log("cons");
         if (!IsAlive || ep - stamina < 0) return false;
         ep -= stamina;
         if (epSlider != null) epSlider.value = ep;

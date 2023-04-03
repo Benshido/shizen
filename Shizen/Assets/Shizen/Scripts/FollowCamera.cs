@@ -77,7 +77,7 @@ public class FollowCamera : MonoBehaviour
                 var Y = Quaternion.LookRotation(player.transform.TransformDirection(player.Movement + dashLookDir));
                 if (!player.IsRunning && !player.IsDashing) Y = Quaternion.LookRotation(playerModel.transform.forward);
 
-                playerModel.rotation = Quaternion.RotateTowards(playerModel.rotation, Y, 1 * Time.unscaledDeltaTime * 800);
+                if(player.Can_Move) playerModel.rotation = Quaternion.RotateTowards(playerModel.rotation, Y, 1 * Time.unscaledDeltaTime * 800);
             }
 
             
@@ -97,15 +97,20 @@ public class FollowCamera : MonoBehaviour
 
             if (rotateToTarget)
             {
-                //look at enemy when attacking
-                Quaternion y = Quaternion.LookRotation(targSyst.Target.transform.position - transform.position);
-                playerModel.rotation = Quaternion.RotateTowards(playerModel.rotation, y, 10 * Time.unscaledDeltaTime * 800);
-               
+
                 targRotTimer += Time.unscaledDeltaTime;
-                if (targRotTimer >= targRotDuration)
+                if (targRotTimer >= targRotDuration || targSyst.Target == null)
                 {
                     targRotTimer = 0;
                     rotateToTarget = false;
+                }
+                else
+                {
+                    //look at enemy when attacking
+                    var targ = targSyst.Target.transform.position;
+                    targ.y = transform.position.y;
+                    Quaternion y = Quaternion.LookRotation(targ - transform.position);
+                    playerModel.rotation = Quaternion.RotateTowards(playerModel.rotation, y, 10 * Time.unscaledDeltaTime * 800);
                 }
             }
         }

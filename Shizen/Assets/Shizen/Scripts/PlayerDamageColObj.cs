@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerDamageColObj : MonoBehaviour
@@ -23,7 +21,6 @@ public class PlayerDamageColObj : MonoBehaviour
         }
         else if (destroyWhenHitHeavyObjects)
         {
-            Debug.Log("destr");
 
             if (other.gameObject.TryGetComponent(out PlayerDamageColObj obj) && obj.ObjectWeight >= ObjectWeight)
             {

@@ -7319,11 +7319,25 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.083333336
+    functionName: CanMove
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.11666667
     functionName: SpawnPrefab
     data: 
     objectReferenceParameter: {fileID: 5694841185078473152, guid: d4c47715c2008894cbfdc69f978e581b,
       type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.25
+    functionName: CanMove
+    data: 
+    objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

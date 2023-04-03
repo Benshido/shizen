@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 finalMovement;
     private Vector3 movement;
     public Vector3 Movement { get { return finalMovement; } }
+    public bool Can_Move { get { return canMove; } }
     private bool canMove = true;
     private bool isStaggered = false;
     private Vector3 externalForces;

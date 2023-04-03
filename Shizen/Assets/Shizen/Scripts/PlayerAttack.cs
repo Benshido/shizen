@@ -28,15 +28,18 @@ public class PlayerAttack : MonoBehaviour
         targetRotationObj = FindObjectOfType<FollowCamera>().PlayerModel;
         TargSyst = FindObjectOfType<TargetSystem>();
 
-        RaycastHit hit;
-        if (!Physics.Raycast(raycastStart.position, Vector3.down, out hit, maxGroundRange, IsGround))
+        if (stickToGround)
         {
-            // pAnimController.RemoveFromList(element, animator);
-            Destroy(gameObject);
-        }
-        else
-        {
-            GroundObject.position = new Vector3(GroundObject.position.x, hit.point.y + groundOffset, GroundObject.position.z);
+            RaycastHit hit;
+            if (!Physics.Raycast(raycastStart.position, Vector3.down, out hit, maxGroundRange, IsGround))
+            {
+                // pAnimController.RemoveFromList(element, animator);
+                Destroy(gameObject);
+            }
+            else
+            {
+                GroundObject.position = new Vector3(GroundObject.position.x, hit.point.y + groundOffset, GroundObject.position.z);
+            }
         }
     }
 
@@ -51,7 +54,7 @@ public class PlayerAttack : MonoBehaviour
         }
 
         RaycastHit hit;
-        if (Physics.Raycast(raycastStart.position, Vector3.down, out hit, maxGroundRange, IsGround))
+        if (stickToGround && Physics.Raycast(raycastStart.position, Vector3.down, out hit, maxGroundRange, IsGround))
         {
             if (hit.distance < groundOffset + 0.5f)
             {
@@ -60,9 +63,9 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    private IEnumerator Destroying()
+    private IEnumerator Destroying(float time)
     {
-        yield return new WaitForSecondsRealtime(10);
+        yield return new WaitForSecondsRealtime(time);
         // pAnimController.RemoveFromList(element, animator);
         Destroy(gameObject);
     }
@@ -83,7 +86,6 @@ public class PlayerAttack : MonoBehaviour
             var targpos = TargSyst.Target.transform.position - transform.position;
             var targRot = Quaternion.LookRotation(targpos, transform.up);
             frozenTargetRot = targRot;
-            Debug.Log(frozenTargetRot);
         }
         else { frozenTargetRot = targetRotationObj.rotation; }
     }

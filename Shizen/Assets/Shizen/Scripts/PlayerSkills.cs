@@ -14,14 +14,17 @@ public class PlayerSkills : MonoBehaviour
     private bool canGoToNextCombo = true;
 
     private bool attacking = false;
+    private bool isHeavy = false;
+    private bool lastAtkWasHeavy = false;
     public bool Attacking { get { return attacking; } }
+    public bool IsHeavy { get { return isHeavy; } }
 
     private List<string> elementList = Enum.GetNames(typeof(Element)).ToList();
 
     [SerializeField] KeyCode NextElement = KeyCode.E;
     [SerializeField] KeyCode PrevElement = KeyCode.Q;
     [SerializeField] KeyCode NormalAttack = KeyCode.Mouse0;
-    [SerializeField] KeyCode HeavyAttack = KeyCode.Mouse2;
+    [SerializeField] KeyCode HeavyAttack = KeyCode.Mouse1;
 
     private PlayerMovement playerMovement;
     private bool cancelReset = false;
@@ -67,11 +70,27 @@ public class PlayerSkills : MonoBehaviour
             if (Input.GetKeyDown(NormalAttack) && playerMovement.IsGrounded)
             {
                 //cancelReset = true;
-                if (canGoToNextCombo)
+                if (canGoToNextCombo && RequireStamina())
                 {
+                    if (lastAtkWasHeavy) comboCount = 0;
                     canGoToNextCombo = false;
+                    lastAtkWasHeavy = false;
                     comboCount++;
                     attacking = true;
+                    isHeavy = false;
+                    StartCoroutine(CancelReset());
+                }
+            }
+            if (Input.GetKeyDown(HeavyAttack) && playerMovement.IsGrounded)
+            {
+                if (canGoToNextCombo && RequireStamina())
+                {
+                    if (!lastAtkWasHeavy) comboCount = 0;
+                    canGoToNextCombo = false;
+                    lastAtkWasHeavy = true;
+                    comboCount++;
+                    attacking = true;
+                    isHeavy = true;
                     StartCoroutine(CancelReset());
                 }
             }
@@ -101,6 +120,38 @@ public class PlayerSkills : MonoBehaviour
     {
         canGoToNextCombo = true;
         attacking = false;
+        isHeavy = false;
         cancelReset = false;
+    }
+
+    private bool RequireStamina()
+    {
+        float stamina = StaminaRequired();
+        
+        if (playerMovement.HP.EP >= stamina) return true;
+        return false;
+    }
+
+    private float StaminaRequired()
+    {
+        if (isHeavy)
+            switch (elementIndex)
+            {
+                case (int)Element.Earth:
+                    return 8;
+                default:
+                    break;
+            }
+        else
+        {
+            switch (elementIndex)
+            {
+                case (int)Element.Earth:
+                    return 2;
+                default:
+                    break;
+            }
+        }
+        return 0;
     }
 }
