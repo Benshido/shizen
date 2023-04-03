@@ -25,6 +25,10 @@ public class TargetSystem : MonoBehaviour
         get { return targets; }
     }
     private List<GameObject> targets = new();
+    public GameObject Target
+    {
+        get { return target; }
+    }
     private GameObject target;
 
     private bool alteredLockonLine = false;

@@ -84,7 +84,6 @@ public class PlayerSkills : MonoBehaviour
         NextComboAvailable();
     }
 
-    int resetsRunning = 0;
     public void ResetCombo(float seconds)
     {
         runTimer = true;

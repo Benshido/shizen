@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float dashMultiplier = 3;
     [SerializeField] float dashDuration = 1;
     [SerializeField] float dashCooldown = 1;
+    [SerializeField] float dashCost = 1;
     /// <summary>
     /// Will be set to false on knockbacks
     /// </summary>
@@ -62,8 +63,8 @@ public class PlayerMovement : MonoBehaviour
     public bool IsMoving { get { if (IsRunning || IsDashing || IsJumping) return true; return false; } }
     public bool IsRunning { get { if (movement != Vector3.zero) return true; return false; } }
     public bool IsDashing { get { if (dashMovement != Vector3.zero) return true; return false; } }
-    public PlayerHP HP { get { return hp; } }
-    private PlayerHP hp;
+    public PlayerHP HP { get { return stats; } }
+    private PlayerHP stats;
 
     private float maxFallSpd = 0;
     private int dashCount = 0;
@@ -72,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         charController = GetComponent<CharacterController>();
-        hp = GetComponentInChildren<PlayerHP>();
+        stats = GetComponentInChildren<PlayerHP>();
 
         //calculate maximum fall speed using gravity and weight
         maxFallSpd = Physics.gravity.y + (Physics.gravity.y * (weight / 75));
@@ -96,14 +97,14 @@ public class PlayerMovement : MonoBehaviour
         }
         else isGrounded = false;
 
-        if (hp.IsAlive)
+        if (stats.IsAlive)
         {
             //reset movement before trying to see if we should be moving
             movement = Vector3.zero;
 
             //when oposite keys are pressed at the same time it should act like neither are pressed
-            if (canMove)
-            {
+           // if (canMove)
+           // {
                 if (Input.GetKey(moveForward) && !Input.GetKey(moveBack))
                 {
                     MoveForward();
@@ -120,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     MoveRight();
                 }
-            }
+           // }
             if (IsRunning)
             {
                 sprintTimer += Time.unscaledDeltaTime;
@@ -148,7 +149,7 @@ public class PlayerMovement : MonoBehaviour
                 jumping = true;
             }
 
-            if (Input.GetKeyDown(dash) && dashAvailable)
+            if (Input.GetKeyDown(dash) && dashAvailable && stats.ComsumeStamina(dashCost))
             {
                 Dash();
             }
@@ -174,6 +175,7 @@ public class PlayerMovement : MonoBehaviour
 
             var movementAndDir = Vector3.zero;
             if (!isStaggered) movementAndDir = transform.rotation * (finalMovement + dashMovement);
+            if(!canMove) movementAndDir = transform.rotation *  dashMovement;
 
             if (IsSliding)
             {

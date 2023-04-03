@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LockOn: 102
-  targetMaxAngle: 30
+  targetMaxAngle: 40
   inRangeOutline: 1
   inRangeOutlineWidth: 2
   inRangeOutlineColor: {r: 0.5471698, g: 0, b: 0, a: 1}
@@ -599,6 +599,9 @@ MonoBehaviour:
   maxHP: 100
   hp: 100
   hpSlider: {fileID: 0}
+  maxEP: 100
+  ep: 100
+  epSlider: {fileID: 0}
 --- !u!1 &1012798479858164922
 GameObject:
   m_ObjectHideFlags: 0
@@ -12126,7 +12129,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 6781045740209213576}
   playerModel: {fileID: 6781045739010002279}
+  targSyst: {fileID: 8086811866772238747}
   player: {fileID: 6781045738938318891}
+  pSkills: {fileID: 318320861780308162}
   tiltUpLim: 70
   tiltLowLim: -40
   targetZoom: -5
@@ -12199,6 +12204,7 @@ MonoBehaviour:
   dashMultiplier: 2.5
   dashDuration: 0.3
   dashCooldown: 0.2
+  dashCost: 1
   weight: 70
   timeUntillSprint: 4
   isGrounded: 1
@@ -28333,6 +28339,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  destroyWhenHitHeavyObjects: 0
+  destroyThis: {fileID: 0}
+  objectWeight: 0
 --- !u!4 &6454120409114568177 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8cce84acf26bce84db44f5500db12714,

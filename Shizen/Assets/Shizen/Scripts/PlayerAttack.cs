@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
@@ -12,10 +13,11 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] LayerMask IsGround;
     [SerializeField] Transform raycastStart;
     [SerializeField] Transform GroundObject;
+    private TargetSystem TargSyst;
     private bool rotate = false;
     private float rotateSpeed = 4;
     private Transform targetRotationObj;
-    private Vector3 frozenTargetRot;
+    private Quaternion frozenTargetRot;
     private Animator animator;
 
     // Start is called before the first frame update
@@ -24,6 +26,8 @@ public class PlayerAttack : MonoBehaviour
         animator = GetComponent<Animator>();
         pAnimController = FindObjectOfType<PlayerAnimatorController>();
         targetRotationObj = FindObjectOfType<FollowCamera>().PlayerModel;
+        TargSyst = FindObjectOfType<TargetSystem>();
+
         RaycastHit hit;
         if (!Physics.Raycast(raycastStart.position, Vector3.down, out hit, maxGroundRange, IsGround))
         {
@@ -41,10 +45,11 @@ public class PlayerAttack : MonoBehaviour
     {
         if (rotate)
         {
-            transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, frozenTargetRot, Time.unscaledDeltaTime * rotateSpeed);
-            if (transform.eulerAngles == frozenTargetRot)
+            transform.rotation = Quaternion.Lerp(transform.rotation, frozenTargetRot, Time.unscaledDeltaTime * rotateSpeed);
+            if (transform.rotation == frozenTargetRot)
                 rotate = false;
         }
+
         RaycastHit hit;
         if (Physics.Raycast(raycastStart.position, Vector3.down, out hit, maxGroundRange, IsGround))
         {
@@ -66,7 +71,21 @@ public class PlayerAttack : MonoBehaviour
     {
         rotate = true;
         rotateSpeed = rotateSpd;
-        frozenTargetRot = targetRotationObj.eulerAngles;
+        frozenTargetRot = targetRotationObj.rotation;
+    }
+
+    public void AimToEnemyTarg(float rotateSpd)
+    {
+        rotate = true;
+        rotateSpeed = rotateSpd;
+        if (TargSyst.Target != null)
+        {
+            var targpos = TargSyst.Target.transform.position - transform.position;
+            var targRot = Quaternion.LookRotation(targpos, transform.up);
+            frozenTargetRot = targRot;
+            Debug.Log(frozenTargetRot);
+        }
+        else { frozenTargetRot = targetRotationObj.rotation; }
     }
 
     private void OnTriggerExit(Collider other)

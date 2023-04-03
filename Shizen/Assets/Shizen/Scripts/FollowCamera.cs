@@ -4,8 +4,10 @@ public class FollowCamera : MonoBehaviour
 {
     [SerializeField] Transform target = null;
     [SerializeField] Transform playerModel = null;
+    [SerializeField] TargetSystem targSyst = null;
     public Transform PlayerModel { get { return playerModel; } }
     [SerializeField] PlayerMovement player = null;
+    [SerializeField] PlayerSkills pSkills = null;
 
     [SerializeField] float tiltUpLim;
     [SerializeField] float tiltLowLim;
@@ -16,6 +18,11 @@ public class FollowCamera : MonoBehaviour
     [SerializeField] float zoomSpeedDivider = 5f;
     [SerializeField] float cameraMinDistance = -3;
     [SerializeField] float cameraMaxDistance = -15;
+
+    private float targRotDuration = 0.1f;
+    private float targRotTimer = 0f;
+    private bool rotateToTarget = false;
+    private int lastComboCount = 0;
 
 
     // Start is called before the first frame update
@@ -59,6 +66,8 @@ public class FollowCamera : MonoBehaviour
             {
                 //Keep the player model facing the same direction by rotating it the oposite direction
                 playerModel.Rotate(0, -addToX, 0);
+
+
             }
             else
             {
@@ -71,12 +80,34 @@ public class FollowCamera : MonoBehaviour
                 playerModel.rotation = Quaternion.RotateTowards(playerModel.rotation, Y, 1 * Time.unscaledDeltaTime * 800);
             }
 
+            
             //ZOOMING
             targetZoom += Input.mouseScrollDelta.y / zoomSpeedDivider;
             if (Mathf.Abs(targetZoom) > Mathf.Abs(cameraMaxDistance)) targetZoom = cameraMaxDistance;
             if (Mathf.Abs(targetZoom) < Mathf.Abs(cameraMinDistance)) targetZoom = cameraMinDistance;
 
             transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, 0, targetZoom), Time.unscaledDeltaTime * 8);
+       
+            //If combo changes and there is a target, get rotating
+            if(pSkills.ComboCount != lastComboCount && targSyst.Target != null)
+            {
+                rotateToTarget = true;
+                lastComboCount = pSkills.ComboCount;
+            }
+
+            if (rotateToTarget)
+            {
+                //look at enemy when attacking
+                Quaternion y = Quaternion.LookRotation(targSyst.Target.transform.position - transform.position);
+                playerModel.rotation = Quaternion.RotateTowards(playerModel.rotation, y, 10 * Time.unscaledDeltaTime * 800);
+               
+                targRotTimer += Time.unscaledDeltaTime;
+                if (targRotTimer >= targRotDuration)
+                {
+                    targRotTimer = 0;
+                    rotateToTarget = false;
+                }
+            }
         }
     }
 
