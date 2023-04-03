@@ -66,11 +66,13 @@ public class EnemyAIController : MonoBehaviour
             {
                 StartCoroutine(EnemyAggro(5));
             }
+            agent.speed = 1.5f;
             Patrolling();
         }
         if (playerInSightRange && !playerInAttackRange)
         {
             if (!alerted) CallGroup();
+            agent.speed = 3.5f;
             ChasePlayer();
         }
         if (playerInSightRange && playerInAttackRange)
@@ -81,9 +83,6 @@ public class EnemyAIController : MonoBehaviour
 
     private void Patrolling()
     {
-        //alerted = false;
-        //sightRange = standardSightRange;
-
         if (!walkPointSet) SearchWalkPoint();
         else agent.SetDestination(walkPoint);
 
@@ -93,13 +92,7 @@ public class EnemyAIController : MonoBehaviour
         if (distanceToWalkPoint.magnitude < 1f /*&& !wayPointReached*/)
         {
             StartCoroutine(PatrollingPause(3));
-            //wayPointReached = true;
         }
-
-        //if (wayPointReached && walkPointSet)
-        //{
-        //    StartCoroutine(PatrollingPause(3));
-        //}
     }
 
     private void SearchWalkPoint()
@@ -108,7 +101,10 @@ public class EnemyAIController : MonoBehaviour
         walkPoint = waypoints[m_CurrentWaypointIndex].position;
 
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+        {
+            anim.SetTrigger("Walk");
             walkPointSet = true;
+        }
     }
 
     public void ChasePlayer()
@@ -116,7 +112,7 @@ public class EnemyAIController : MonoBehaviour
         if (!anim.GetBool("Attack"))
         {
             agent.SetDestination(player.position);
-            anim.SetTrigger("Move");
+            anim.SetTrigger("Run");
         }
         anim.SetBool("Attack", false);
     }
@@ -136,27 +132,15 @@ public class EnemyAIController : MonoBehaviour
 
     private void AttackPlayer()
     {
-        //if (alerted)
-        //{
-        //    alerted = false;
-        //    sightRange = standardSightRange;
-        //}
-
         //Make sure enemy doesn't move
         agent.SetDestination(transform.position);
 
-        transform.LookAt(player);
+        transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
         anim.SetBool("Attack", true);
-        anim.SetInteger("AttackType", currentAttackType);
+        //anim.SetInteger("AttackType", currentAttackType);
 
         if (!alreadyAttacked)
         {
-            //Attack code here
-            //Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-            //rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-            //rb.AddForce(transform.up * 8f, ForceMode.Impulse);
-            //End
-
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
@@ -184,7 +168,6 @@ public class EnemyAIController : MonoBehaviour
         yield return new WaitForSeconds(time);
         if (!playerInSightRange && !playerInAttackRange)
         {
-            Debug.Log("test");
             sightRange = standardSightRange;
             alerted = false;
             StopAllCoroutines();
@@ -193,9 +176,11 @@ public class EnemyAIController : MonoBehaviour
 
     IEnumerator PatrollingPause(float time)
     {
+        anim.SetTrigger("Idle");
         yield return new WaitForSeconds(time);
         //wayPointReached = false;
         walkPointSet = false;
+        anim.SetTrigger("Walk");
         StopAllCoroutines();
     }
 }
