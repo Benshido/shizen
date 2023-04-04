@@ -128,7 +128,7 @@ public class PlayerSkills : MonoBehaviour
 
     private IEnumerator DelayStaminaUse()
     {
-        yield return new WaitForSecondsRealtime(0.3f);
+        yield return new WaitForSecondsRealtime(0.1f);
         playerMovement.HP.ComsumeStamina(aboutToUseStamina);
         aboutToUseStamina = 0;
     }
