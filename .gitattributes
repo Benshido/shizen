@@ -13,6 +13,8 @@
 *.asset merge=unityyamlmerge eol=lf
 *.meta merge=unityyamlmerge eol=lf
 *.controller merge=unityyamlmerge eol=lf
+*.tiff merge=unityyamlmerge eol=lf
+*.cubemap merge=unityyamlmerge eol=lf
 
 
 ## git-lfs ##
