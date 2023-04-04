@@ -1876,6 +1876,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 1431351759287996, guid: ba2926d80e1466444936c24a1fa5aec7, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1433495221962836, guid: ba2926d80e1466444936c24a1fa5aec7, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -1903,6 +1907,10 @@ PrefabInstance:
     - target: {fileID: 1469432149067592, guid: ba2926d80e1466444936c24a1fa5aec7, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469432149067592, guid: ba2926d80e1466444936c24a1fa5aec7, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 1469670974863492, guid: ba2926d80e1466444936c24a1fa5aec7, type: 3}
       propertyPath: m_Layer
@@ -2079,6 +2087,10 @@ PrefabInstance:
     - target: {fileID: 1637584495559616, guid: ba2926d80e1466444936c24a1fa5aec7, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1637584495559616, guid: ba2926d80e1466444936c24a1fa5aec7, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 1645117210141060, guid: ba2926d80e1466444936c24a1fa5aec7, type: 3}
       propertyPath: m_Layer
@@ -2259,6 +2271,10 @@ PrefabInstance:
     - target: {fileID: 1872863404240268, guid: ba2926d80e1466444936c24a1fa5aec7, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1872863404240268, guid: ba2926d80e1466444936c24a1fa5aec7, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 1875719414166758, guid: ba2926d80e1466444936c24a1fa5aec7, type: 3}
       propertyPath: m_Layer
@@ -5026,7 +5042,7 @@ GameObject:
   - component: {fileID: 828841108}
   m_Layer: 7
   m_Name: EnemyOrc
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5059,6 +5075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a990ab86d04d1cd4cb8a7170ca514828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHitPoints: 5
   agent: {fileID: 0}
   player: {fileID: 0}
   whatIsGround:

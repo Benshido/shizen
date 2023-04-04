@@ -8,6 +8,11 @@ using static UnityEngine.GraphicsBuffer;
 
 public class EnemyAIController : MonoBehaviour
 {
+    [SerializeField] float maxHitPoints = 5;
+    private float hitPoints = 1;
+    public float HitPoints { get { return hitPoints; } }
+    public bool IsAlive { get; private set; }
+
     public NavMeshAgent agent;
     public Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
@@ -47,37 +52,47 @@ public class EnemyAIController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
         standardSightRange = sightRange;
+
+        hitPoints = maxHitPoints;
+        IsAlive = true;
     }
 
     private void Update()
     {
-        //Check for sight and attack range
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-
-        if (alerted)
+        if (IsAlive)
         {
-            sightRange = 50;
-        }
+            //Check for sight and attack range
+            playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+            playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if (!playerInSightRange && !playerInAttackRange)
-        {
             if (alerted)
             {
-                StartCoroutine(EnemyAggro(5));
+                sightRange = 50;
             }
-            agent.speed = 1.5f;
-            Patrolling();
+
+            if (!playerInSightRange && !playerInAttackRange)
+            {
+                if (alerted)
+                {
+                    StartCoroutine(EnemyAggro(5));
+                }
+                agent.speed = 1.5f;
+                Patrolling();
+            }
+            if (playerInSightRange && !playerInAttackRange)
+            {
+                if (!alerted) CallGroup();
+                agent.speed = 3.5f;
+                ChasePlayer();
+            }
+            if (playerInSightRange && playerInAttackRange)
+            {
+                AttackPlayer();
+            }
         }
-        if (playerInSightRange && !playerInAttackRange)
+        else
         {
-            if (!alerted) CallGroup();
-            agent.speed = 3.5f;
-            ChasePlayer();
-        }
-        if (playerInSightRange && playerInAttackRange)
-        {
-            AttackPlayer();
+            Invoke(nameof(DestroyEnemy), 6f);
         }
     }
 
@@ -109,12 +124,13 @@ public class EnemyAIController : MonoBehaviour
 
     public void ChasePlayer()
     {
-        if (!anim.GetBool("Attack"))
+        if (!anim.GetBool("Attack") || !anim.GetBool("GetHit"))
         {
             agent.SetDestination(player.position);
             anim.SetTrigger("Run");
         }
         anim.SetBool("Attack", false);
+        anim.SetBool("GetHit", false);
     }
 
     public void LastPlayerLocation()
@@ -132,18 +148,23 @@ public class EnemyAIController : MonoBehaviour
 
     private void AttackPlayer()
     {
-        //Make sure enemy doesn't move
-        agent.SetDestination(transform.position);
-
-        transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
-        anim.SetBool("Attack", true);
-        //anim.SetInteger("AttackType", currentAttackType);
-
-        if (!alreadyAttacked)
+        if (!anim.GetBool("GetHit"))
         {
-            alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+            //Make sure enemy doesn't move
+            agent.SetDestination(transform.position);
+
+            transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
+            anim.SetBool("Attack", true);
+            //anim.SetBool("GetHit", false);
+            //anim.SetInteger("AttackType", currentAttackType);
+
+            if (!alreadyAttacked)
+            {
+                alreadyAttacked = true;
+                Invoke(nameof(ResetAttack), timeBetweenAttacks);
+            }
         }
+        anim.SetBool("GetHit", false);
     }
 
     private void ResetAttack()
@@ -151,11 +172,18 @@ public class EnemyAIController : MonoBehaviour
         alreadyAttacked = false;
     }
 
-    private void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
-        health -= damage;
-
-        if (health <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
+        Debug.Log("HIT");
+        hitPoints -= damage;
+        anim.SetBool("GetHit", true);
+        anim.SetBool("Attack", false);
+        if (hitPoints <= 0)
+        {
+            Debug.Log("DEAD");
+            anim.SetTrigger("Death");
+            IsAlive = false;
+        }
     }
 
     private void DestroyEnemy()
@@ -165,9 +193,11 @@ public class EnemyAIController : MonoBehaviour
 
     IEnumerator EnemyAggro(float time)
     {
+        anim.SetTrigger("Walk");
         yield return new WaitForSeconds(time);
         if (!playerInSightRange && !playerInAttackRange)
         {
+            anim.SetTrigger("Walk");
             sightRange = standardSightRange;
             alerted = false;
             StopAllCoroutines();

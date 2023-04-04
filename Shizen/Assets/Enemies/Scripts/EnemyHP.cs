@@ -27,8 +27,10 @@ public class EnemyHP : MonoBehaviour
 
     public void TakeAttack(float damage)
     {
-        hitPoints -= damage;
+        //hitPoints -= damage;
         //if (hitPoints <= 0) IsAlive = false;
-        if (hitPoints <= 0) Destroy(gameObject);
+        //if (hitPoints <= 0) Destroy(gameObject);
+
+        gameObject.transform.parent.gameObject.GetComponent<EnemyAIController>().TakeDamage(2);
     }
 }
