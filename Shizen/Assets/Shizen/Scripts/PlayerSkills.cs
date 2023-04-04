@@ -10,6 +10,7 @@ public class PlayerSkills : MonoBehaviour
     public int ElementIndex { get { return elementIndex; } }
 
     [SerializeField] int comboCount = 0;
+    private float aboutToUseStamina = 0;
     public int ComboCount { get { return comboCount; } }
     private bool canGoToNextCombo = true;
 
@@ -71,7 +72,7 @@ public class PlayerSkills : MonoBehaviour
             }
             if (Input.GetKeyDown(NormalAttack) && playerMovement.IsGrounded)
             {
-                if (canGoToNextCombo)
+                if (canGoToNextCombo && RequireStamina(false))
                 {
                     if (lastAtkWasHeavy) comboCount = 0;
                     canGoToNextCombo = false;
@@ -84,7 +85,7 @@ public class PlayerSkills : MonoBehaviour
             }
             if (Input.GetKeyDown(HeavyAttack) && playerMovement.IsGrounded)
             {
-                if (canGoToNextCombo)
+                if (canGoToNextCombo && RequireStamina(true))
                 {
                     if (!lastAtkWasHeavy) comboCount = 0;
                     canGoToNextCombo = false;
@@ -101,6 +102,7 @@ public class PlayerSkills : MonoBehaviour
     public void EndOfComboReset()
     {
         comboCount = 0;
+        aboutToUseStamina = 0;
         NextComboAvailable();
     }
 
@@ -116,28 +118,39 @@ public class PlayerSkills : MonoBehaviour
 
 
     public void NextComboAvailable()
-    { 
+    {
+        StartCoroutine(DelayStaminaUse());
         canGoToNextCombo = true;
         attacking = false;
         isHeavy = false;
         cancelReset = false;
     }
 
-    private bool RequireStamina()
+    private IEnumerator DelayStaminaUse()
     {
-        float stamina = StaminaRequired();
+        yield return new WaitForSecondsRealtime(0.3f);
+        playerMovement.HP.ComsumeStamina(aboutToUseStamina);
+        aboutToUseStamina = 0;
+    }
 
-        if (playerMovement.HP.EP >= stamina) return true;
+    private bool RequireStamina(bool isheavy)
+    {
+        float stamina = StaminaRequired(isheavy);
+
+        if (playerMovement.HP.EP >= stamina) {
+            aboutToUseStamina = stamina;
+            
+            return true; }
         return false;
     }
 
-    private float StaminaRequired()
+    private float StaminaRequired(bool isheavy)
     {
-        if (isHeavy)
+        if (isheavy)
             switch (elementIndex)
             {
                 case (int)Element.Earth:
-                    return 8;
+                    return 12;
                 default:
                     break;
             }
@@ -146,7 +159,7 @@ public class PlayerSkills : MonoBehaviour
             switch (elementIndex)
             {
                 case (int)Element.Earth:
-                    return 2;
+                    return 5;
                 default:
                     break;
             }
