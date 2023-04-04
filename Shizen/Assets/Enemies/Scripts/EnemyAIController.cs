@@ -16,7 +16,7 @@ public class EnemyAIController : MonoBehaviour
     public NavMeshAgent agent;
     public Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
-    public float health;
+    //public float health;
     private Animator anim;
 
     [SerializeField] EnemyAttack[] attacks;
@@ -90,10 +90,10 @@ public class EnemyAIController : MonoBehaviour
                 AttackPlayer();
             }
         }
-        else
-        {
-            Invoke(nameof(DestroyEnemy), 6f);
-        }
+        //else
+        //{
+        //    Invoke(nameof(DestroyEnemy), 6f);
+        //}
     }
 
     private void Patrolling()
@@ -130,7 +130,7 @@ public class EnemyAIController : MonoBehaviour
             anim.SetTrigger("Run");
         }
         anim.SetBool("Attack", false);
-        anim.SetBool("GetHit", false);
+        //anim.SetBool("GetHit", false);
     }
 
     public void LastPlayerLocation()
@@ -154,9 +154,9 @@ public class EnemyAIController : MonoBehaviour
             agent.SetDestination(transform.position);
 
             transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
-            anim.SetBool("Attack", true);
             //anim.SetBool("GetHit", false);
             //anim.SetInteger("AttackType", currentAttackType);
+            anim.SetBool("Attack", true);
 
             if (!alreadyAttacked)
             {
@@ -164,7 +164,7 @@ public class EnemyAIController : MonoBehaviour
                 Invoke(nameof(ResetAttack), timeBetweenAttacks);
             }
         }
-        anim.SetBool("GetHit", false);
+        //anim.SetBool("GetHit", false);
     }
 
     private void ResetAttack()
@@ -176,13 +176,16 @@ public class EnemyAIController : MonoBehaviour
     {
         Debug.Log("HIT");
         hitPoints -= damage;
-        anim.SetBool("GetHit", true);
-        anim.SetBool("Attack", false);
+
         if (hitPoints <= 0)
         {
-            Debug.Log("DEAD");
-            anim.SetTrigger("Death");
-            IsAlive = false;
+            StartCoroutine(Death(3f));
+        }
+        else
+        {
+            StartCoroutine(GetHit(0.1f));
+            //anim.SetBool("Attack", false);
+            //anim.SetBool("GetHit", true);
         }
     }
 
@@ -211,6 +214,26 @@ public class EnemyAIController : MonoBehaviour
         //wayPointReached = false;
         walkPointSet = false;
         anim.SetTrigger("Walk");
+        StopAllCoroutines();
+    }
+
+    IEnumerator Death(float time)
+    {
+        Debug.Log("DEAD");
+        anim.SetTrigger("Death");
+        agent.enabled = false;
+        IsAlive = false;
+        yield return new WaitForSeconds(time);
+        DestroyEnemy();
+        StopAllCoroutines();
+    }
+
+    IEnumerator GetHit(float time)
+    {
+        anim.SetBool("Attack", false);
+        anim.SetBool("GetHit", true);
+        yield return new WaitForSeconds(time);
+        anim.SetBool("GetHit", false);
         StopAllCoroutines();
     }
 }
