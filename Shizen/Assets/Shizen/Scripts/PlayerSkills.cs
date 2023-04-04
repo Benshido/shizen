@@ -45,6 +45,8 @@ public class PlayerSkills : MonoBehaviour
 
         if (runTimer)
         {
+            Debug.Log("debug");
+
             resetTimer += Time.unscaledDeltaTime;
             if (resetTimer >= resetComboTime)
             {
@@ -70,7 +72,7 @@ public class PlayerSkills : MonoBehaviour
             if (Input.GetKeyDown(NormalAttack) && playerMovement.IsGrounded)
             {
                 //cancelReset = true;
-                if (canGoToNextCombo && RequireStamina())
+                if (canGoToNextCombo)
                 {
                     if (lastAtkWasHeavy) comboCount = 0;
                     canGoToNextCombo = false;
@@ -78,12 +80,13 @@ public class PlayerSkills : MonoBehaviour
                     comboCount++;
                     attacking = true;
                     isHeavy = false;
-                    StartCoroutine(CancelReset());
+                    cancelReset = true;
+                    //  StartCoroutine(CancelReset());
                 }
             }
             if (Input.GetKeyDown(HeavyAttack) && playerMovement.IsGrounded)
             {
-                if (canGoToNextCombo && RequireStamina())
+                if (canGoToNextCombo)
                 {
                     if (!lastAtkWasHeavy) comboCount = 0;
                     canGoToNextCombo = false;
@@ -91,7 +94,8 @@ public class PlayerSkills : MonoBehaviour
                     comboCount++;
                     attacking = true;
                     isHeavy = true;
-                    StartCoroutine(CancelReset());
+                    cancelReset = true;
+                 //   StartCoroutine(CancelReset());
                 }
             }
         }
@@ -105,19 +109,28 @@ public class PlayerSkills : MonoBehaviour
 
     public void ResetCombo(float seconds)
     {
-        runTimer = true;
-        resetComboTime = seconds;
+        if (!cancelReset)
+        {
+            runTimer = true;
+            resetComboTime = seconds;
+            resetTimer = 0;
+           // StartCoroutine(CancelReset());
+        }
     }
 
-    private IEnumerator CancelReset()
+/*    private IEnumerator CancelReset()
     {
         var combocountNow = ComboCount;
-        yield return new WaitUntil(() => comboCount != combocountNow && comboCount != 0);
-        cancelReset = true;
-    }
+        yield return new WaitUntil(() => comboCount != combocountNow);
+        if (comboCount != 0)
+        {
+            cancelReset = true;
+        }
+        else { Debug.Log(combocountNow + " = Ccnow - " + comboCount); }
+    }*/
 
     public void NextComboAvailable()
-    {
+    { 
         canGoToNextCombo = true;
         attacking = false;
         isHeavy = false;
@@ -127,7 +140,7 @@ public class PlayerSkills : MonoBehaviour
     private bool RequireStamina()
     {
         float stamina = StaminaRequired();
-        
+
         if (playerMovement.HP.EP >= stamina) return true;
         return false;
     }

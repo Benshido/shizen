@@ -17942,7 +17942,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.083333336
+  - time: 0
     functionName: NextComboAvailable
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -17964,13 +17964,6 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.41666666
-    functionName: CanMove
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.41666666
     functionName: SpawnPrefab
     data: 
     objectReferenceParameter: {fileID: 4196019357397201693, guid: d1db66b0f110fdc4098b4a8820832b3a,
@@ -17978,11 +17971,18 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.6666667
+  - time: 0.41666666
+    functionName: CanMove
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.75
     functionName: ResetCombo
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 1
+    floatParameter: 1.5
     intParameter: 0
     messageOptions: 0
   - time: 0.75
@@ -17990,5 +17990,5 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 1
+    intParameter: 2
     messageOptions: 0

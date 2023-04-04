@@ -15289,11 +15289,11 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.6666667
+  - time: 0.75
     functionName: ResetCombo
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 1
+    floatParameter: 1.5
     intParameter: 0
     messageOptions: 0
   - time: 0.81666666

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerDamageColObj : MonoBehaviour
@@ -5,6 +6,8 @@ public class PlayerDamageColObj : MonoBehaviour
     [SerializeField] float damage;
 
     [SerializeField] bool destroyWhenHitHeavyObjects;
+    [SerializeField] bool destroyOnEnemyHit;
+    [SerializeField] float enemyHitDestrDelay = 0;
     [SerializeField] GameObject destroyThis;
     [SerializeField] float objectWeight;
     public float ObjectWeight { get { return objectWeight; } }
@@ -17,6 +20,7 @@ public class PlayerDamageColObj : MonoBehaviour
             if (other.gameObject.TryGetComponent(out EnemyHP hp))
             {
                 hp.TakeAttack(damage);
+                if (destroyOnEnemyHit) StartCoroutine(Destroying());
             }
         }
         else if (destroyWhenHitHeavyObjects)
@@ -27,5 +31,10 @@ public class PlayerDamageColObj : MonoBehaviour
                 Destroy(destroyThis);
             }
         }
+    }
+    private IEnumerator Destroying()
+    {
+        yield return new WaitForSecondsRealtime(enemyHitDestrDelay);
+        Destroy(destroyThis);
     }
 }

@@ -18,6 +18,7 @@ public class PlayerHP : MonoBehaviour
 
     public float EP { get { return ep; } }
     [SerializeField] float ep = 100;
+    [SerializeField] float epRegen = 2;
 
     [SerializeField] Slider epSlider;
 
@@ -38,6 +39,14 @@ public class PlayerHP : MonoBehaviour
         }
     }
 
+
+    private void Update()
+    {
+        ep += epRegen * Time.unscaledDeltaTime;
+        if (ep > maxEP) ep = maxEP;
+        epSlider.value = ep;
+    }
+
     public void TakeDamage(float damage)
     {
         if (!IsAlive) return;
@@ -48,7 +57,6 @@ public class PlayerHP : MonoBehaviour
 
     public bool ComsumeStamina(float stamina)
     {
-        Debug.Log("cons");
         if (!IsAlive || ep - stamina < 0) return false;
         ep -= stamina;
         if (epSlider != null) epSlider.value = ep;

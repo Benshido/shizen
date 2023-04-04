@@ -99,9 +99,9 @@ public class PlayerAnimatorController : MonoBehaviour
 
     }
 
-    public void RemoveFromList(Element elem, Animator anim)
+    public void RemoveFromList(Element elem, Animator anim, bool resetcombo)
     {
-        if (elementAnimators[(int)elem].IndexOf(anim) == elementAnimators[(int)elem].Count - 1)
+        if (elementAnimators[(int)elem].IndexOf(anim) == elementAnimators[(int)elem].Count - 1 && resetcombo)
             playerSkills.EndOfComboReset();
         elementAnimators[(int)elem].Remove(anim);
     }

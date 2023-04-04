@@ -3,6 +3,8 @@ using UnityEngine;
 public class FollowCamera : MonoBehaviour
 {
     [SerializeField] Transform target = null;
+    [SerializeField] LayerMask ignore;
+    private Transform cam;
     [SerializeField] Transform playerModel = null;
     [SerializeField] TargetSystem targSyst = null;
     public Transform PlayerModel { get { return playerModel; } }
@@ -29,6 +31,7 @@ public class FollowCamera : MonoBehaviour
     void Start()
     {
         CursorLock();
+        cam = Camera.main.transform;
     }
 
     // Update is called once per frame
@@ -77,19 +80,19 @@ public class FollowCamera : MonoBehaviour
                 var Y = Quaternion.LookRotation(player.transform.TransformDirection(player.Movement + dashLookDir));
                 if (!player.IsRunning && !player.IsDashing) Y = Quaternion.LookRotation(playerModel.transform.forward);
 
-                if(player.Can_Move) playerModel.rotation = Quaternion.RotateTowards(playerModel.rotation, Y, 1 * Time.unscaledDeltaTime * 800);
+                if (player.Can_Move) playerModel.rotation = Quaternion.RotateTowards(playerModel.rotation, Y, 1 * Time.unscaledDeltaTime * 800);
             }
 
-            
+
             //ZOOMING
             targetZoom += Input.mouseScrollDelta.y / zoomSpeedDivider;
             if (Mathf.Abs(targetZoom) > Mathf.Abs(cameraMaxDistance)) targetZoom = cameraMaxDistance;
             if (Mathf.Abs(targetZoom) < Mathf.Abs(cameraMinDistance)) targetZoom = cameraMinDistance;
 
             transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, 0, targetZoom), Time.unscaledDeltaTime * 8);
-       
+
             //If combo changes and there is a target, get rotating
-            if(pSkills.ComboCount != lastComboCount && targSyst.Target != null)
+            if (pSkills.ComboCount != lastComboCount && targSyst.Target != null)
             {
                 rotateToTarget = true;
                 lastComboCount = pSkills.ComboCount;
@@ -114,6 +117,18 @@ public class FollowCamera : MonoBehaviour
                 }
             }
         }
+
+        var camNewPos = transform.position;
+
+        if (Physics.Raycast(target.position, transform.position - target.position, out RaycastHit hit, Mathf.Abs(transform.localPosition.z), ignore))
+        {
+            camNewPos = hit.point;
+        }
+
+        cam.position = camNewPos;
+        camNewPos = cam.localPosition;
+        camNewPos += new Vector3(0, 0.05f, 0.1f);
+        cam.localPosition = camNewPos;
     }
 
     private void CursorLock()

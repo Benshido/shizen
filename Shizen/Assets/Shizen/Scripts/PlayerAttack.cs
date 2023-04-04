@@ -20,6 +20,8 @@ public class PlayerAttack : MonoBehaviour
     private Quaternion frozenTargetRot;
     private Animator animator;
 
+    private bool resetOnDestroy = false;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -34,7 +36,8 @@ public class PlayerAttack : MonoBehaviour
             if (!Physics.Raycast(raycastStart.position, Vector3.down, out hit, maxGroundRange, IsGround))
             {
                 // pAnimController.RemoveFromList(element, animator);
-                Destroy(gameObject);
+                resetOnDestroy = true;
+                Destroying(0);
             }
             else
             {
@@ -100,7 +103,7 @@ public class PlayerAttack : MonoBehaviour
     }
     private void OnDestroy()
     {
-        pAnimController.RemoveFromList(element, animator);
+        pAnimController.RemoveFromList(element, animator, resetOnDestroy);
     }
 
     public void SpawnPrefab(GameObject prefab)

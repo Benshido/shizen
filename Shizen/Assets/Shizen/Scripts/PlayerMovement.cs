@@ -123,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
                     MoveRight();
                 }
            // }
-            if (IsRunning)
+            if (IsRunning && canMove)
             {
                 sprintTimer += Time.unscaledDeltaTime;
 
