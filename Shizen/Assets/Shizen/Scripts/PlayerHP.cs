@@ -44,7 +44,7 @@ public class PlayerHP : MonoBehaviour
     {
         ep += epRegen * Time.unscaledDeltaTime;
         if (ep > maxEP) ep = maxEP;
-        epSlider.value = ep;
+        if (epSlider != null) epSlider.value = ep;
     }
 
     public void TakeDamage(float damage)
