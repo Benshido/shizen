@@ -12159,7 +12159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LockOn: 102
-  targetMaxAngle: 60
+  targetMaxAngle: 50
   inRangeOutline: 1
   inRangeOutlineWidth: 2
   inRangeOutlineColor: {r: 0.5471698, g: 0, b: 0, a: 1}

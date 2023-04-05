@@ -46,8 +46,6 @@ public class PlayerSkills : MonoBehaviour
 
         if (runTimer)
         {
-            Debug.Log("debug");
-
             resetTimer += Time.unscaledDeltaTime;
             if (resetTimer >= resetComboTime)
             {
