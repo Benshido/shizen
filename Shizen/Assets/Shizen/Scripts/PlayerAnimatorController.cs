@@ -1,6 +1,5 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerAnimatorController : MonoBehaviour
@@ -10,6 +9,8 @@ public class PlayerAnimatorController : MonoBehaviour
     [Tooltip("If null will grab from this object")]
     [SerializeField] Animator animator;
     [SerializeField] Transform modelTransform;
+    [SerializeField] ParticleSystem dashParticles;
+    [SerializeField] ParticleSystem[] sprintParticles;
     private List<List<Animator>> elementAnimators = new();
 
     void Start()
@@ -30,8 +31,26 @@ public class PlayerAnimatorController : MonoBehaviour
         if (playerMovement.HP.IsAlive)
         {
             animator.SetBool("BackStep", playerMovement.BackStep);
+            animator.SetFloat("RunToSprint", playerMovement.SprintAmount);
+
+            if (playerMovement.SprintAmount > 0.5f)
+            {
+                foreach (ParticleSystem p in sprintParticles)
+                {
+                    if (!p.isPlaying) p.Play();
+                }
+            }
+            else
+            {
+                foreach (ParticleSystem p in sprintParticles)
+                {
+                    if (p.isPlaying) p.Stop();
+                }
+            }
+
             animator.SetInteger("AttackType", playerSkills.ElementIndex);
             animator.SetInteger("ComboCount", playerSkills.ComboCount);
+            animator.SetBool("IsHeavyAtk", playerSkills.IsHeavy);
             animator.SetBool("Attacking", playerSkills.Attacking);
 
             if (playerMovement.IsDashing)
@@ -60,18 +79,15 @@ public class PlayerAnimatorController : MonoBehaviour
         }
     }
 
-    //All below methods can be called from animation events
-
-    public void ResetCombo(float seconds)
-    {
-        StartCoroutine(playerSkills.ResetCombo(seconds));
-    }
 
     public void SpawnPrefab(GameObject prefab)
     {
-        var pref = Instantiate(prefab, modelTransform);
-        pref.transform.parent = null;
-        elementAnimators[playerSkills.ElementIndex].Add(pref.GetComponentInChildren<Animator>());
+        if (Unlockables.Elements[Enum.GetName(typeof(Element), playerSkills.ElementIndex)] > 0)
+        {
+            var pref = Instantiate(prefab, modelTransform);
+            pref.transform.parent = null;
+            elementAnimators[playerSkills.ElementIndex].Add(pref.GetComponentInChildren<Animator>());
+        }
     }
 
     public void UpdateElementComboIndex(int index)
@@ -82,4 +98,18 @@ public class PlayerAnimatorController : MonoBehaviour
         if (elem.Count > 0 && elem != null) elem[elementAnimators[playerSkills.ElementIndex].Count - 1].SetInteger("ComboStage", index);
 
     }
+
+    public void RemoveFromList(Element elem, Animator anim, bool resetcombo)
+    {
+        if (elementAnimators[(int)elem].IndexOf(anim) == elementAnimators[(int)elem].Count - 1 && resetcombo)
+            playerSkills.EndOfComboReset();
+        elementAnimators[(int)elem].Remove(anim);
+    }
+
+    public void DashParticlePlay()
+    {
+        if (!dashParticles.isPlaying) dashParticles.Play();
+    }
+
+
 }

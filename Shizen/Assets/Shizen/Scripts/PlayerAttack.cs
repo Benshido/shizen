@@ -1,8 +1,11 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    private PlayerAnimatorController pAnimController;
+    [SerializeField] Element element;
     [SerializeField] bool breakComboOnTriggerExit = false;
     [SerializeField] bool stickToGround;
     [SerializeField] float maxGroundRange = 5f;
@@ -10,21 +13,36 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] LayerMask IsGround;
     [SerializeField] Transform raycastStart;
     [SerializeField] Transform GroundObject;
+    private TargetSystem TargSyst;
     private bool rotate = false;
     private float rotateSpeed = 4;
     private Transform targetRotationObj;
-    private Vector3 frozenTargetRot;
+    private Quaternion frozenTargetRot;
+    private Animator animator;
+
+    private bool resetOnDestroy = false;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        animator = GetComponent<Animator>();
+        pAnimController = FindObjectOfType<PlayerAnimatorController>();
         targetRotationObj = FindObjectOfType<FollowCamera>().PlayerModel;
-        RaycastHit hit;
-        if (!Physics.Raycast(raycastStart.position, Vector3.down, out hit, maxGroundRange, IsGround))
-            Destroy(gameObject);
-        else
+        TargSyst = FindObjectOfType<TargetSystem>();
+
+        if (stickToGround)
         {
-            GroundObject.position = new Vector3(GroundObject.position.x, hit.point.y + groundOffset, GroundObject.position.z);
+            RaycastHit hit;
+            if (!Physics.Raycast(raycastStart.position, Vector3.down, out hit, maxGroundRange, IsGround))
+            {
+                // pAnimController.RemoveFromList(element, animator);
+                resetOnDestroy = true;
+                Destroying(0);
+            }
+            else
+            {
+                GroundObject.position = new Vector3(GroundObject.position.x, hit.point.y + groundOffset, GroundObject.position.z);
+            }
         }
     }
 
@@ -33,12 +51,13 @@ public class PlayerAttack : MonoBehaviour
     {
         if (rotate)
         {
-            transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, frozenTargetRot, Time.unscaledDeltaTime * rotateSpeed);
-            if(transform.eulerAngles == frozenTargetRot)
-            rotate = false;
+            transform.rotation = Quaternion.Lerp(transform.rotation, frozenTargetRot, Time.unscaledDeltaTime * rotateSpeed);
+            if (transform.rotation == frozenTargetRot)
+                rotate = false;
         }
+
         RaycastHit hit;
-        if (Physics.Raycast(raycastStart.position, Vector3.down, out hit, maxGroundRange, IsGround))
+        if (stickToGround && Physics.Raycast(raycastStart.position, Vector3.down, out hit, maxGroundRange, IsGround))
         {
             if (hit.distance < groundOffset + 0.5f)
             {
@@ -47,9 +66,10 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    private IEnumerator Destroying()
+    private IEnumerator Destroying(float time)
     {
-        yield return new WaitForSecondsRealtime(10);
+        yield return new WaitForSecondsRealtime(time);
+        // pAnimController.RemoveFromList(element, animator);
         Destroy(gameObject);
     }
 
@@ -57,7 +77,20 @@ public class PlayerAttack : MonoBehaviour
     {
         rotate = true;
         rotateSpeed = rotateSpd;
-        frozenTargetRot = targetRotationObj.eulerAngles;
+        frozenTargetRot = targetRotationObj.rotation;
+    }
+
+    public void AimToEnemyTarg(float rotateSpd)
+    {
+        rotate = true;
+        rotateSpeed = rotateSpd;
+        if (TargSyst.Target != null)
+        {
+            var targpos = TargSyst.Target.transform.position - transform.position;
+            var targRot = Quaternion.LookRotation(targpos, transform.up);
+            frozenTargetRot = targRot;
+        }
+        else { frozenTargetRot = targetRotationObj.rotation; }
     }
 
     private void OnTriggerExit(Collider other)
@@ -67,5 +100,15 @@ public class PlayerAttack : MonoBehaviour
             skill.EndOfComboReset();
             gameObject.GetComponent<Collider>().enabled = false;
         }
+    }
+    private void OnDestroy()
+    {
+        pAnimController.RemoveFromList(element, animator, resetOnDestroy);
+    }
+
+    public void SpawnPrefab(GameObject prefab)
+    {
+        var inst = Instantiate(prefab, transform);
+        inst.transform.parent = null;
     }
 }

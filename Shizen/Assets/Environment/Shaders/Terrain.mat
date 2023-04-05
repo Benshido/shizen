@@ -58,7 +58,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Grass:
-        m_Texture: {fileID: 10305, guid: 0000000000000000f000000000000000, type: 0}
+        m_Texture: {fileID: 10309, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GrassNormal:
@@ -86,12 +86,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Rocks:
-        m_Texture: {fileID: 10309, guid: 0000000000000000f000000000000000, type: 0}
+        m_Texture: {fileID: 10305, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SecondaryColorMask:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 0, y: 1}
         m_Offset: {x: 0.5, y: 0.5}
     - _Texture:
         m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
@@ -113,7 +113,7 @@ Material:
     m_Floats:
     - _Angle: 0.833
     - _BumpScale: 1
-    - _ColorMaskCoverage: 0.041
+    - _ColorMaskCoverage: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -143,6 +143,6 @@ Material:
     m_Colors:
     - _Color: {r: 0.11320752, g: 0.09518509, b: 0.08917762, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GrassColor: {r: 0.13511103, g: 0.2627451, b: 0.07058822, a: 1}
+    - _GrassColor: {r: 0.11301875, g: 0.12100001, b: 0.09014501, a: 1}
     - _RockColor: {r: 0.1981132, g: 0.17973478, b: 0.14297792, a: 1}
   m_BuildTextureStacks: []

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 [RequireComponent(typeof(CharacterController))]
 
@@ -15,17 +16,21 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Move Speed")]
     [SerializeField] float moveSpeed = 10;
+    [SerializeField] float sprintIncrease = 5;
 
     [Header("Jump")]
     [SerializeField] float jumpForce = 20;
 
     private bool jumping = false;
     public bool IsJumping { get { return jumping; } }
+    private bool inCombat = false;
+    public bool InCombat { get { return inCombat; } }
 
     [Header("Dash")]
     [SerializeField] float dashMultiplier = 3;
     [SerializeField] float dashDuration = 1;
     [SerializeField] float dashCooldown = 1;
+    [SerializeField] float dashCost = 1;
     /// <summary>
     /// Will be set to false on knockbacks
     /// </summary>
@@ -34,6 +39,8 @@ public class PlayerMovement : MonoBehaviour
     public bool BackStep { get { return backStep; } }
     [Header("Other")]
     [SerializeField] float weight = 70;
+    [SerializeField] float timeUntillSprint = 4;
+    private float sprintTimer = 0;
 
     private CharacterController charController;
 
@@ -44,18 +51,21 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 finalMovement;
     private Vector3 movement;
     public Vector3 Movement { get { return finalMovement; } }
+    public bool Can_Move { get { return canMove; } }
     private bool canMove = true;
     private bool isStaggered = false;
     private Vector3 externalForces;
     public Vector3 ExternalForces { get { return externalForces; } }
     private Vector3 dashMovement;
     public Vector3 DashMovement { get { return dashMovement; } }
+    public float SprintAmount { get { return sprintAmount; } }
+    private float sprintAmount = 0;
 
     public bool IsMoving { get { if (IsRunning || IsDashing || IsJumping) return true; return false; } }
     public bool IsRunning { get { if (movement != Vector3.zero) return true; return false; } }
     public bool IsDashing { get { if (dashMovement != Vector3.zero) return true; return false; } }
-    public PlayerHP HP { get { return hp; } }
-    private PlayerHP hp;
+    public PlayerHP HP { get { return stats; } }
+    private PlayerHP stats;
 
     private float maxFallSpd = 0;
     private int dashCount = 0;
@@ -64,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         charController = GetComponent<CharacterController>();
-        hp = GetComponentInChildren<PlayerHP>();
+        stats = GetComponentInChildren<PlayerHP>();
 
         //calculate maximum fall speed using gravity and weight
         maxFallSpd = Physics.gravity.y + (Physics.gravity.y * (weight / 75));
@@ -75,23 +85,27 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SetSlopeSlideVelocity();
+
         //grounded check (character controller isGrounded is too glitchy)
         Vector3 origin = transform.position + charController.center;
-        origin.y -= (charController.height / 2) - 0.03f;
-        if (Physics.OverlapSphere(origin, charController.radius, groundedMask).Length > 0)
+        origin.y -= (charController.height / 2) - 0.3f;
+        Debug.DrawLine(origin, new Vector3(origin.x, origin.y - charController.radius, origin.z), Color.red);
+
+        if (Physics.OverlapSphere(origin, charController.radius, groundedMask).Length > 0 && !IsSliding)
         {
             isGrounded = true;
         }
         else isGrounded = false;
 
-        if (hp.IsAlive)
+        if (stats.IsAlive)
         {
             //reset movement before trying to see if we should be moving
             movement = Vector3.zero;
 
             //when oposite keys are pressed at the same time it should act like neither are pressed
-            if (canMove)
-            {
+           // if (canMove)
+           // {
                 if (Input.GetKey(moveForward) && !Input.GetKey(moveBack))
                 {
                     MoveForward();
@@ -108,6 +122,21 @@ public class PlayerMovement : MonoBehaviour
                 {
                     MoveRight();
                 }
+           // }
+            if (IsRunning && canMove)
+            {
+                sprintTimer += Time.unscaledDeltaTime;
+
+                if (sprintTimer >= timeUntillSprint)
+                {
+                    if (sprintTimer >= timeUntillSprint * 2) sprintAmount = Mathf.MoveTowards(sprintAmount, 1f, Time.unscaledDeltaTime);
+                    else sprintAmount = Mathf.MoveTowards(sprintAmount, 0.5f, Time.unscaledDeltaTime);
+                }
+            }
+            else
+            {
+                sprintTimer = 0;
+                sprintAmount = 0;
             }
 
             //evens out movement when multiple directions are being moved towards
@@ -121,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
                 jumping = true;
             }
 
-            if (Input.GetKeyDown(dash) && dashAvailable)
+            if (Input.GetKeyDown(dash) && dashAvailable && stats.ComsumeStamina(dashCost))
             {
                 Dash();
             }
@@ -147,6 +176,13 @@ public class PlayerMovement : MonoBehaviour
 
             var movementAndDir = Vector3.zero;
             if (!isStaggered) movementAndDir = transform.rotation * (finalMovement + dashMovement);
+            if(!canMove) movementAndDir = transform.rotation *  dashMovement;
+
+            if (IsSliding)
+            {
+                float initMovSpdDivider = 20;
+                movementAndDir = new Vector3(slopeSlideVelo.x + movementAndDir.x / initMovSpdDivider, -slopeSlideVelo.y, slopeSlideVelo.z + movementAndDir.z / initMovSpdDivider) * 6;
+            }
 
             //External force can be used for jumping and knockbacks
             charController.Move((externalForces + movementAndDir) * Time.unscaledDeltaTime);
@@ -158,24 +194,43 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    private Vector3 slopeSlideVelo;
+    private float slopeAngle;
+    private bool IsSliding { get { return slopeAngle > charController.slopeLimit + 1; } }
+    private void SetSlopeSlideVelocity()
+    {
+        var origin = transform.position - charController.center;
+
+        if (Physics.Raycast(origin, Vector3.down, out RaycastHit hit, charController.height, groundedMask))
+        {
+            slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
+            if (slopeAngle >= charController.slopeLimit)
+            {
+                slopeSlideVelo = hit.normal;
+                return;
+            }
+        }
+        slopeSlideVelo = Vector3.MoveTowards(slopeSlideVelo, Vector3.zero, Time.unscaledDeltaTime);
+    }
+
     public void MoveForward()
     {
-        movement.z = moveSpeed;
+        movement.z = moveSpeed + (sprintIncrease * sprintAmount);
     }
 
     public void MoveBack()
     {
-        movement.z = -moveSpeed;
+        movement.z = -(moveSpeed + (sprintIncrease * sprintAmount));
     }
 
     public void MoveLeft()
     {
-        movement.x = -moveSpeed;
+        movement.x = -(moveSpeed + (sprintIncrease * sprintAmount));
     }
 
     public void MoveRight()
     {
-        movement.x = moveSpeed;
+        movement.x = moveSpeed + (sprintIncrease * sprintAmount);
     }
 
     public void Jump()
