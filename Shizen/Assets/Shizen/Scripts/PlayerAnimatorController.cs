@@ -6,6 +6,7 @@ public class PlayerAnimatorController : MonoBehaviour
 {
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerSkills playerSkills;
+    [SerializeField] TargetSystem playerTarget;
     [Tooltip("If null will grab from this object")]
     [SerializeField] Animator animator;
     [SerializeField] Transform modelTransform;
@@ -16,6 +17,7 @@ public class PlayerAnimatorController : MonoBehaviour
     void Start()
     {
         if (animator == null) animator = GetComponent<Animator>();
+        if (playerTarget == null) playerTarget = FindObjectOfType<TargetSystem>();
 
         animator.SetTrigger("Idle");
 
@@ -97,6 +99,19 @@ public class PlayerAnimatorController : MonoBehaviour
         //uses only latest spawned elemental object of said element
         if (elem.Count > 0 && elem != null) elem[elementAnimators[playerSkills.ElementIndex].Count - 1].SetInteger("ComboStage", index);
 
+    }
+
+    public void UpdateElementComboIndexAll(int index)
+    {
+        var elem = elementAnimators[playerSkills.ElementIndex];
+
+        if (playerTarget.Target != null && elem.Count > 0 && elem != null)
+        {
+            for (int i = 0; i < elem.Count; i++)
+            {
+                elem[i].SetInteger("ComboStage", index);
+            }
+        }
     }
 
     public void RemoveFromList(Element elem, Animator anim, bool resetcombo)

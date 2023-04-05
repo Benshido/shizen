@@ -32,6 +32,11 @@ public class PlayerDamageColObj : MonoBehaviour
             }
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("teat");
+    }
     private IEnumerator Destroying()
     {
         yield return new WaitForSecondsRealtime(enemyHitDestrDelay);
