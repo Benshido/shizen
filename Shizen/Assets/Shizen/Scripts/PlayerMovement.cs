@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Other")]
     [SerializeField] float weight = 70;
     [SerializeField] float timeUntillSprint = 4;
+    [SerializeField] GameObject orient;
     private float sprintTimer = 0;
 
     private CharacterController charController;
@@ -175,8 +176,8 @@ public class PlayerMovement : MonoBehaviour
 
 
             var movementAndDir = Vector3.zero;
-            if (!isStaggered) movementAndDir = transform.rotation * (finalMovement + dashMovement);
-            if(!canMove) movementAndDir = transform.rotation *  dashMovement;
+            if (!isStaggered) movementAndDir = orient.transform.rotation * (finalMovement + dashMovement);
+            if(!canMove) movementAndDir = orient.transform.rotation *  dashMovement;
 
             if (IsSliding)
             {

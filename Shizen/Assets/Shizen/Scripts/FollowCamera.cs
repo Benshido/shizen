@@ -6,6 +6,7 @@ public class FollowCamera : MonoBehaviour
     [SerializeField] LayerMask ignore;
     private Transform cam;
     [SerializeField] Transform playerModel = null;
+    [SerializeField] Transform camParent = null;
     [SerializeField] TargetSystem targSyst = null;
     public Transform PlayerModel { get { return playerModel; } }
     [SerializeField] PlayerMovement player = null;
@@ -63,24 +64,20 @@ public class FollowCamera : MonoBehaviour
             target.localEulerAngles = new Vector3(pitchRotation, 0, 0);
 
             //rotate player to face away from the camera
-            player.transform.Rotate(0, addToX, 0);
+            camParent.transform.Rotate(0, addToX, 0);
+            camParent.position = player.transform.position;
 
-            if (!player.IsMoving)
+            if (player.IsMoving)
             {
-                //Keep the player model facing the same direction by rotating it the oposite direction
-                playerModel.Rotate(0, -addToX, 0);
-
-
-            }
-            else
-            {
+                //player.transform.rotation = camParent.rotation;
                 //When dashing or running the rotation should match the expectations of the player
                 var dashLookDir = player.DashMovement;
                 if (player.BackStep) dashLookDir = -dashLookDir;
-                var Y = Quaternion.LookRotation(player.transform.TransformDirection(player.Movement + dashLookDir));
-                if (!player.IsRunning && !player.IsDashing) Y = Quaternion.LookRotation(playerModel.transform.forward);
+                var Y = Quaternion.LookRotation(camParent.transform.TransformDirection(player.Movement + dashLookDir));
+                if (!player.IsRunning && !player.IsDashing) Y = Quaternion.LookRotation(player.transform.forward);
 
-                if (player.Can_Move) playerModel.rotation = Quaternion.RotateTowards(playerModel.rotation, Y, 1 * Time.unscaledDeltaTime * 800);
+                if (player.Can_Move) player.transform.rotation = Quaternion.RotateTowards(player.transform.rotation, Y, 1 * Time.unscaledDeltaTime * 800);
+
             }
 
 
@@ -111,9 +108,9 @@ public class FollowCamera : MonoBehaviour
                 {
                     //look at enemy when attacking
                     var targ = targSyst.Target.transform.position;
-                    targ.y = transform.position.y;
-                    Quaternion y = Quaternion.LookRotation(targ - transform.position);
-                    playerModel.rotation = Quaternion.RotateTowards(playerModel.rotation, y, 10 * Time.unscaledDeltaTime * 800);
+                    targ.y = player.transform.position.y;
+                    Quaternion y = Quaternion.LookRotation(targ - player.transform.position);
+                    player.transform.rotation = Quaternion.RotateTowards(player.transform.rotation, y, 10 * Time.unscaledDeltaTime * 800);
                 }
             }
         }
