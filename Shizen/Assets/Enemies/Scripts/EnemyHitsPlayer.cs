@@ -11,6 +11,7 @@ public class EnemyHitsPlayer : MonoBehaviour
         if (other.gameObject.tag == "Player" && !cooldown)
         {
             Debug.Log("Player got hit!!!");
+            if (gameObject.tag == "Projectile") Destroy(gameObject);
             cooldown = true;
             StartCoroutine(HitCooldown(1.0f));
         }

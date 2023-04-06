@@ -38,7 +38,7 @@ public class EnemyAIController : MonoBehaviour
     //Attacking
     public float timeBetweenAttacks;
     bool alreadyAttacked;
-    public GameObject projectile;
+    public bool enemyIsRanged = false;
 
     //States
     public float sightRange, attackRange;
@@ -57,6 +57,11 @@ public class EnemyAIController : MonoBehaviour
 
         hitPoints = maxHitPoints;
         IsAlive = true;
+
+        if (enemyIsRanged)
+        {
+            anim.SetBool("IsRanged", true);
+        }
     }
 
     private void Update()
@@ -128,7 +133,7 @@ public class EnemyAIController : MonoBehaviour
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
         //walkpoint reached
-        if (distanceToWalkPoint.magnitude < 1f /*&& !wayPointReached*/)
+        if (distanceToWalkPoint.magnitude < 0.5f /*&& !wayPointReached*/)
         {
             StartCoroutine(PatrollingPause(3));
         }
@@ -136,8 +141,12 @@ public class EnemyAIController : MonoBehaviour
 
     private void SearchWalkPoint()
     {
-        m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
-        walkPoint = waypoints[m_CurrentWaypointIndex].position;
+        float randomZ = Random.Range(-walkPointRange, walkPointRange);
+        float randomX = Random.Range(-walkPointRange, walkPointRange);
+        //m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
+        //walkPoint = waypoints[m_CurrentWaypointIndex].position;
+
+        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
         {
@@ -184,6 +193,8 @@ public class EnemyAIController : MonoBehaviour
 
             if (!alreadyAttacked)
             {
+                if (enemyIsRanged) RangedAttack();
+
                 alreadyAttacked = true;
                 Invoke(nameof(ResetAttack), timeBetweenAttacks);
             }
@@ -216,6 +227,11 @@ public class EnemyAIController : MonoBehaviour
     private void DestroyEnemy()
     {
         Destroy(gameObject);
+    }
+
+    public void RangedAttack()
+    {
+        gameObject.GetComponent<RangedAttack>().ThrowProjectile(player);
     }
 
     IEnumerator EnemyAggro(float time)
