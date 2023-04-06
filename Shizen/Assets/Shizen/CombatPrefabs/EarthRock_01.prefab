@@ -4848,7 +4848,6 @@ GameObject:
   - component: {fileID: 8386435001745416362}
   - component: {fileID: 4030278897219830722}
   - component: {fileID: 1219834895}
-  - component: {fileID: 399847148}
   m_Layer: 3
   m_Name: EarthRock_01
   m_TagString: Untagged
@@ -4914,29 +4913,6 @@ MonoBehaviour:
     m_Bits: 1
   raycastStart: {fileID: 4622536064265387021}
   GroundObject: {fileID: 4622536064265387021}
---- !u!136 &399847148
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5694841185078473152}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1
-  m_Height: 4
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: -1.17}
 --- !u!1 &8632425469708687379
 GameObject:
   m_ObjectHideFlags: 0
