@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -48,7 +49,8 @@ public class EnemyAIController : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        //player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = FindFirstObjectByType<PlayerHP>().transform;
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
         standardSightRange = sightRange;
@@ -62,15 +64,15 @@ public class EnemyAIController : MonoBehaviour
         if (IsAlive)
         {
             //Check for sight and attack range
-            playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-            playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+            //playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+            //playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
             if (alerted)
             {
                 sightRange = 50;
             }
 
-            if (!playerInSightRange && !playerInAttackRange)
+            if (!PlayerInSightRange() && !PlayerInAttackRange())
             {
                 if (alerted)
                 {
@@ -79,13 +81,13 @@ public class EnemyAIController : MonoBehaviour
                 agent.speed = 1.5f;
                 Patrolling();
             }
-            if (playerInSightRange && !playerInAttackRange)
+            if (PlayerInSightRange() && !PlayerInAttackRange())
             {
                 if (!alerted) CallGroup();
                 agent.speed = 3.5f;
                 ChasePlayer();
             }
-            if (playerInSightRange && playerInAttackRange)
+            if (PlayerInSightRange() && PlayerInAttackRange())
             {
                 AttackPlayer();
             }
@@ -94,6 +96,28 @@ public class EnemyAIController : MonoBehaviour
         //{
         //    Invoke(nameof(DestroyEnemy), 6f);
         //}
+    }
+
+    private bool PlayerInSightRange()
+    {
+        Collider[] overlap = Physics.OverlapSphere(transform.position, sightRange);
+        Collider targetCollider = overlap.FirstOrDefault(c => c.CompareTag("Player"));
+        if (targetCollider != null)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private bool PlayerInAttackRange()
+    {
+        Collider[] overlap = Physics.OverlapSphere(transform.position, attackRange);
+        Collider targetCollider = overlap.FirstOrDefault(c => c.CompareTag("Player"));
+        if (targetCollider != null)
+        {
+            return true;
+        }
+        return false;
     }
 
     private void Patrolling()
