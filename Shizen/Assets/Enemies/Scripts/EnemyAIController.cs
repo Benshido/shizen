@@ -226,7 +226,7 @@ public class EnemyAIController : MonoBehaviour
 
     private void DestroyEnemy()
     {
-        Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
     }
 
     public void RangedAttack()
