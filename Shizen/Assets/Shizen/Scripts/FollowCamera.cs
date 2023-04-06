@@ -91,15 +91,15 @@ public class FollowCamera : MonoBehaviour
             //If combo changes and there is a target, get rotating
             if (pSkills.ComboCount != lastComboCount && targSyst.Target != null)
             {
-                rotateToTarget = true;
+                if (pSkills.ComboCount > 0) rotateToTarget = true;
                 lastComboCount = pSkills.ComboCount;
             }
 
             if (rotateToTarget)
             {
-
                 targRotTimer += Time.unscaledDeltaTime;
-                if (targRotTimer >= targRotDuration || targSyst.Target == null)
+                if (targSyst.Target == null) { targRotTimer = 0; rotateToTarget = false; }
+                if (targRotTimer >= targRotDuration)
                 {
                     targRotTimer = 0;
                     rotateToTarget = false;
