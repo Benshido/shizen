@@ -62,12 +62,23 @@ public class PlayerSkills : MonoBehaviour
                 elementIndex++;
                 if (elementIndex >= elementList.Count) elementIndex = 0;
 
+                while (elementIndex != 0 && Unlockables.Elements[Enum.GetName(typeof(Element), elementIndex)] == 0)
+                {
+                    elementIndex++;
+                    if (elementIndex >= elementList.Count) elementIndex = 0;
+                }
             }
-            if (Input.GetKeyDown(NextElement))
+            if (Input.GetKeyDown(PrevElement))
             {
                 elementIndex--;
                 if (elementIndex < 0) elementIndex = elementList.Count - 1;
+                while (elementIndex != 0 && Unlockables.Elements[Enum.GetName(typeof(Element), elementIndex)] == 0)
+                {
+                    elementIndex--;
+                    if (elementIndex < 0) elementIndex = elementList.Count - 1;
+                }
             }
+
             if (Input.GetKeyDown(NormalAttack) && playerMovement.IsGrounded)
             {
                 if (canGoToNextCombo && RequireStamina(false))
@@ -135,10 +146,12 @@ public class PlayerSkills : MonoBehaviour
     {
         float stamina = StaminaRequired(isheavy);
 
-        if (playerMovement.HP.EP >= stamina) {
+        if (playerMovement.HP.EP >= stamina)
+        {
             aboutToUseStamina = stamina;
-            
-            return true; }
+
+            return true;
+        }
         return false;
     }
 
@@ -149,6 +162,8 @@ public class PlayerSkills : MonoBehaviour
             {
                 case (int)Element.Earth:
                     return 12;
+                case (int)Element.Water:
+                    return 6;
                 default:
                     break;
             }
@@ -158,6 +173,8 @@ public class PlayerSkills : MonoBehaviour
             {
                 case (int)Element.Earth:
                     return 5;
+                case (int)Element.Water:
+                    return 2;
                 default:
                     break;
             }
