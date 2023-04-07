@@ -26,13 +26,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2426821081700110795}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.583, y: 0, z: 0.0032339096}
+  m_LocalPosition: {x: 584.06, y: 100, z: 677.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2749295389267241174}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2426821081700110794
 Animator:
@@ -66,6 +66,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd1cabd2752d88048b66fdb79f696341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 1
+  walkPoint: {x: 0, y: 0, z: 0}
+  walkPointRange: 0
+  isDead: 1
+  npcState: 0
 --- !u!1001 &2426821081451581245
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82,17 +90,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 77689292a859d894087079cf355fb9f3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 584.06
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 77689292a859d894087079cf355fb9f3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 77689292a859d894087079cf355fb9f3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 677.24
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 77689292a859d894087079cf355fb9f3,
         type: 3}
@@ -1955,7 +1963,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!136 &2426821080304556692
 CapsuleCollider:
