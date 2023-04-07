@@ -23432,6 +23432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 7019290950414503385}
   playerSkills: {fileID: 4258291860827061552}
+  playerTarget: {fileID: 0}
   animator: {fileID: 0}
   modelTransform: {fileID: 7019290950485950613}
   dashParticles: {fileID: 4571886728333987559}
