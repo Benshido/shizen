@@ -54,12 +54,12 @@ public class EnemyAI : MonoBehaviour
 
         StopAgent();
 
-        attacks.OrderByDescending(x => x.Range);
+        //attacks.OrderByDescending(x => x.Range);
 
-        foreach (EnemyAttack attack in attacks)
-        {
-            attack.FullAmmo();
-        }
+        //foreach (EnemyAttack attack in attacks)
+        //{
+        //    attack.FullAmmo();
+        //}
     }
 
     void Update()
@@ -140,71 +140,71 @@ public class EnemyAI : MonoBehaviour
     /// </summary>
     public void UseAmmoNoProjectile()
     {
-        var atk = attacks[currentAttackType];
-        if (atk.Ammo > 0 || atk.HasInfiniteAmmo)
-        {
-            atk.UseAmmo();
-            StartCoroutine(atk.Reload());
-            HitboxMeleeAtk(atk);
-        }
+        //var atk = attacks[currentAttackType];
+        //if (atk.Ammo > 0 || atk.HasInfiniteAmmo)
+        //{
+        //    atk.UseAmmo();
+        //    StartCoroutine(atk.Reload());
+        //    HitboxMeleeAtk(atk);
+        //}
     }
 
     public void UseAmmoWithProjectile()
     {
-        var atk = attacks[currentAttackType];
-        if (atk.Ammo > 0 || atk.HasInfiniteAmmo)
-        {
-            atk.UseAmmo();
-            StartCoroutine(atk.Reload());
-            FireProjectile(atk);
-        }
+        //var atk = attacks[currentAttackType];
+        //if (atk.Ammo > 0 || atk.HasInfiniteAmmo)
+        //{
+        //    atk.UseAmmo();
+        //    StartCoroutine(atk.Reload());
+        //    FireProjectile(atk);
+        //}
     }
 
     public LayerMask AttackMask;
     private void FireProjectile(EnemyAttack atk)
     {
-        if (atk.Projectile != null)
-        {
-            var obj = Instantiate(atk.Projectile, transform);
-            obj.transform.SetPositionAndRotation(transform.position, transform.rotation);
-            obj.transform.SetParent(null);
-            var projectile = obj.AddComponent<EnemyProjectile>();
-            projectile.speed = atk.projectileSpeed;
-            projectile.damage = atk.Damage;
-            projectile.range = atk.Range;
-            projectile.target = target.position;
-            projectile.mask = AttackMask;
-        }
+        //if (atk.Projectile != null)
+        //{
+        //    var obj = Instantiate(atk.Projectile, transform);
+        //    obj.transform.SetPositionAndRotation(transform.position, transform.rotation);
+        //    obj.transform.SetParent(null);
+        //    var projectile = obj.AddComponent<EnemyProjectile>();
+        //    projectile.speed = atk.projectileSpeed;
+        //    projectile.damage = atk.Damage;
+        //    projectile.range = atk.Range;
+        //    projectile.target = target.position;
+        //    projectile.mask = AttackMask;
+        //}
     }
 
     private void HitboxMeleeAtk(EnemyAttack atk)
     {
-        if (atk.MeleeHitArea != null)
-        {
-            atk.MeleeHitArea.enabled = true;
-            var melee = atk.MeleeHitArea.GetComponent<EnemyMeleeAtk>();
-            if (melee == null)
-            {
-                melee = atk.MeleeHitArea.AddComponent<EnemyMeleeAtk>();
-                melee.damage = atk.Damage;
-            }
-        }
+        //if (atk.MeleeHitArea != null)
+        //{
+        //    atk.MeleeHitArea.enabled = true;
+        //    var melee = atk.MeleeHitArea.GetComponent<EnemyMeleeAtk>();
+        //    if (melee == null)
+        //    {
+        //        melee = atk.MeleeHitArea.AddComponent<EnemyMeleeAtk>();
+        //        melee.damage = atk.Damage;
+        //    }
+        //}
     }
     public void MeleeHitboxOff(int attackType)
     {
-        var atk = attacks[attackType];
-        if (atk.MeleeHitArea != null)
-        {
-            atk.MeleeHitArea.enabled = false;
-            var melee = atk.MeleeHitArea.GetComponent<EnemyMeleeAtk>();
-            melee.damage = atk.Damage;
-            melee.ClearHPObjectsHit();
-        }
+        //var atk = attacks[attackType];
+        //if (atk.MeleeHitArea != null)
+        //{
+        //    atk.MeleeHitArea.enabled = false;
+        //    var melee = atk.MeleeHitArea.GetComponent<EnemyMeleeAtk>();
+        //    melee.damage = atk.Damage;
+        //    melee.ClearHPObjectsHit();
+        //}
     }
 
     private void SetStoppingDistance()
     {
-        agent.stoppingDistance = attacks[currentAttackType].Range;
+        //agent.stoppingDistance = attacks[currentAttackType].Range;
     }
 
     /// <summary>
@@ -227,21 +227,21 @@ public class EnemyAI : MonoBehaviour
         SetStoppingDistance();
 
         hasAvailableAtk = false;
-        for (int i = 0; i < attacks.Length; i++)
-        {
-            var atk = attacks[i];
-            if (atk.Ammo > 0)
-            {
-                currentAttackType = atk.AnimationIndex;
-                hasAvailableAtk = true;
-                break;
-            }
-            if (atk.HasInfiniteAmmo)
-            {
-                currentAttackType = atk.AnimationIndex;
-                hasAvailableAtk = true;
-            }
-        }
+        //for (int i = 0; i < attacks.Length; i++)
+        //{
+        //    var atk = attacks[i];
+        //    if (atk.Ammo > 0)
+        //    {
+        //        currentAttackType = atk.AnimationIndex;
+        //        hasAvailableAtk = true;
+        //        break;
+        //    }
+        //    if (atk.HasInfiniteAmmo)
+        //    {
+        //        currentAttackType = atk.AnimationIndex;
+        //        hasAvailableAtk = true;
+        //    }
+        //}
     }
 
     /// <summary>

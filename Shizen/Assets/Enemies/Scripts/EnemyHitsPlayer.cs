@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyHitsPlayer : MonoBehaviour
 {
     bool cooldown = false;
+    public float damage = 5;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -15,6 +16,13 @@ public class EnemyHitsPlayer : MonoBehaviour
             cooldown = true;
             StartCoroutine(HitCooldown(1.0f));
         }
+
+        if (gameObject.tag == "Projectile") Invoke(nameof(DestroyProjectile), 3f); ;
+    }
+
+    private void DestroyProjectile()
+    {
+        Destroy(gameObject);
     }
 
     IEnumerator HitCooldown(float time)

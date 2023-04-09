@@ -24,14 +24,14 @@ public class EnemyAIController : MonoBehaviour
     [Tooltip("Make sure to use correct animation transition conditions")]
     private int currentAttackType = 0;
     private bool hasAvailableAtk = false;
-    [SerializeField] bool lookAt = true;
+    //[SerializeField] bool lookAt = true;
 
     //Patrolling
     public Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
     //Waypoints patrol
-    public Transform[] waypoints;
+    //public Transform[] waypoints;
     int m_CurrentWaypointIndex;
     //bool wayPointReached = false;
 
