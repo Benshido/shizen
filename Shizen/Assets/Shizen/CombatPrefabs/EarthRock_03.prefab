@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5630927800790788923
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7969847255447744468}
+  m_Layer: 3
+  m_Name: GroundPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7969847255447744468
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5630927800790788923}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6571486191917291247}
+  m_Father: {fileID: 6571486192176570602}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6571486191917291246
 GameObject:
   m_ObjectHideFlags: 0
@@ -28,8 +60,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6571486191917291246}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.55765, y: 3.2, z: 0.14101}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.5576501, y: 3.2, z: 0.14101005}
   m_LocalScale: {x: 3.0672553, y: 1.9192, z: 1.9192}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -40,7 +72,7 @@ Transform:
   - {fileID: 6681128128872717382}
   - {fileID: 6681128128750633837}
   - {fileID: 6681128129342384971}
-  m_Father: {fileID: 6571486192176570602}
+  m_Father: {fileID: 7969847255447744468}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &6571486191917291243
@@ -157,6 +189,7 @@ GameObject:
   - component: {fileID: 6571486192176570602}
   - component: {fileID: 6571486192176570603}
   - component: {fileID: 6571486192176570596}
+  - component: {fileID: 973518008}
   m_Layer: 3
   m_Name: EarthRock_03
   m_TagString: Untagged
@@ -172,13 +205,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6571486192176570601}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.04, y: 0.21, z: -1.84}
+  m_LocalPosition: {x: -3.04, y: 0, z: -1.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6571486191917291247}
+  - {fileID: 7969847255447744468}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6571486192176570603
 MonoBehaviour:
@@ -195,13 +228,14 @@ MonoBehaviour:
   element: 0
   breakComboOnTriggerExit: 0
   stickToGround: 1
-  maxGroundRange: 5
-  groundOffset: 0
+  maxGroundRange: 10
+  groundOffset: 1
+  detectionOffset: 7
   IsGround:
     serializedVersion: 2
     m_Bits: 1
-  raycastStart: {fileID: 6571486192176570602}
-  GroundObject: {fileID: 6571486192176570602}
+  raycastStart: {fileID: 7969847255447744468}
+  GroundObject: {fileID: 7969847255447744468}
 --- !u!95 &6571486192176570596
 Animator:
   serializedVersion: 5
@@ -222,6 +256,38 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &973518008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6571486192176570601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 186ef02e5556ac646b92665e5e953591, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  createSourceAsChild: 0
+  clips:
+  - clips:
+    - {fileID: 8300000, guid: 9b737400d56488541982189dee9a6137, type: 3}
+    source: {fileID: 0}
+    group: {fileID: 9059175822470014708, guid: 75b90765dbf89ff43a7636b4493a21ed, type: 2}
+    seamlessLoop: 0
+    randomPitch: 1
+    minPitch: 0.6
+    maxPitch: 0.8
+  - clips:
+    - {fileID: 8300000, guid: f276c4b0653741b448ba36038e54bf67, type: 3}
+    source: {fileID: 0}
+    group: {fileID: 9059175822470014708, guid: 75b90765dbf89ff43a7636b4493a21ed, type: 2}
+    seamlessLoop: 0
+    randomPitch: 1
+    minPitch: 0.8
+    maxPitch: 1.1
+  sourcePrefab: {fileID: 4176924504323749845, guid: fe1206eba1e88b24dbed71955b7476fc,
+    type: 3}
 --- !u!1001 &6571486190611400514
 PrefabInstance:
   m_ObjectHideFlags: 0

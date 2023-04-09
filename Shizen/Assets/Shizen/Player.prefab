@@ -23351,6 +23351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eedfb5612717fd4d8455eda46ccdbdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  elementAudioGroup: {fileID: 0}
   elementIndex: 0
   comboCount: 0
   NextElement: 101
@@ -23468,23 +23469,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 186ef02e5556ac646b92665e5e953591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  createSourceAsChild: 1
   clips:
-  - clips:
-    - {fileID: 8300000, guid: 35722749f53ac98429ed259f3dec201d, type: 3}
-    source: {fileID: 0}
-    group: {fileID: 9059175822470014708, guid: 75b90765dbf89ff43a7636b4493a21ed, type: 2}
-    seamlessLoop: 0
-    randomPitch: 1
-    minPitch: 0.8
-    maxPitch: 1
-  - clips:
-    - {fileID: 8300000, guid: 9b737400d56488541982189dee9a6137, type: 3}
-    source: {fileID: 0}
-    group: {fileID: 9059175822470014708, guid: 75b90765dbf89ff43a7636b4493a21ed, type: 2}
-    seamlessLoop: 0
-    randomPitch: 1
-    minPitch: 0.8
-    maxPitch: 1.2
   - clips:
     - {fileID: 8300000, guid: c8ebe47e17e104b4f9413b7325ef2c08, type: 3}
     - {fileID: 8300000, guid: 44120047d610fd94796a528d28a63b52, type: 3}
@@ -23495,8 +23481,8 @@ MonoBehaviour:
       type: 2}
     seamlessLoop: 0
     randomPitch: 1
-    minPitch: 0.2
-    maxPitch: 1.2
+    minPitch: 0.5
+    maxPitch: 1.5
   sourcePrefab: {fileID: 4176924504323749845, guid: fe1206eba1e88b24dbed71955b7476fc,
     type: 3}
 --- !u!1 &7019290950424014568

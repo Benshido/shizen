@@ -10,6 +10,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] bool stickToGround;
     [SerializeField] float maxGroundRange = 5f;
     [SerializeField] float groundOffset = 1f;
+    [SerializeField] float detectionOffset = 1f;
     [SerializeField] LayerMask IsGround;
     [SerializeField] Transform raycastStart;
     [SerializeField] Transform GroundObject;
@@ -59,7 +60,7 @@ public class PlayerAttack : MonoBehaviour
         RaycastHit hit;
         if (stickToGround && Physics.Raycast(raycastStart.position, Vector3.down, out hit, maxGroundRange, IsGround))
         {
-            if (hit.distance < groundOffset + 0.5f)
+            if (hit.distance < groundOffset + detectionOffset)
             {
                 GroundObject.position = new Vector3(GroundObject.position.x, hit.point.y + groundOffset, GroundObject.position.z);
             }

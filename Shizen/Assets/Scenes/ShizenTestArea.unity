@@ -2120,6 +2120,62 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1487946027}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1523989084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1523989086}
+  - component: {fileID: 1523989085}
+  m_Layer: 0
+  m_Name: Audio Reverb Zone (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!167 &1523989085
+AudioReverbZone:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523989084}
+  m_Enabled: 1
+  m_MinDistance: 6.9
+  m_MaxDistance: 15.9
+  m_ReverbPreset: 9
+  m_Room: -1000
+  m_RoomHF: 0
+  m_DecayTime: 2.91
+  m_DecayHFRatio: 1.3
+  m_Reflections: -602
+  m_ReflectionsDelay: 0.015
+  m_Reverb: -302
+  m_ReverbDelay: 0.022
+  m_HFReference: 5000
+  m_Diffusion: 100
+  m_Density: 100
+  m_LFReference: 250
+  m_RoomLF: 0
+--- !u!4 &1523989086
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523989084}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 29.75, y: 1.9000893, z: 6.165908}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 26
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1525468924
 GameObject:
   m_ObjectHideFlags: 0
@@ -2347,8 +2403,8 @@ AudioReverbZone:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1686655126}
   m_Enabled: 1
-  m_MinDistance: 54.5
-  m_MaxDistance: 96.5
+  m_MinDistance: 6.9
+  m_MaxDistance: 15.9
   m_ReverbPreset: 18
   m_Room: -1000
   m_RoomHF: -2500

@@ -3,13 +3,14 @@ using UnityEngine;
 using UnityEngine.Audio;
 
 [Serializable]
-public class ClipArray 
+public class ClipArray
 {
     public AudioClip[] clips;
     public AudioSource source;
     public AudioMixerGroup group;
     [Header("Loop")]
     [SerializeField] bool seamlessLoop;
+    public GameObject MyObject { get; set; }
 
     [Header("Pitch")]
     public bool randomPitch;
@@ -18,11 +19,15 @@ public class ClipArray
     private float currentPitch = 1f;
     private AudioClip currentClip;
 
-
     public void PlayAudio()
     {
         SetPitch();
         SetClip();
+
+        if (source.transform.parent == null && MyObject != null)
+        {
+            source.transform.position = MyObject.transform.position;
+        }
 
         source.pitch = currentPitch;
         source.clip = currentClip;

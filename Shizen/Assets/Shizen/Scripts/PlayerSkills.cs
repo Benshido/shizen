@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class PlayerSkills : MonoBehaviour
 {
+    [SerializeField] AudioMixerGroup elementAudioGroup;
     [SerializeField] int elementIndex = 0;
     public int ElementIndex { get { return elementIndex; } }
 
