@@ -18,7 +18,7 @@ public class PlatformPuzzle : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (Input.GetKeyDown(KeyCode.E) && !platformTriggered)
+        if (Input.GetKeyDown(KeyCode.R) && !platformTriggered)
         {
             Debug.Log("CLICKED!");
             platform.GetComponent<Animator>().SetTrigger("PlatformTriggered");

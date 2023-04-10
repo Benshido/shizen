@@ -6,12 +6,14 @@ public class EnemyHitsPlayer : MonoBehaviour
 {
     bool cooldown = false;
     public float damage = 5;
+    public Transform player;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player" && !cooldown)
         {
-            Debug.Log("Player got hit!!!");
+            player = FindFirstObjectByType<PlayerHP>().transform;
+            player.GetComponent<PlayerHP>().TakeDamage(2);
             if (gameObject.tag == "Projectile") Destroy(gameObject);
             cooldown = true;
             StartCoroutine(HitCooldown(1.0f));
