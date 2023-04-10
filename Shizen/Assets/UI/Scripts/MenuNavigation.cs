@@ -23,11 +23,11 @@ public class MenuNavigation : MonoBehaviour
 
     public void ExitToMainMenu()
     {
-        Debug.Log("Mainmenu");
+        SceneManager.LoadScene(0);
     }
 
     public void ExitGame()
     {
-
+        Application.Quit();
     }
 }

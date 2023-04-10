@@ -123,6 +123,24 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &51670210 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6038775469254216925, guid: 2a999a4444288264d919e785585f94b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 517383771}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &51670217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51670210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6a656f949c3e1f4fb81fb63532b08a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &314207350
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,10 +447,23 @@ PrefabInstance:
       propertyPath: m_Name
       value: DeadEnvironment
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    - target: {fileID: 6038775469503033990, guid: 2a999a4444288264d919e785585f94b4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6038775469254216919, guid: 2a999a4444288264d919e785585f94b4, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 4454914817309373945, guid: 2a999a4444288264d919e785585f94b4, type: 3}
+    - {fileID: 6038775467712215203, guid: 2a999a4444288264d919e785585f94b4, type: 3}
+    - {fileID: 6849803073756884503, guid: 2a999a4444288264d919e785585f94b4, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6038775469254216925, guid: 2a999a4444288264d919e785585f94b4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 51670217}
   m_SourcePrefab: {fileID: 100100000, guid: 2a999a4444288264d919e785585f94b4, type: 3}
 --- !u!1001 &1275876110
 PrefabInstance:
@@ -446,6 +477,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: Start Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 5842909302756739625, guid: 0d44c6fb32decec4e9ed56dd1db511ef,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ExitGame
       objectReference: {fileID: 0}
     - target: {fileID: 5842909302756739630, guid: 0d44c6fb32decec4e9ed56dd1db511ef,
         type: 3}
@@ -584,12 +620,28 @@ PrefabInstance:
 
 '
       objectReference: {fileID: 0}
+    - target: {fileID: 5842909303222879687, guid: 0d44c6fb32decec4e9ed56dd1db511ef,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1275876113}
+    - target: {fileID: 5842909303222879687, guid: 0d44c6fb32decec4e9ed56dd1db511ef,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 5842909303222879687, guid: 0d44c6fb32decec4e9ed56dd1db511ef,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MenuNavigation, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 5842909303435604752, guid: 0d44c6fb32decec4e9ed56dd1db511ef,
         type: 3}
       propertyPath: m_text
       value: SHIZEN
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5842909302855085788, guid: 0d44c6fb32decec4e9ed56dd1db511ef, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5842909303620919208, guid: 0d44c6fb32decec4e9ed56dd1db511ef,
@@ -826,7 +878,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1275876113}
         m_TargetAssemblyTypeName: MenuNavigation, Assembly-CSharp
-        m_MethodName: Controls
+        m_MethodName: Credits
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
