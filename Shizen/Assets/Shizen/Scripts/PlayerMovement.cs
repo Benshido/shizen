@@ -1,6 +1,7 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using static UnityEngine.UI.Image;
 
 [RequireComponent(typeof(CharacterController))]
 
@@ -40,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Other")]
     [SerializeField] float weight = 70;
     [SerializeField] float timeUntillSprint = 4;
+    [SerializeField] GameObject orient;
     private float sprintTimer = 0;
 
     private CharacterController charController;
@@ -80,6 +82,7 @@ public class PlayerMovement : MonoBehaviour
         maxFallSpd = Physics.gravity.y + (Physics.gravity.y * (weight / 75));
 
         externalForces.y = maxFallSpd;
+
     }
 
     // Update is called once per frame
@@ -89,10 +92,13 @@ public class PlayerMovement : MonoBehaviour
 
         //grounded check (character controller isGrounded is too glitchy)
         Vector3 origin = transform.position + charController.center;
-        origin.y -= (charController.height / 2) - 0.3f;
-        Debug.DrawLine(origin, new Vector3(origin.x, origin.y - charController.radius, origin.z), Color.red);
+        var radius = charController.radius * 0.8f;
+        origin.y -= (charController.height / 2) - (radius / 2);
 
-        if (Physics.OverlapSphere(origin, charController.radius, groundedMask).Length > 0 && !IsSliding)
+        var sphere = Physics.OverlapSphere(origin, radius, groundedMask);
+        int noTriggers = 0;
+        for (int i = 0; i < sphere.Length; i++) if (!sphere[i].isTrigger) noTriggers++;
+        if (noTriggers > 0 && !IsSliding)
         {
             isGrounded = true;
         }
@@ -104,25 +110,25 @@ public class PlayerMovement : MonoBehaviour
             movement = Vector3.zero;
 
             //when oposite keys are pressed at the same time it should act like neither are pressed
-           // if (canMove)
-           // {
-                if (Input.GetKey(moveForward) && !Input.GetKey(moveBack))
-                {
-                    MoveForward();
-                }
-                if (Input.GetKey(moveBack) && !Input.GetKey(moveForward))
-                {
-                    MoveBack();
-                }
-                if (Input.GetKey(moveLeft) && !Input.GetKey(moveRight))
-                {
-                    MoveLeft();
-                }
-                if (Input.GetKey(moveRight) && !Input.GetKey(moveLeft))
-                {
-                    MoveRight();
-                }
-           // }
+            // if (canMove)
+            // {
+            if (Input.GetKey(moveForward) && !Input.GetKey(moveBack))
+            {
+                MoveForward();
+            }
+            if (Input.GetKey(moveBack) && !Input.GetKey(moveForward))
+            {
+                MoveBack();
+            }
+            if (Input.GetKey(moveLeft) && !Input.GetKey(moveRight))
+            {
+                MoveLeft();
+            }
+            if (Input.GetKey(moveRight) && !Input.GetKey(moveLeft))
+            {
+                MoveRight();
+            }
+            // }
             if (IsRunning && canMove)
             {
                 sprintTimer += Time.unscaledDeltaTime;
@@ -175,8 +181,8 @@ public class PlayerMovement : MonoBehaviour
 
 
             var movementAndDir = Vector3.zero;
-            if (!isStaggered) movementAndDir = transform.rotation * (finalMovement + dashMovement);
-            if(!canMove) movementAndDir = transform.rotation *  dashMovement;
+            if (!isStaggered) movementAndDir = orient.transform.rotation * (finalMovement + dashMovement);
+            if (!canMove) movementAndDir = orient.transform.rotation * dashMovement;
 
             if (IsSliding)
             {
@@ -247,6 +253,7 @@ public class PlayerMovement : MonoBehaviour
     {
         dashMovement = movement * dashMultiplier;
 
+        HP.IFrame(0.1f);
         //If not moving, the backstep will be used instead
         if (dashMovement == Vector3.zero)
         {

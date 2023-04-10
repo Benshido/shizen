@@ -4848,7 +4848,7 @@ GameObject:
   - component: {fileID: 8386435001745416362}
   - component: {fileID: 4030278897219830722}
   - component: {fileID: 1219834895}
-  - component: {fileID: 399847148}
+  - component: {fileID: 4012116868240980035}
   m_Layer: 3
   m_Name: EarthRock_01
   m_TagString: Untagged
@@ -4870,7 +4870,7 @@ Transform:
   m_Children:
   - {fileID: 4622536064265387021}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4030278897219830722
 Animator:
@@ -4909,34 +4909,44 @@ MonoBehaviour:
   stickToGround: 1
   maxGroundRange: 5
   groundOffset: 1
+  detectionOffset: 1
   IsGround:
     serializedVersion: 2
     m_Bits: 1
   raycastStart: {fileID: 4622536064265387021}
   GroundObject: {fileID: 4622536064265387021}
---- !u!136 &399847148
-CapsuleCollider:
+--- !u!114 &4012116868240980035
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5694841185078473152}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1
-  m_Height: 4
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: -1.17}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 186ef02e5556ac646b92665e5e953591, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  createSourceAsChild: 0
+  clips:
+  - clips:
+    - {fileID: 8300000, guid: 35722749f53ac98429ed259f3dec201d, type: 3}
+    source: {fileID: 0}
+    group: {fileID: 9059175822470014708, guid: 75b90765dbf89ff43a7636b4493a21ed, type: 2}
+    seamlessLoop: 0
+    randomPitch: 1
+    minPitch: 0.8
+    maxPitch: 1.1
+  - clips:
+    - {fileID: 8300000, guid: 9b737400d56488541982189dee9a6137, type: 3}
+    source: {fileID: 0}
+    group: {fileID: 9059175822470014708, guid: 75b90765dbf89ff43a7636b4493a21ed, type: 2}
+    seamlessLoop: 0
+    randomPitch: 1
+    minPitch: 0.8
+    maxPitch: 1.1
+  sourcePrefab: {fileID: 4176924504323749845, guid: fe1206eba1e88b24dbed71955b7476fc,
+    type: 3}
 --- !u!1 &8632425469708687379
 GameObject:
   m_ObjectHideFlags: 0

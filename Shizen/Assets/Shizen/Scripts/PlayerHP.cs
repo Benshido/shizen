@@ -22,6 +22,10 @@ public class PlayerHP : MonoBehaviour
 
     [SerializeField] Slider epSlider;
 
+    private bool iFrame = false;
+    private float iFrameTimer = 0;
+    private float iFrameDuration = 0.1f;
+
     void Start()
     {
         hp = maxHP;
@@ -37,6 +41,7 @@ public class PlayerHP : MonoBehaviour
             epSlider.maxValue = maxEP;
             epSlider.value = ep;
         }
+
     }
 
 
@@ -45,11 +50,22 @@ public class PlayerHP : MonoBehaviour
         ep += epRegen * Time.unscaledDeltaTime;
         if (ep > maxEP) ep = maxEP;
         if (epSlider != null) epSlider.value = ep;
+
+        if (iFrame)
+        {
+            iFrameTimer += Time.unscaledDeltaTime;
+            if (iFrameTimer >= iFrameDuration)
+            {
+                iFrameTimer = 0;
+                iFrame = false;
+            }
+        }
+
     }
 
     public void TakeDamage(float damage)
     {
-        if (!IsAlive) return;
+        if (!IsAlive || iFrame) return;
 
         hp -= damage;
         if (hpSlider != null) hpSlider.value = hp;
@@ -61,5 +77,12 @@ public class PlayerHP : MonoBehaviour
         ep -= stamina;
         if (epSlider != null) epSlider.value = ep;
         return true;
+    }
+
+    public void IFrame(float seconds)
+    {
+        iFrameDuration = seconds;
+        iFrameTimer = 0;
+        iFrame = true;
     }
 }

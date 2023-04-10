@@ -48,7 +48,7 @@ public class TargetSystem : MonoBehaviour
                     var dir = objTransf.transform.position - Camera.main.transform.position;
                     var camFw = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z);
                     var targDir2D = new Vector3(dir.x, dir.y, dir.z);
-                    float angle = Vector3.Angle(camFw, targDir2D);
+                    float angle = Vector3.Angle(Camera.main.transform.forward, targDir2D);
 
                     //set outline back to basic
                     var outline = objTransf.GetComponent<Outline>();

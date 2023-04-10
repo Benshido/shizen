@@ -32,6 +32,7 @@ public class PlayerDamageColObj : MonoBehaviour
             }
         }
     }
+
     private IEnumerator Destroying()
     {
         yield return new WaitForSecondsRealtime(enemyHitDestrDelay);
