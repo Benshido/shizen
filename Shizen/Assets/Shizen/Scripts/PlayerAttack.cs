@@ -6,6 +6,7 @@ public class PlayerAttack : MonoBehaviour
 {
     private PlayerAnimatorController pAnimController;
     [SerializeField] Element element;
+    [SerializeField] bool hasSetTarget = false;
     [SerializeField] bool breakComboOnTriggerExit = false;
     [SerializeField] bool stickToGround;
     [SerializeField] float maxGroundRange = 5f;
@@ -20,7 +21,7 @@ public class PlayerAttack : MonoBehaviour
     private Transform targetRotationObj;
     private Quaternion frozenTargetRot;
     private Animator animator;
-
+    private GameObject targObj = null;
     private bool resetOnDestroy = false;
 
     // Start is called before the first frame update
@@ -30,7 +31,7 @@ public class PlayerAttack : MonoBehaviour
         pAnimController = FindObjectOfType<PlayerAnimatorController>();
         targetRotationObj = FindObjectOfType<FollowCamera>().PlayerModel;
         TargSyst = FindObjectOfType<TargetSystem>();
-
+        if (TargSyst != null) targObj = TargSyst.Target;
         if (stickToGround)
         {
             RaycastHit hit;
@@ -57,6 +58,14 @@ public class PlayerAttack : MonoBehaviour
                 rotate = false;
         }
 
+        if (hasSetTarget && targObj != null)
+        {
+            var targpos = targObj.transform.position - transform.position;
+            var targRot = Quaternion.LookRotation(targpos, Vector3.up);
+
+            transform.rotation = Quaternion.Lerp(transform.rotation, targRot, Time.unscaledDeltaTime * 30);
+        }
+
         RaycastHit hit;
         if (stickToGround && Physics.Raycast(raycastStart.position, Vector3.down, out hit, maxGroundRange, IsGround))
         {
@@ -70,7 +79,6 @@ public class PlayerAttack : MonoBehaviour
     private IEnumerator Destroying(float time)
     {
         yield return new WaitForSecondsRealtime(time);
-        // pAnimController.RemoveFromList(element, animator);
         Destroy(gameObject);
     }
 

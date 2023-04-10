@@ -13907,6 +13907,14 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.21666667
+    functionName: SpawnPrefab
+    data: 
+    objectReferenceParameter: {fileID: 1611201787765778901, guid: f6513a665c8f4f5498029aeecbe378a0,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 1.3333334
     functionName: ResetCombo
     data: 
