@@ -97,7 +97,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0.55765, y: 1.05, z: 0.14101}
+        value: {x: 0.55765, y: -0.7380625, z: 0.14101}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -106,7 +106,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.16666667
-        value: {x: 0.55765, y: 1.46, z: 0.14101}
+        value: {x: 0.55765, y: -0.32806242, z: 0.14101}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -115,7 +115,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.5833333
-        value: {x: 0.55765, y: 1.46, z: 0.14101}
+        value: {x: 0.55765, y: -0.32806242, z: 0.14101}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -124,7 +124,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.75
-        value: {x: 0.55765, y: -5.104287, z: 2.23}
+        value: {x: 0.55765, y: -6.8923492, z: 2.23}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -504,7 +504,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1.05
+        value: -0.7380625
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -513,7 +513,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.16666667
-        value: 1.46
+        value: -0.32806242
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -522,7 +522,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.5833333
-        value: 1.46
+        value: -0.32806242
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -531,7 +531,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.75
-        value: -5.104287
+        value: -6.8923492
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -892,6 +892,13 @@ AnimationClip:
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
   m_Events:
+  - time: 0
+    functionName: AimToEnemyTarg
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 10
+    intParameter: 0
+    messageOptions: 0
   - time: 0.16666667
     functionName: PlayAudio
     data: 

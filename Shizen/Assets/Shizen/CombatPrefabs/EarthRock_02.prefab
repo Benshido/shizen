@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4196019357397201688}
   - component: {fileID: 4196019357397201695}
   - component: {fileID: 4196019357397201694}
+  - component: {fileID: 1870194431}
   m_Layer: 3
   m_Name: EarthRock_02
   m_TagString: Untagged
@@ -51,6 +52,7 @@ MonoBehaviour:
   stickToGround: 0
   maxGroundRange: 5
   groundOffset: 1
+  detectionOffset: 1
   IsGround:
     serializedVersion: 2
     m_Bits: 1
@@ -76,6 +78,38 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &1870194431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4196019357397201693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 186ef02e5556ac646b92665e5e953591, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  createSourceAsChild: 0
+  clips:
+  - clips:
+    - {fileID: 8300000, guid: cd86bcf7f1b091a4f812cf091aea4815, type: 3}
+    source: {fileID: 0}
+    group: {fileID: 9059175822470014708, guid: 75b90765dbf89ff43a7636b4493a21ed, type: 2}
+    seamlessLoop: 0
+    randomPitch: 1
+    minPitch: 1
+    maxPitch: 1.4
+  - clips:
+    - {fileID: 8300000, guid: 726cca944a0fcd940a8435321e915b69, type: 3}
+    source: {fileID: 0}
+    group: {fileID: 9059175822470014708, guid: 75b90765dbf89ff43a7636b4493a21ed, type: 2}
+    seamlessLoop: 0
+    randomPitch: 1
+    minPitch: 1
+    maxPitch: 1.6
+  sourcePrefab: {fileID: 4176924504323749845, guid: fe1206eba1e88b24dbed71955b7476fc,
+    type: 3}
 --- !u!1 &4196019357747664612
 GameObject:
   m_ObjectHideFlags: 0
