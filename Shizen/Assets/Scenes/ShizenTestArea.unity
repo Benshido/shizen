@@ -2136,7 +2136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!167 &1523989085
 AudioReverbZone:
   m_ObjectHideFlags: 0
@@ -2394,7 +2394,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!167 &1686655127
 AudioReverbZone:
   m_ObjectHideFlags: 0
@@ -3340,7 +3340,7 @@ PrefabInstance:
     - target: {fileID: 4196019357397201688, guid: d1db66b0f110fdc4098b4a8820832b3a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.63
+      value: 2.42
       objectReference: {fileID: 0}
     - target: {fileID: 4196019357397201688, guid: d1db66b0f110fdc4098b4a8820832b3a,
         type: 3}
@@ -3350,7 +3350,7 @@ PrefabInstance:
     - target: {fileID: 4196019357397201688, guid: d1db66b0f110fdc4098b4a8820832b3a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.46
+      value: 6.56
       objectReference: {fileID: 0}
     - target: {fileID: 4196019357397201688, guid: d1db66b0f110fdc4098b4a8820832b3a,
         type: 3}

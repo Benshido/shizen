@@ -23483,6 +23483,15 @@ MonoBehaviour:
     randomPitch: 1
     minPitch: 0.5
     maxPitch: 1.5
+  - clips:
+    - {fileID: 8300000, guid: 42a9de3af3605ef41a8edcd9307d6c38, type: 3}
+    source: {fileID: 0}
+    group: {fileID: -6376592459611148377, guid: 75b90765dbf89ff43a7636b4493a21ed,
+      type: 2}
+    seamlessLoop: 0
+    randomPitch: 1
+    minPitch: 0.5
+    maxPitch: 1.2
   sourcePrefab: {fileID: 4176924504323749845, guid: fe1206eba1e88b24dbed71955b7476fc,
     type: 3}
 --- !u!1 &7019290950424014568
