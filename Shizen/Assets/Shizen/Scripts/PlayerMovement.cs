@@ -184,7 +184,7 @@ public class PlayerMovement : MonoBehaviour
             if (!isStaggered) movementAndDir = orient.transform.rotation * (finalMovement + dashMovement);
             if (!canMove) movementAndDir = orient.transform.rotation * dashMovement;
 
-            if (IsSliding)
+            if (IsSliding && !IsDashing)
             {
                 float initMovSpdDivider = 20;
                 movementAndDir = new Vector3(slopeSlideVelo.x + movementAndDir.x / initMovSpdDivider, -slopeSlideVelo.y, slopeSlideVelo.z + movementAndDir.z / initMovSpdDivider) * 6;
