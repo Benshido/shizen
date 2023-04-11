@@ -19,6 +19,8 @@ public class PlayerDamageColObj : MonoBehaviour
         {
             if (other.gameObject.TryGetComponent(out EnemyHP hp))
             {
+                Debug.Log("deat");
+
                 hp.TakeAttack(damage);
                 if (destroyOnEnemyHit) StartCoroutine(Destroying());
             }

@@ -198,7 +198,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             if (Time.timeScale == 1)
-                Time.timeScale = 0f;
+                Time.timeScale = 0.01f;
             else { Time.timeScale = 1; }
         }
 

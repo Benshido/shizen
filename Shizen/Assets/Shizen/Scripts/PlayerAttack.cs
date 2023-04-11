@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
@@ -39,7 +38,8 @@ public class PlayerAttack : MonoBehaviour
             {
                 // pAnimController.RemoveFromList(element, animator);
                 resetOnDestroy = true;
-                Destroying(0);
+                Destroy(gameObject);
+               // Destroying(0);
             }
             else
             {
