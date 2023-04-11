@@ -65,11 +65,10 @@ public class FollowCamera : MonoBehaviour
 
             //rotate player to face away from the camera
             camParent.transform.Rotate(0, addToX, 0);
-            camParent.position = player.transform.position;
+            camParent.position = Vector3.Lerp(camParent.position, player.transform.position, Time.unscaledDeltaTime * 15);
 
             if (player.IsMoving)
             {
-                //player.transform.rotation = camParent.rotation;
                 //When dashing or running the rotation should match the expectations of the player
                 var dashLookDir = player.DashMovement;
                 if (player.BackStep) dashLookDir = -dashLookDir;
@@ -77,7 +76,6 @@ public class FollowCamera : MonoBehaviour
                 if (!player.IsRunning && !player.IsDashing) Y = Quaternion.LookRotation(player.transform.forward);
 
                 if (player.Can_Move) player.transform.rotation = Quaternion.RotateTowards(player.transform.rotation, Y, 1 * Time.unscaledDeltaTime * 800);
-
             }
 
 

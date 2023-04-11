@@ -17,7 +17,7 @@ public class CustomAudioPlayer : MonoBehaviour
             var source = clips[i].source;
             if (source == null)
             {
-                source = Instantiate(sourcePrefab, transform).GetComponent<AudioSource>(); 
+                source = Instantiate(sourcePrefab, transform).GetComponent<AudioSource>();
 
                 source.name += i;
                 clips[i].source = source;
@@ -37,5 +37,18 @@ public class CustomAudioPlayer : MonoBehaviour
     public void PlayAudio(int index)
     {
         clips[index].PlayAudio();
+    }
+
+    private void OnDestroy()
+    {
+        if (!createSourceAsChild)
+            for (int i = clips.Length - 1; i >= 0; i--)
+            {
+                if (clips[i].source != null)
+                {
+                    var destroyer = clips[i].source.gameObject.AddComponent<AudioSourceDestroyer>();
+                    destroyer.Destroyer();
+                }
+            }
     }
 }

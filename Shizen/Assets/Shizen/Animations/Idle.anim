@@ -5972,7 +5972,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Model/Rig/RFoot_IK/RFootTarg
+    path: Model/Rig/RFoot_IK
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -5984,7 +5984,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Model/Rig/RFoot_IK/RFootTarg
+    path: Model/Rig/RFoot_IK
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -5996,7 +5996,151 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Model/Rig/RFoot_IK/RFootTarg
+    path: Model/Rig/RFoot_IK
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RThumb001/RThumb002/RThumb003
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RThumb001/RThumb002/RThumb003
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RThumb001/RThumb002/RThumb003
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Model/Rig/LFoot_IK/LFootTarg
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Model/Rig/LFoot_IK/LFootTarg
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Model/Rig/LFoot_IK/LFootTarg
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Model/Rig/LHand_IK
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Model/Rig/LHand_IK
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Model/Rig/LHand_IK
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LIndex001
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LIndex001
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LIndex001
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6044,7 +6188,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Model/Rig/LHand_IK
+    path: Model/Rig/RFoot_IK/RFootTarg
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6056,7 +6200,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Model/Rig/LHand_IK
+    path: Model/Rig/RFoot_IK/RFootTarg
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6068,7 +6212,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Model/Rig/LHand_IK
+    path: Model/Rig/RFoot_IK/RFootTarg
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6152,7 +6296,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Model/Rig/LFoot_IK/LFootTarg
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LThumb001
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6164,7 +6308,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Model/Rig/LFoot_IK/LFootTarg
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LThumb001
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6176,7 +6320,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Model/Rig/LFoot_IK/LFootTarg
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LThumb001
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6224,7 +6368,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Model/Rig/RFoot_IK
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LPink001
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6236,7 +6380,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Model/Rig/RFoot_IK
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LPink001
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6248,7 +6392,43 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Model/Rig/RFoot_IK
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LPink001
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LThumb001/LThumb002
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LThumb001/LThumb002
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LThumb001/LThumb002
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6296,7 +6476,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LThumb001/LThumb002
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LRing001
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6308,7 +6488,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LThumb001/LThumb002
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LRing001
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6320,31 +6500,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LThumb001/LThumb002
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LIndex001
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LIndex001
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LRing001
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6356,7 +6512,67 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LIndex001
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LRing001/LRing002
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LRing001/LRing002
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LRing001/LRing002
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RThumb001
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RThumb001
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RThumb001
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6404,7 +6620,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LThumb001/LThumb002/LThumb003
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LMiddle001/LMiddle002
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6416,7 +6632,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LThumb001/LThumb002/LThumb003
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LMiddle001/LMiddle002
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6428,7 +6644,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LThumb001/LThumb002/LThumb003
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LMiddle001/LMiddle002
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6476,42 +6692,6 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LRing001/LRing002
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LRing001/LRing002
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LRing001/LRing002
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
     path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LRing001/LRing002/LRing003
     classID: 4
     script: {fileID: 0}
@@ -6535,80 +6715,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
+    attribute: m_LocalEulerAngles.x
     path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LRing001/LRing002/LRing003
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RThumb001/RThumb002
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RThumb001/RThumb002
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RThumb001/RThumb002
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LPink001/LPink002/LPink003
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LPink001/LPink002/LPink003
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LPink001/LPink002/LPink003
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6655,8 +6763,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LMiddle001/LMiddle002
+    attribute: m_LocalEulerAngles.z
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LPink001/LPink002/LPink003
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6668,19 +6776,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LMiddle001/LMiddle002
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LMiddle001/LMiddle002
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LPink001/LPink002/LPink003
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6692,7 +6788,19 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LThumb001
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LPink001/LPink002/LPink003
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LThumb001/LThumb002/LThumb003
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6704,43 +6812,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LThumb001
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LThumb001
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LPink001
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LPink001
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LThumb001/LThumb002/LThumb003
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6752,31 +6824,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LPink001
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LRing001
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LRing001
+    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LThumb001/LThumb002/LThumb003
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6788,18 +6836,6 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Model/Hip/Back001/Back002/Back003/LShoulderConnection/LUpperArm/LLowerArm/LWrist/LRing001
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
     path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RIndex001
     classID: 4
     script: {fileID: 0}
@@ -6823,7 +6859,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
+    attribute: m_LocalEulerAngles.x
     path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RIndex001
     classID: 4
     script: {fileID: 0}
@@ -6871,30 +6907,6 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RIndex001/RIndex002/RIndex003
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RIndex001/RIndex002/RIndex003
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
     path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RIndex001/RIndex002/RIndex003
     classID: 4
@@ -6907,56 +6919,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RMiddle001
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RMiddle001
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RMiddle001
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RMiddle001/RMiddle002/RMiddle003
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RMiddle001/RMiddle002/RMiddle003
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RIndex001/RIndex002/RIndex003
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6968,187 +6932,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RMiddle001/RMiddle002/RMiddle003
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RRing001
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RRing001
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RRing001
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RPink001
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RPink001
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RPink001
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RPink001/RPink002
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RPink001/RPink002
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RPink001/RPink002
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RRing001/RRing002
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RRing001/RRing002
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RRing001/RRing002
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RThumb001/RThumb002/RThumb003
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RThumb001/RThumb002/RThumb003
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RThumb001/RThumb002/RThumb003
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RIndex001/RIndex002/RIndex003
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -7231,8 +7015,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RThumb001
+    attribute: m_LocalEulerAngles.z
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RMiddle001/RMiddle002/RMiddle003
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -7244,7 +7028,19 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RThumb001
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RMiddle001/RMiddle002/RMiddle003
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RMiddle001/RMiddle002/RMiddle003
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -7256,7 +7052,175 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RThumb001
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RPink001
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RPink001
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RPink001
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RRing001
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RRing001
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RRing001
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RThumb001/RThumb002
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RThumb001/RThumb002
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RThumb001/RThumb002
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RMiddle001
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RMiddle001
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RMiddle001
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RPink001/RPink002
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RPink001/RPink002
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RPink001/RPink002
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -7293,6 +7257,42 @@ AnimationClip:
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
     path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RRing001/RRing002/RRing003
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RRing001/RRing002
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RRing001/RRing002
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Model/Hip/Back001/Back002/Back003/RShoulderConnection/RUpperArm/RLowerArm/RWrist/RRing001/RRing002
     classID: 4
     script: {fileID: 0}
     flags: 0

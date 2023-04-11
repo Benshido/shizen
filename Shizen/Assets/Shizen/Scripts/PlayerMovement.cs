@@ -184,7 +184,7 @@ public class PlayerMovement : MonoBehaviour
             if (!isStaggered) movementAndDir = orient.transform.rotation * (finalMovement + dashMovement);
             if (!canMove) movementAndDir = orient.transform.rotation * dashMovement;
 
-            if (IsSliding)
+            if (IsSliding && !IsDashing)
             {
                 float initMovSpdDivider = 20;
                 movementAndDir = new Vector3(slopeSlideVelo.x + movementAndDir.x / initMovSpdDivider, -slopeSlideVelo.y, slopeSlideVelo.z + movementAndDir.z / initMovSpdDivider) * 6;
@@ -195,8 +195,14 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //quick test on time slowing/speeding up
-        if (Input.GetKeyDown(KeyCode.Q)) Time.timeScale = 0.02f;
-        if (Input.GetKeyDown(KeyCode.E)) Time.timeScale = 1;
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (Time.timeScale == 1)
+                Time.timeScale = 0f;
+            else { Time.timeScale = 1; }
+        }
+
+        //if (Input.GetKeyDown(KeyCode.E)) Time.timeScale = 1;
 
     }
 
