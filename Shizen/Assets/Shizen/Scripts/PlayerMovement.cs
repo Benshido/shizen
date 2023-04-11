@@ -195,8 +195,14 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //quick test on time slowing/speeding up
-        if (Input.GetKeyDown(KeyCode.Q)) Time.timeScale = 0.02f;
-        if (Input.GetKeyDown(KeyCode.E)) Time.timeScale = 1;
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (Time.timeScale == 1)
+                Time.timeScale = 0f;
+            else { Time.timeScale = 1; }
+        }
+
+        //if (Input.GetKeyDown(KeyCode.E)) Time.timeScale = 1;
 
     }
 
