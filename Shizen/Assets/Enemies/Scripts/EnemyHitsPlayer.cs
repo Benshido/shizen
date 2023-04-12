@@ -8,9 +8,16 @@ public class EnemyHitsPlayer : MonoBehaviour
     public float damage = 5;
     public Transform player;
 
+    private int elementLayerIndex = 0;
+
+    private void Start()
+    {
+        elementLayerIndex = LayerMask.NameToLayer("Elements");
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (gameObject.tag == "Projectile" && other.gameObject.layer == 3) Destroy(gameObject);
+        if (gameObject.tag == "Projectile" && other.gameObject.layer == elementLayerIndex) Destroy(gameObject);
 
         if (other.gameObject.tag == "Player" && !cooldown)
         {
