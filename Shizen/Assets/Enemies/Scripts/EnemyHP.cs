@@ -17,20 +17,11 @@ public class EnemyHP : MonoBehaviour
         IsAlive = true;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.layer == 3)
-        {
-            TakeAttack(2);
-        }
-    }
-
     public void TakeAttack(float damage)
     {
-        //hitPoints -= damage;
-        //if (hitPoints <= 0) IsAlive = false;
-        //if (hitPoints <= 0) Destroy(gameObject);
+        hitPoints -= damage;
+        if (hitPoints <= 0) IsAlive = false;
 
-        gameObject.transform.parent.gameObject.GetComponent<EnemyAIController>().TakeDamage(2);
+        gameObject.transform.parent.gameObject.GetComponent<EnemyAIController>().RespondToAttack(IsAlive);
     }
 }
