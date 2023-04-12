@@ -18,9 +18,10 @@ public class DialogueManager : MonoBehaviour
 
     public void DialogueHasBeenTriggered(int dialogueIndex)
     {
-        Debug.Log(dialogueIndex);
         if (!dialogue[dialogueIndex].hasBeenTriggered)
         {
+            audioSource.Stop();
+            dialogueUI.SetActive(false);
             dialogueUI.SetActive(true);
             dialogueInText.GetComponent<TextMeshProUGUI>().text = dialogue[dialogueIndex].dialogueText;
             logs[dialogueIndex].GetComponent<TextMeshProUGUI>().text = dialogue[dialogueIndex].dialogueText;
