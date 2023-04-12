@@ -158,7 +158,6 @@ public class PlayerMovement : MonoBehaviour
                     var start = end;
                     start.y += 0.1f;
                     var direction = end - start;
-                    Debug.DrawRay(start, direction, Color.yellow);
 
                     RaycastHit hit;
                     if (Physics.Raycast(start, direction, out hit))

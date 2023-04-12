@@ -9,6 +9,7 @@ public class PlayerSkills : MonoBehaviour
 {
     [SerializeField] AudioMixerGroup elementAudioGroup;
     [SerializeField] int elementIndex = 0;
+    private Outline outline;
     public int ElementIndex { get { return elementIndex; } }
 
     [SerializeField] int comboCount = 0;
@@ -22,7 +23,7 @@ public class PlayerSkills : MonoBehaviour
     public bool Attacking { get { return attacking; } }
     public bool IsHeavy { get { return isHeavy; } }
 
-    private List<string> elementList = Enum.GetNames(typeof(Element)).ToList();
+    private List<string> elementList = Enum.GetNames(typeof(Elements)).ToList();
 
     [SerializeField] KeyCode NextElement = KeyCode.E;
     [SerializeField] KeyCode PrevElement = KeyCode.Q;
@@ -39,11 +40,15 @@ public class PlayerSkills : MonoBehaviour
     void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
+        outline = GetComponentInChildren<Outline>();
+        UpdateOutline();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (outline.OutlineWidth > 0f) outline.OutlineWidth = Mathf.MoveTowards(outline.OutlineWidth, 0f, Time.unscaledDeltaTime * 5);
+
         if (cancelReset) { resetTimer = 0; runTimer = false; }
 
         if (runTimer)
@@ -63,22 +68,23 @@ public class PlayerSkills : MonoBehaviour
             {
                 elementIndex++;
                 if (elementIndex >= elementList.Count) elementIndex = 0;
-
-                while (elementIndex != 0 && Unlockables.Elements[Enum.GetName(typeof(Element), elementIndex)] == 0)
+                while (elementIndex != 0 && Unlockables.Elements[Enum.GetName(typeof(Elements), elementIndex)].Level == 0)
                 {
                     elementIndex++;
                     if (elementIndex >= elementList.Count) elementIndex = 0;
                 }
+                UpdateOutline();
             }
             if (Input.GetKeyDown(PrevElement))
             {
                 elementIndex--;
                 if (elementIndex < 0) elementIndex = elementList.Count - 1;
-                while (elementIndex != 0 && Unlockables.Elements[Enum.GetName(typeof(Element), elementIndex)] == 0)
+                while (elementIndex != 0 && Unlockables.Elements[Enum.GetName(typeof(Elements), elementIndex)].Level == 0)
                 {
                     elementIndex--;
                     if (elementIndex < 0) elementIndex = elementList.Count - 1;
                 }
+                UpdateOutline();
             }
 
             if (Input.GetKeyDown(NormalAttack) && playerMovement.IsGrounded)
@@ -108,6 +114,12 @@ public class PlayerSkills : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void UpdateOutline()
+    {
+        outline.OutlineColor = Unlockables.Elements[Enum.GetName(typeof(Elements), elementIndex)].Color;
+        outline.OutlineWidth = 2f;
     }
 
     public void EndOfComboReset()
@@ -162,9 +174,9 @@ public class PlayerSkills : MonoBehaviour
         if (isheavy)
             switch (elementIndex)
             {
-                case (int)Element.Earth:
+                case (int)Elements.Earth:
                     return 12;
-                case (int)Element.Water:
+                case (int)Elements.Water:
                     return 6;
                 default:
                     break;
@@ -173,9 +185,9 @@ public class PlayerSkills : MonoBehaviour
         {
             switch (elementIndex)
             {
-                case (int)Element.Earth:
+                case (int)Elements.Earth:
                     return 5;
-                case (int)Element.Water:
+                case (int)Elements.Water:
                     return 2;
                 default:
                     break;

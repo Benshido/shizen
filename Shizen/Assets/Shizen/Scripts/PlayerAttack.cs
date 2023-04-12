@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     private PlayerAnimatorController pAnimController;
-    [SerializeField] Element element;
+    [SerializeField] Elements element;
     [SerializeField] bool hasSetTarget = false;
     [SerializeField] bool breakComboOnTriggerExit = false;
     [SerializeField] bool stickToGround;

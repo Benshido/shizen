@@ -84,7 +84,7 @@ public class PlayerAnimatorController : MonoBehaviour
 
     public void SpawnPrefab(GameObject prefab)
     {
-        if (Unlockables.Elements[Enum.GetName(typeof(Element), playerSkills.ElementIndex)] > 0)
+        if (Unlockables.Elements[Enum.GetName(typeof(Elements), playerSkills.ElementIndex)].Level > 0)
         {
             var pref = Instantiate(prefab, modelTransform);
             pref.transform.parent = null;
@@ -114,7 +114,7 @@ public class PlayerAnimatorController : MonoBehaviour
         }
     }
 
-    public void RemoveFromList(Element elem, Animator anim, bool resetcombo)
+    public void RemoveFromList(Elements elem, Animator anim, bool resetcombo)
     {
         if (elementAnimators[(int)elem].IndexOf(anim) == elementAnimators[(int)elem].Count - 1 && resetcombo)
             playerSkills.EndOfComboReset();
