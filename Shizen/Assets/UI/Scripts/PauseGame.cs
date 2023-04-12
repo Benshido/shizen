@@ -12,6 +12,7 @@ public class PauseGame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1.0f;
         menuObjects.SetActive(false);
     }
 

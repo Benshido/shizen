@@ -9,11 +9,6 @@ using static UnityEngine.GraphicsBuffer;
 
 public class EnemyAIController : MonoBehaviour
 {
-    [SerializeField] float maxHitPoints = 5;
-    private float hitPoints = 1;
-    public float HitPoints { get { return hitPoints; } }
-    public bool IsAlive { get; private set; }
-
     public NavMeshAgent agent;
     public Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
@@ -47,6 +42,8 @@ public class EnemyAIController : MonoBehaviour
     public bool alerted = false;
     private float standardSightRange;
 
+    public bool IsAlive { get; private set; } = true;
+
     private void Start()
     {
         //player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -54,9 +51,6 @@ public class EnemyAIController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
         standardSightRange = sightRange;
-
-        hitPoints = maxHitPoints;
-        IsAlive = true;
 
         if (enemyIsRanged)
         {
@@ -207,14 +201,14 @@ public class EnemyAIController : MonoBehaviour
         alreadyAttacked = false;
     }
 
-    public void TakeDamage(int damage)
+    public void RespondToAttack(bool isAlive)
     {
         Debug.Log("HIT");
-        hitPoints -= damage;
+        //hitPoints -= damage;
 
-        if (hitPoints <= 0)
+        if (!isAlive)
         {
-            StartCoroutine(Death(3f));
+            StartCoroutine(Death(2f));
         }
         else
         {
