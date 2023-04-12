@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Hints : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject hint;
+
+    private void Start()
     {
-        
+        hint.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if(other.gameObject.tag == "Player") hint.SetActive(true);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player") hint.SetActive(false);
     }
 }
