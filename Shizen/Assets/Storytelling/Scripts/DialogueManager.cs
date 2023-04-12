@@ -6,6 +6,7 @@ using UnityEngine;
 public class DialogueManager : MonoBehaviour
 {
     [SerializeField] Dialogue[] dialogue;
+    public GameObject[] logs;
     public AudioSource audioSource;
     public GameObject dialogueUI;
     public GameObject dialogueInText;
@@ -22,9 +23,19 @@ public class DialogueManager : MonoBehaviour
         {
             dialogueUI.SetActive(true);
             dialogueInText.GetComponent<TextMeshProUGUI>().text = dialogue[dialogueIndex].dialogueText;
+            logs[dialogueIndex].GetComponent<TextMeshProUGUI>().text = dialogue[dialogueIndex].dialogueText;
             audioSource.PlayOneShot(dialogue[dialogueIndex].dialogueClip);
             dialogue[dialogueIndex].hasBeenTriggered = true;
             StartCoroutine(ShowDialogueBox(5));
+        }
+    }
+
+    public void PlayAudio(int dialogueIndex)
+    {
+        if (dialogue[dialogueIndex].hasBeenTriggered)
+        {
+            audioSource.Stop();
+            audioSource.PlayOneShot(dialogue[dialogueIndex].dialogueClip);
         }
     }
 

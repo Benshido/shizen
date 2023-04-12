@@ -147,6 +147,14 @@ MonoBehaviour:
   - dialogueText: This must be where the villagers were looking at!
     dialogueClip: {fileID: 8300000, guid: 23fea9facb10b1a4b9d52d3d7f3e61b4, type: 3}
     hasBeenTriggered: 0
+  logs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   audioSource: {fileID: 4416637011315164741}
   dialogueUI: {fileID: 4416637011511927694}
   dialogueInText: {fileID: 4416637012047437808}
