@@ -34,12 +34,20 @@ public class PlayerAttack : MonoBehaviour
         if (stickToGround)
         {
             RaycastHit hit;
-            if (!Physics.Raycast(raycastStart.position, Vector3.down, out hit, maxGroundRange, IsGround))
+            if (!Physics.Raycast(raycastStart.position, Vector3.down, out hit, maxGroundRange + detectionOffset, IsGround))
             {
-                // pAnimController.RemoveFromList(element, animator);
-                resetOnDestroy = true;
-                Destroy(gameObject);
-               // Destroying(0);
+                //if on a slope and higher ground is on spawn it will also check if that is in range
+                var higher = raycastStart.position;
+                higher.y += detectionOffset;
+                if (Physics.Raycast(higher, Vector3.down, out hit, maxGroundRange + detectionOffset))
+                {
+                    GroundObject.position = new Vector3(GroundObject.position.x, hit.point.y + groundOffset, GroundObject.position.z);
+                }
+                else
+                {
+                    resetOnDestroy = true;
+                    Destroy(gameObject);
+                }               
             }
             else
             {

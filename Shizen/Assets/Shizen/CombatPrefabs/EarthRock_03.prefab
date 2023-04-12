@@ -5049,7 +5049,7 @@ Transform:
   m_Children:
   - {fileID: 7969847255447744468}
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6571486192176570603
 MonoBehaviour:
@@ -5064,11 +5064,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   element: 0
+  hasSetTarget: 0
   breakComboOnTriggerExit: 0
   stickToGround: 1
   maxGroundRange: 2
   groundOffset: 1
-  detectionOffset: 7
+  detectionOffset: 5
   IsGround:
     serializedVersion: 2
     m_Bits: 1

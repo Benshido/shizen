@@ -11310,7 +11310,7 @@ Transform:
   - {fileID: 12100772}
   - {fileID: 2085924410}
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3197071820441189837
 GameObject:
@@ -23379,7 +23379,7 @@ CharacterController:
   serializedVersion: 3
   m_Height: 2
   m_Radius: 0.4
-  m_SlopeLimit: 50
+  m_SlopeLimit: 60
   m_StepOffset: 0.3
   m_SkinWidth: 0.01
   m_MinMoveDistance: 0.001
