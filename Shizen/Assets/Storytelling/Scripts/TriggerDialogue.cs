@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class TriggerDialogue : MonoBehaviour
 {
-    public AudioSource audioSource;
-    public AudioClip clip;
-    public bool hasBeenTriggered = false;
+    public GameObject dialogueManager;
+    public int dialogueIndex;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" && !hasBeenTriggered)
+        if (other.gameObject.tag == "Player")
         {
-            hasBeenTriggered = true;
-            audioSource.PlayOneShot(clip);
+            dialogueManager.GetComponent<DialogueManager>().DialogueHasBeenTriggered(dialogueIndex);
         }
     }
 }
