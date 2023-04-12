@@ -10,6 +10,8 @@ public class EnemyHitsPlayer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (gameObject.tag == "Projectile" && other.gameObject.layer == 3) Destroy(gameObject);
+
         if (other.gameObject.tag == "Player" && !cooldown)
         {
             player = FindFirstObjectByType<PlayerHP>().transform;
