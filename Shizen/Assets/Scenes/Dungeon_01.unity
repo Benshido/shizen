@@ -21664,6 +21664,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemies (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7934501584685698896, guid: cac21b8418c5bb84aa7939154c118660,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7934501584685698899, guid: cac21b8418c5bb84aa7939154c118660,
         type: 3}
       propertyPath: m_RootOrder
@@ -21846,6 +21851,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemies (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7934501584685698896, guid: cac21b8418c5bb84aa7939154c118660,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7934501584685698899, guid: cac21b8418c5bb84aa7939154c118660,
         type: 3}
@@ -22364,6 +22374,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemies (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7934501584685698896, guid: cac21b8418c5bb84aa7939154c118660,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7934501584685698899, guid: cac21b8418c5bb84aa7939154c118660,
         type: 3}
@@ -23909,6 +23924,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemies
+      objectReference: {fileID: 0}
+    - target: {fileID: 7934501584685698896, guid: cac21b8418c5bb84aa7939154c118660,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7934501584685698899, guid: cac21b8418c5bb84aa7939154c118660,
         type: 3}

@@ -208,7 +208,7 @@ public class EnemyAIController : MonoBehaviour
         anim.SetBool("Attack", false);
         if (!isAlive)
         {
-            StartCoroutine(Death(2f));
+            StartCoroutine(Death(5f));
         }
         else
         {

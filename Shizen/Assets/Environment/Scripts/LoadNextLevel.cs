@@ -12,7 +12,10 @@ public class LoadNextLevel : MonoBehaviour
         // gets the curent screen
         //Scene sceneLoaded = SceneManager.GetActiveScene();
         // loads next level
-        currentSceneBuildIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentSceneBuildIndex + 1);
+        if (other.gameObject.tag == "Player")
+        {
+            currentSceneBuildIndex = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(currentSceneBuildIndex + 1);
+        }
     }
 }
