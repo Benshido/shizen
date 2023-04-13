@@ -96,7 +96,7 @@ public class FollowCamera : MonoBehaviour
             if (rotateToTarget)
             {
                 targRotTimer += Time.unscaledDeltaTime;
-                if (targSyst.Target == null) { targRotTimer = 0; rotateToTarget = false; }
+                if (targSyst.Target == null) { targRotTimer = targRotDuration; }
                 if (targRotTimer >= targRotDuration)
                 {
                     targRotTimer = 0;

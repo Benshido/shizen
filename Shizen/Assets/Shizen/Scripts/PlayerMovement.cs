@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 [RequireComponent(typeof(CharacterController))]
 
@@ -50,6 +51,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask groundedMask;
     public bool IsGrounded { get { return isGrounded; } }
 
+    private Vector3 slopeSlideVelo;
+    private float slopeAngle;
+    private bool IsSliding { get { return slopeAngle > charController.slopeLimit + 1; } }
+
     private Vector3 finalMovement;
     private Vector3 movement;
     public Vector3 Movement { get { return finalMovement; } }
@@ -82,22 +87,92 @@ public class PlayerMovement : MonoBehaviour
         maxFallSpd = Physics.gravity.y + (Physics.gravity.y * (weight / 75));
 
         externalForces.y = maxFallSpd;
-
     }
+
 
     // Update is called once per frame
     void Update()
     {
-        SetSlopeSlideVelocity();
+        // SetSlopeSlideVelocity();
+        slopeSlideVelo = Vector3.Lerp(slopeSlideVelo, Vector3.zero, Time.unscaledDeltaTime * 5);
 
         //grounded check (character controller isGrounded is too glitchy)
         Vector3 origin = transform.position + charController.center;
-        var radius = charController.radius * 0.8f;
+        var radius = charController.radius * 0.99f;
         origin.y -= (charController.height / 2) - (radius / 2);
 
         var sphere = Physics.OverlapSphere(origin, radius, groundedMask);
         int noTriggers = 0;
-        for (int i = 0; i < sphere.Length; i++) if (!sphere[i].isTrigger) noTriggers++;
+
+        bool hasANonSlope = false;
+        for (int i = 0; i < sphere.Length; i++)
+            if (!sphere[i].isTrigger)
+            {
+                if (!hasANonSlope)
+                {
+                    Vector3 end = new();
+                    if (sphere[i] is not TerrainCollider)
+                    {
+                        end = sphere[i].ClosestPoint(origin);
+                    }
+                    else
+                    {
+                        RaycastHit hit1;
+                        float dist = 0;
+                        //cast multiple rays to roughly find the closest part of the terrain
+                        Ray rayD = new(origin, -transform.up);
+                        Ray rayF = new(origin, transform.forward);
+                        Ray rayR = new(origin, transform.right);
+                        Ray rayL = new(origin, -transform.right);
+
+                        if (Physics.Raycast(rayD, out hit1))
+                        {
+                            dist = hit1.distance;
+                            end = hit1.point;
+                        }
+                        if (Physics.Raycast(rayF, out hit1))
+                        {
+                            if (hit1.distance < dist)
+                            {
+                                dist = hit1.distance;
+                                end = hit1.point;
+                            }
+                        }
+                        if (Physics.Raycast(rayR, out hit1))
+                        {
+                            if (hit1.distance < dist)
+                            {
+                                dist = hit1.distance;
+                                end = hit1.point;
+                            }
+                        }
+                        if (Physics.Raycast(rayL, out hit1))
+                        {
+                            if (hit1.distance < dist)
+                            {
+                                dist = hit1.distance;
+                                end = hit1.point;
+                            }
+                        }
+                    }
+                    var start = end;
+                    start.y += 0.1f;
+                    var direction = end - start;
+
+                    RaycastHit hit;
+                    if (Physics.Raycast(start, direction, out hit))
+                    {
+                        slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
+                        if (slopeAngle >= charController.slopeLimit)
+                        {
+                            slopeSlideVelo = hit.normal;
+                        }
+                        else hasANonSlope = true;
+                    }
+                }
+                noTriggers++;
+            }
+
         if (noTriggers > 0 && !IsSliding)
         {
             isGrounded = true;
@@ -173,7 +248,7 @@ public class PlayerMovement : MonoBehaviour
             else if (!jumping) externalForces.y = maxFallSpd / 3;
 
             //When dashing the player should not fall
-            if (dashCount > 0) externalForces.y = 0;
+            if (IsDashing) externalForces.y = 0;
 
             //smooth movement
             if (isGrounded || IsDashing) finalMovement = Vector3.MoveTowards(finalMovement, movement, Time.unscaledDeltaTime * 30);
@@ -206,24 +281,21 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private Vector3 slopeSlideVelo;
-    private float slopeAngle;
-    private bool IsSliding { get { return slopeAngle > charController.slopeLimit + 1; } }
-    private void SetSlopeSlideVelocity()
-    {
-        var origin = transform.position - charController.center;
+    /* private void SetSlopeSlideVelocity()
+     {
+         var origin = transform.position - charController.center;
 
-        if (Physics.Raycast(origin, Vector3.down, out RaycastHit hit, charController.height, groundedMask))
-        {
-            slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
-            if (slopeAngle >= charController.slopeLimit)
-            {
-                slopeSlideVelo = hit.normal;
-                return;
-            }
-        }
-        slopeSlideVelo = Vector3.MoveTowards(slopeSlideVelo, Vector3.zero, Time.unscaledDeltaTime);
-    }
+          if (Physics.Raycast(origin, Vector3.down, out RaycastHit hit, charController.height, groundedMask))
+          {
+              slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
+              if (slopeAngle >= charController.slopeLimit)
+              {
+                  slopeSlideVelo = hit.normal;
+                  return;
+              }
+          }
+         slopeSlideVelo = Vector3.MoveTowards(slopeSlideVelo, Vector3.zero, Time.unscaledDeltaTime);
+     }*/
 
     public void MoveForward()
     {
