@@ -1504,6 +1504,31 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 594112471661909798, guid: 86e8e9fa0e0661c4ca0f267480e81acf,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1352306810}
+    - target: {fileID: 594112471680615875, guid: 86e8e9fa0e0661c4ca0f267480e81acf,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1352306810}
+    - target: {fileID: 594112472931364266, guid: 86e8e9fa0e0661c4ca0f267480e81acf,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1352306810}
+    - target: {fileID: 1374534965579480081, guid: 86e8e9fa0e0661c4ca0f267480e81acf,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1352306810}
+    - target: {fileID: 1727186439941567647, guid: 86e8e9fa0e0661c4ca0f267480e81acf,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1352306810}
     - target: {fileID: 6038775469254216912, guid: 86e8e9fa0e0661c4ca0f267480e81acf,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1600,6 +1625,31 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.75
       objectReference: {fileID: 0}
+    - target: {fileID: 7335728716799057668, guid: 86e8e9fa0e0661c4ca0f267480e81acf,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1352306810}
+    - target: {fileID: 7335728716993653982, guid: 86e8e9fa0e0661c4ca0f267480e81acf,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1352306810}
+    - target: {fileID: 7335728717075023658, guid: 86e8e9fa0e0661c4ca0f267480e81acf,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1352306810}
+    - target: {fileID: 8783481408361052613, guid: 86e8e9fa0e0661c4ca0f267480e81acf,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1352306810}
+    - target: {fileID: 9011235989606822219, guid: 86e8e9fa0e0661c4ca0f267480e81acf,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1352306810}
     - target: {fileID: 9179473507130220652, guid: 86e8e9fa0e0661c4ca0f267480e81acf,
         type: 3}
       propertyPath: m_TreeDistance
@@ -1625,6 +1675,10 @@ PrefabInstance:
     - {fileID: 6849803073756884503, guid: 86e8e9fa0e0661c4ca0f267480e81acf, type: 3}
     - {fileID: 6435475329369961290, guid: 86e8e9fa0e0661c4ca0f267480e81acf, type: 3}
     - {fileID: 3986360291321445904, guid: 86e8e9fa0e0661c4ca0f267480e81acf, type: 3}
+    - {fileID: 6435475330536665162, guid: 86e8e9fa0e0661c4ca0f267480e81acf, type: 3}
+    - {fileID: 6435475329845036386, guid: 86e8e9fa0e0661c4ca0f267480e81acf, type: 3}
+    - {fileID: 3986360290338962704, guid: 86e8e9fa0e0661c4ca0f267480e81acf, type: 3}
+    - {fileID: 3986360289682065464, guid: 86e8e9fa0e0661c4ca0f267480e81acf, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6038775469261446106, guid: 86e8e9fa0e0661c4ca0f267480e81acf,
         type: 3}
@@ -1664,7 +1718,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1274195756}
   - component: {fileID: 1274195755}
-  - component: {fileID: 1274195757}
   m_Layer: 0
   m_Name: BackgroundMusic
   m_TagString: Untagged
@@ -1784,18 +1837,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1274195757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1274195754}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fa5554ec846f4945b8a503d4ca81cb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1278222635
 GameObject:
   m_ObjectHideFlags: 0
@@ -2145,6 +2186,12 @@ PrefabInstance:
 --- !u!1 &1352306809 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2076416605298132393, guid: 5f1a2d343ce2eb946841228edc039b29,
+    type: 3}
+  m_PrefabInstance: {fileID: 1352306808}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1352306810 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8416251637787156904, guid: 5f1a2d343ce2eb946841228edc039b29,
     type: 3}
   m_PrefabInstance: {fileID: 1352306808}
   m_PrefabAsset: {fileID: 0}

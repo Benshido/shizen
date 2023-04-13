@@ -59,8 +59,9 @@ MonoBehaviour:
     m_Bits: 1
   raycastStart: {fileID: 0}
   GroundObject: {fileID: 0}
+  DestroyOnHitWall: 0
   raycastToWallStart: {fileID: 3705783716017115954}
-  raycastToWallLength: 1
+  raycastToWallLength: 0
 --- !u!95 &3705783716017115955
 Animator:
   serializedVersion: 5

@@ -4949,7 +4949,7 @@ MonoBehaviour:
   GroundObject: {fileID: 4622536064265387021}
   DestroyOnHitWall: 0
   raycastToWallStart: {fileID: 331011786}
-  raycastToWallLength: 1
+  raycastToWallLength: 0
 --- !u!114 &4012116868240980035
 MonoBehaviour:
   m_ObjectHideFlags: 0
