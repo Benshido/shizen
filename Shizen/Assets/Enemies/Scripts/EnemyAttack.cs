@@ -8,8 +8,8 @@ public class EnemyAttack
 {
     [SerializeField] string name;
     [SerializeField] int animationIndex;
-    [SerializeField] float cooldown = 2;
-    public Collider MeleeHitArea;
+    [SerializeField] public float cooldown;
+    //public Collider MeleeHitArea;
 
     private bool reloading = false;
 

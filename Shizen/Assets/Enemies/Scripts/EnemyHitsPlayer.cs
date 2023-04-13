@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyHitsPlayer : MonoBehaviour
 {
     bool cooldown = false;
-    public float damage = 5;
+    public float damage = 2;
     public Transform player;
 
     private int elementLayerIndex = 0;
@@ -22,7 +22,7 @@ public class EnemyHitsPlayer : MonoBehaviour
         if (other.gameObject.tag == "Player" && !cooldown)
         {
             player = FindFirstObjectByType<PlayerHP>().transform;
-            player.GetComponent<PlayerHP>().TakeDamage(2);
+            player.GetComponent<PlayerHP>().TakeDamage(damage);
             if (gameObject.tag == "Projectile") Destroy(gameObject);
             cooldown = true;
             StartCoroutine(HitCooldown(1.0f));

@@ -52,6 +52,7 @@ public class EnemyAIController : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         standardSightRange = sightRange;
 
+        timeBetweenAttacks = attacks[0].cooldown;
         if (enemyIsRanged)
         {
             anim.SetBool("IsRanged", true);
@@ -182,10 +183,10 @@ public class EnemyAIController : MonoBehaviour
             transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
             //anim.SetBool("GetHit", false);
             //anim.SetInteger("AttackType", currentAttackType);
-            anim.SetBool("Attack", true);
 
             if (!alreadyAttacked)
             {
+                anim.SetBool("Attack", true);
                 if (enemyIsRanged) RangedAttack();
 
                 alreadyAttacked = true;
