@@ -7,6 +7,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] Elements element;
     [SerializeField] bool hasSetTarget = false;
     [SerializeField] bool breakComboOnTriggerExit = false;
+
     [SerializeField] bool stickToGround;
     [SerializeField] float maxGroundRange = 5f;
     [SerializeField] float groundOffset = 1f;
@@ -14,6 +15,10 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] LayerMask IsGround;
     [SerializeField] Transform raycastStart;
     [SerializeField] Transform GroundObject;
+
+    [SerializeField] bool DestroyOnHitWall =false;
+    [SerializeField] Transform raycastToWallStart;
+    [SerializeField] float raycastToWallLength;
     private TargetSystem TargSyst;
     private bool rotate = false;
     private float rotateSpeed = 4;
@@ -72,6 +77,11 @@ public class PlayerAttack : MonoBehaviour
             var targRot = Quaternion.LookRotation(targpos, Vector3.up);
 
             transform.rotation = Quaternion.Lerp(transform.rotation, targRot, Time.unscaledDeltaTime * 30);
+        }
+        if (DestroyOnHitWall && raycastToWallStart != null && Physics.Raycast(raycastToWallStart.position, transform.forward, out RaycastHit hitWall))
+        {
+            if (hitWall.distance <= raycastToWallLength)
+                Destroy(gameObject);
         }
 
         RaycastHit hit;
