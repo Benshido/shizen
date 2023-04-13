@@ -47,7 +47,7 @@ public class PlayerAttack : MonoBehaviour
                 {
                     resetOnDestroy = true;
                     Destroy(gameObject);
-                }               
+                }
             }
             else
             {
@@ -95,6 +95,13 @@ public class PlayerAttack : MonoBehaviour
         rotate = true;
         rotateSpeed = rotateSpd;
         frozenTargetRot = targetRotationObj.rotation;
+    }
+
+    public void SetRotationEqualCameraAim()
+    {
+        rotate = false;
+        if (TargSyst.AimTarget != Vector3.zero) transform.rotation = Quaternion.LookRotation(TargSyst.AimTarget);
+        else { rotate = true; frozenTargetRot = Camera.main.transform.rotation; }
     }
 
     public void AimToEnemyTarg(float rotateSpd)

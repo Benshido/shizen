@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class TargetSystem : MonoBehaviour
 {
@@ -31,6 +30,11 @@ public class TargetSystem : MonoBehaviour
         get { return target; }
     }
     private GameObject target;
+    public Vector3 AimTarget
+    {
+        get { return aimTarget; }
+    }
+    private Vector3 aimTarget;
 
     private bool alteredLockonLine = false;
 
@@ -73,6 +77,7 @@ public class TargetSystem : MonoBehaviour
                     var outline1 = target.GetComponent<Outline>();
                     outline1.OutlineWidth = targetedOutlineWidth;
                     outline1.OutlineColor = targetedOutlineColor;
+                    if (smallestAngle < targetMaxAngle / 3) aimTarget = sortedTargList[0].transform.position;
                 }
                 else target = null;
 
@@ -92,6 +97,12 @@ public class TargetSystem : MonoBehaviour
             lockOn = !lockOn;
             alteredLockonLine = false;
         }
+        aimTarget = Vector3.zero;
+    }
+
+    public void SetAimTarget(Vector3 pos)
+    {
+        aimTarget = pos;
     }
 
 

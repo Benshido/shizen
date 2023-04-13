@@ -35,6 +35,10 @@ public class PlayerSkills : MonoBehaviour
     private float resetComboTime = 1;
     private float resetTimer = 0;
     private bool runTimer = false;
+    private bool isAiming = false;
+    public bool IsAiming { get { return isAiming; } }
+
+    private string ElementName { get { return Enum.GetName(typeof(Elements), elementIndex); } }
 
     // Start is called before the first frame update
     void Start()
@@ -68,7 +72,7 @@ public class PlayerSkills : MonoBehaviour
             {
                 elementIndex++;
                 if (elementIndex >= elementList.Count) elementIndex = 0;
-                while (elementIndex != 0 && Unlockables.Elements[Enum.GetName(typeof(Elements), elementIndex)].Level == 0)
+                while (elementIndex != 0 && Unlockables.Elements[ElementName].Level == 0)
                 {
                     elementIndex++;
                     if (elementIndex >= elementList.Count) elementIndex = 0;
@@ -79,7 +83,7 @@ public class PlayerSkills : MonoBehaviour
             {
                 elementIndex--;
                 if (elementIndex < 0) elementIndex = elementList.Count - 1;
-                while (elementIndex != 0 && Unlockables.Elements[Enum.GetName(typeof(Elements), elementIndex)].Level == 0)
+                while (elementIndex != 0 && Unlockables.Elements[ElementName].Level == 0)
                 {
                     elementIndex--;
                     if (elementIndex < 0) elementIndex = elementList.Count - 1;
@@ -89,31 +93,72 @@ public class PlayerSkills : MonoBehaviour
 
             if (Input.GetKeyDown(NormalAttack) && playerMovement.IsGrounded)
             {
-                if (canGoToNextCombo && RequireStamina(false))
+                if (isAiming && canGoToNextCombo && RequireStamina(true))
                 {
-                    if (lastAtkWasHeavy) comboCount = 0;
-                    canGoToNextCombo = false;
-                    lastAtkWasHeavy = false;
-                    comboCount++;
-                    attacking = true;
-                    isHeavy = false;
-                    cancelReset = true;
+                    UseHeavyAtk();
+                }
+                else if (canGoToNextCombo && RequireStamina(false))
+                {
+                    UseNormalAtk();
                 }
             }
             if (Input.GetKeyDown(HeavyAttack) && playerMovement.IsGrounded)
             {
                 if (canGoToNextCombo && RequireStamina(true))
                 {
-                    if (!lastAtkWasHeavy) comboCount = 0;
-                    canGoToNextCombo = false;
-                    lastAtkWasHeavy = true;
-                    comboCount++;
-                    attacking = true;
-                    isHeavy = true;
-                    cancelReset = true;
+                    UseHeavyAtk();
                 }
             }
+            if (isAiming && Input.GetKeyUp(HeavyAttack))
+            {
+                isAiming = false;
+                EndOfComboReset();
+            }
         }
+    }
+
+    private void UseHeavyAtk()
+    {
+        if (Unlockables.Elements[ElementName].HeavyAttackMode == AttackMode.Aim)
+        {
+            if (!isAiming)
+            {
+                isHeavy = true;
+                isAiming = true;
+            }
+            else
+            {
+                if (!lastAtkWasHeavy) comboCount = 0;
+                isHeavy = true;
+                canGoToNextCombo = false;
+                lastAtkWasHeavy = true;
+                comboCount++;
+                attacking = true;
+                cancelReset = true;
+            }
+        }
+        else
+        {
+            isAiming = false;
+            if (!lastAtkWasHeavy) comboCount = 0;
+            canGoToNextCombo = false;
+            lastAtkWasHeavy = true;
+            comboCount++;
+            attacking = true;
+            isHeavy = true;
+            cancelReset = true;
+        }
+    }
+    private void UseNormalAtk()
+    {
+        isAiming = false;
+        if (lastAtkWasHeavy) comboCount = 0;
+        canGoToNextCombo = false;
+        lastAtkWasHeavy = false;
+        comboCount++;
+        attacking = true;
+        isHeavy = false;
+        cancelReset = true;
     }
 
     private void UpdateOutline()
@@ -145,7 +190,7 @@ public class PlayerSkills : MonoBehaviour
         StartCoroutine(DelayStaminaUse());
         canGoToNextCombo = true;
         attacking = false;
-        isHeavy = false;
+        if (!isAiming) isHeavy = false;
         cancelReset = false;
     }
 
@@ -177,7 +222,7 @@ public class PlayerSkills : MonoBehaviour
                 case (int)Elements.Earth:
                     return 12;
                 case (int)Elements.Water:
-                    return 6;
+                    return 5;
                 default:
                     break;
             }
@@ -186,9 +231,9 @@ public class PlayerSkills : MonoBehaviour
             switch (elementIndex)
             {
                 case (int)Elements.Earth:
-                    return 5;
+                    return 7;
                 case (int)Elements.Water:
-                    return 2;
+                    return 4;
                 default:
                     break;
             }
