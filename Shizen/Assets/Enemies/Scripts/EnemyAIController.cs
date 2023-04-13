@@ -169,7 +169,6 @@ public class EnemyAIController : MonoBehaviour
     {
         // Get the parent of the parent of the parent of the child object
         GameObject grandParentObject = gameObject.transform.parent.parent.gameObject;
-        //Debug.Log(gameObject.transform.parent.parent.gameObject.name);
         grandParentObject.GetComponent<AlertGroup>().Alert();
     }
 
@@ -213,6 +212,8 @@ public class EnemyAIController : MonoBehaviour
         else
         {
             StartCoroutine(GetHit(0.1f));
+
+            if (!alerted) CallGroup();
             //anim.SetBool("Attack", false);
             //anim.SetBool("GetHit", true);
         }

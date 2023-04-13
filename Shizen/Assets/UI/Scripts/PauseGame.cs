@@ -8,12 +8,14 @@ public class PauseGame : MonoBehaviour
     public GameObject shizen;
     public GameObject camera;
     public GameObject menuObjects;
+    public GameObject logObjects;
 
     // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1.0f;
         menuObjects.SetActive(false);
+        logObjects.SetActive(false);
     }
 
     // Update is called once per frame
@@ -23,18 +25,24 @@ public class PauseGame : MonoBehaviour
         {
             if (!gameIsPaused)
             {
+                menuObjects.SetActive(true);
                 PauseTheGame();
             }
-            else
+            else UnpauseTheGame();
+        }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            if (!gameIsPaused)
             {
-                UnpauseTheGame();
+                logObjects.SetActive(true);
+                PauseTheGame();
             }
+            else UnpauseTheGame();
         }
     }
 
     public void PauseTheGame()
     {
-        menuObjects.SetActive(true);
         camera.SetActive(false);
         shizen.SetActive(false);
         gameIsPaused = true;
@@ -46,6 +54,7 @@ public class PauseGame : MonoBehaviour
     public void UnpauseTheGame()
     {
         menuObjects.SetActive(false);
+        logObjects.SetActive(false);
         camera.SetActive(true);
         shizen.SetActive(true);
         gameIsPaused = false;
