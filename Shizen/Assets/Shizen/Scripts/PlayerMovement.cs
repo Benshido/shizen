@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using static UnityEngine.UI.Image;
 
 [RequireComponent(typeof(CharacterController))]
 
@@ -25,8 +22,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool jumping = false;
     public bool IsJumping { get { return jumping; } }
-    private bool inCombat = false;
-    public bool InCombat { get { return inCombat; } }
+   // private bool inCombat = false;
+  //  public bool InCombat { get { return inCombat; } }
 
     [Header("Dash")]
     [SerializeField] float dashMultiplier = 3;
@@ -192,8 +189,6 @@ public class PlayerMovement : MonoBehaviour
             movement = Vector3.zero;
 
             //when oposite keys are pressed at the same time it should act like neither are pressed
-            // if (canMove)
-            // {
             if (Input.GetKey(moveForward) && !Input.GetKey(moveBack))
             {
                 MoveForward();
@@ -210,7 +205,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 MoveRight();
             }
-            // }
+
             if (IsRunning && canMove)
             {
                 sprintTimer += Time.unscaledDeltaTime;

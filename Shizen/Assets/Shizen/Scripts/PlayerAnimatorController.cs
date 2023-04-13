@@ -74,10 +74,10 @@ public class PlayerAnimatorController : MonoBehaviour
                 animator.SetBool("Falling", !playerMovement.IsGrounded);
             }
         }
-        else
+        else if(!animator.GetBool("Dead"))
         {
             playerMovement.CanMove(0);
-            //animator.SetTrigger("Dead");
+            animator.SetBool("Dead", true);
         }
     }
 
