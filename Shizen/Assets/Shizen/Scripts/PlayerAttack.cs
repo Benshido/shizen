@@ -89,7 +89,6 @@ public class PlayerAttack : MonoBehaviour
             {
                 if (hitWall.distance <= raycastToWallLength && !hitWall.collider.isTrigger)
                 {
-                    Debug.Log(hitWall.transform.name);
                     Destroy(gameObject);
                 }
             }

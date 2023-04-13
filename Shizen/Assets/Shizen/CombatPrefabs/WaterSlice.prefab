@@ -59,8 +59,9 @@ MonoBehaviour:
     m_Bits: 1
   raycastStart: {fileID: 0}
   GroundObject: {fileID: 0}
+  DestroyOnHitWall: 0
   raycastToWallStart: {fileID: 1611201787765778903}
-  raycastToWallLength: 1
+  raycastToWallLength: 0
 --- !u!95 &1611201787765778902
 Animator:
   serializedVersion: 5
@@ -206,7 +207,7 @@ MonoBehaviour:
   damage: 4
   destroyWhenHitHeavyObjects: 0
   destroyOnEnemyHit: 0
-  enemyHitDestrDelay: 0.01
+  enemyHitDestrDelay: 0.1
   destroyThis: {fileID: 1611201787765778901}
   objectWeight: 0
 --- !u!136 &1611201788164094737
