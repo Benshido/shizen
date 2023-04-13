@@ -16,7 +16,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] Transform raycastStart;
     [SerializeField] Transform GroundObject;
 
-    [SerializeField] bool DestroyOnHitWall =false;
+    [SerializeField] bool DestroyOnHitWall = false;
     [SerializeField] Transform raycastToWallStart;
     [SerializeField] float raycastToWallLength;
     private TargetSystem TargSyst;
@@ -28,9 +28,12 @@ public class PlayerAttack : MonoBehaviour
     private GameObject targObj = null;
     private bool resetOnDestroy = false;
 
+    private Vector3 lastPosition = Vector3.zero;
+
     // Start is called before the first frame update
     void Awake()
     {
+        lastPosition = transform.position;
         animator = GetComponent<Animator>();
         pAnimController = FindObjectOfType<PlayerAnimatorController>();
         targetRotationObj = FindObjectOfType<FollowCamera>().PlayerModel;
@@ -78,11 +81,21 @@ public class PlayerAttack : MonoBehaviour
 
             transform.rotation = Quaternion.Lerp(transform.rotation, targRot, Time.unscaledDeltaTime * 30);
         }
-        if (DestroyOnHitWall && raycastToWallStart != null && Physics.Raycast(raycastToWallStart.position, transform.forward, out RaycastHit hitWall))
+        if (DestroyOnHitWall && raycastToWallStart != null)
         {
-            if (hitWall.distance <= raycastToWallLength)
-                Destroy(gameObject);
+            RaycastHit hitWall;
+            if (Physics.Raycast(raycastToWallStart.position, transform.forward, out hitWall, IsGround) ||
+                Physics.Raycast(lastPosition, raycastToWallStart.position - lastPosition, out hitWall, Vector3.Distance(raycastToWallStart.position, lastPosition), IsGround))
+            {
+                if (hitWall.distance <= raycastToWallLength && !hitWall.collider.isTrigger)
+                {
+                    Debug.Log(hitWall.transform.name);
+                    Destroy(gameObject);
+                }
+            }
+            lastPosition = raycastToWallStart.position;
         }
+
 
         RaycastHit hit;
         if (stickToGround && Physics.Raycast(raycastStart.position, Vector3.down, out hit, maxGroundRange, IsGround))
