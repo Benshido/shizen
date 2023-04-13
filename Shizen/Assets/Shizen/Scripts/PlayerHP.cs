@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerHP : MonoBehaviour
@@ -61,6 +63,10 @@ public class PlayerHP : MonoBehaviour
             }
         }
 
+        if (!IsAlive)
+        {
+            StartCoroutine(Death());
+        }
     }
 
     public void TakeDamage(float damage)
@@ -84,5 +90,12 @@ public class PlayerHP : MonoBehaviour
         iFrameDuration = seconds;
         iFrameTimer = 0;
         iFrame = true;
+    }
+
+    public IEnumerator Death()
+    {
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        StopAllCoroutines();
     }
 }

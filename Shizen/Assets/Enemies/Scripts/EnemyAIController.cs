@@ -205,7 +205,7 @@ public class EnemyAIController : MonoBehaviour
     {
         Debug.Log("HIT");
         //hitPoints -= damage;
-
+        anim.SetBool("Attack", false);
         if (!isAlive)
         {
             StartCoroutine(Death(2f));
