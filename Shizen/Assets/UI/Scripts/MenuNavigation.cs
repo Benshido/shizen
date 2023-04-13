@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class MenuNavigation : MonoBehaviour
 {
+    public GameObject menuObjects;
+    public GameObject controlsObjects;
+    public GameObject creditsObjects;
+
     public void StartGame()
     {
         SceneManager.LoadScene(1);
@@ -13,12 +17,14 @@ public class MenuNavigation : MonoBehaviour
 
     public void Controls()
     {
-        Debug.Log("Controls");
+        menuObjects.SetActive(false);
+        controlsObjects.SetActive(true);
     }
 
     public void Credits()
     {
-        Debug.Log("Credits");
+        menuObjects.SetActive(false);
+        creditsObjects.SetActive(true);
     }
 
     public void ExitToMainMenu()
@@ -29,5 +35,12 @@ public class MenuNavigation : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void BackToMainMenu()
+    {
+        menuObjects.SetActive(true);
+        creditsObjects.SetActive(false);
+        controlsObjects.SetActive(false);
     }
 }

@@ -763,12 +763,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5842909302391227493}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &726855213 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3362503403649668223, guid: 5f1a2d343ce2eb946841228edc039b29,
-    type: 3}
-  m_PrefabInstance: {fileID: 1352306808}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &767299864
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1754,6 +1748,12 @@ PrefabInstance:
       addedObject: {fileID: 508747820}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f1a2d343ce2eb946841228edc039b29, type: 3}
+--- !u!1 &1352306809 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2076416605298132393, guid: 5f1a2d343ce2eb946841228edc039b29,
+    type: 3}
+  m_PrefabInstance: {fileID: 1352306808}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1388141364 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100002, guid: bc9773c775d98153b91b9a7c25ecccab,
@@ -2863,7 +2863,7 @@ PrefabInstance:
         type: 3}
       propertyPath: camera
       value: 
-      objectReference: {fileID: 726855213}
+      objectReference: {fileID: 1352306809}
     - target: {fileID: 5842909302855085788, guid: 0d44c6fb32decec4e9ed56dd1db511ef,
         type: 3}
       propertyPath: shizen

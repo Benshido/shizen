@@ -9,6 +9,7 @@ public class PauseGame : MonoBehaviour
     public GameObject camera;
     public GameObject menuObjects;
     public GameObject logObjects;
+    public GameObject controlsObjects;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,7 @@ public class PauseGame : MonoBehaviour
         Time.timeScale = 1.0f;
         menuObjects.SetActive(false);
         logObjects.SetActive(false);
+        controlsObjects.SetActive(false);
     }
 
     // Update is called once per frame
@@ -43,7 +45,7 @@ public class PauseGame : MonoBehaviour
 
     public void PauseTheGame()
     {
-        camera.SetActive(false);
+        camera.GetComponent<FollowCamera>().enabled = false;
         shizen.SetActive(false);
         gameIsPaused = true;
         Cursor.lockState = CursorLockMode.None;
@@ -55,11 +57,26 @@ public class PauseGame : MonoBehaviour
     {
         menuObjects.SetActive(false);
         logObjects.SetActive(false);
-        camera.SetActive(true);
+        controlsObjects.SetActive(false);
+        camera.GetComponent<FollowCamera>().enabled = true;
         shizen.SetActive(true);
         gameIsPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         Time.timeScale = 1.0f;
+    }
+
+    public void OpenControlsMenu()
+    {
+        menuObjects.SetActive(false);
+        controlsObjects.SetActive(true);
+        PauseTheGame();
+    }
+
+    public void BackToPauseMenu()
+    {
+        menuObjects.SetActive(true);
+        controlsObjects.SetActive(false);
+        PauseTheGame();
     }
 }
