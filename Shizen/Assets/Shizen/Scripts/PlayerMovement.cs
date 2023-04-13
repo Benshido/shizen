@@ -111,7 +111,14 @@ public class PlayerMovement : MonoBehaviour
                 if (!hasANonSlope)
                 {
                     Vector3 end = new();
-                    if (sphere[i] is not TerrainCollider)
+                    bool meshcolConvex = false;
+                    if (sphere[i] is MeshCollider)
+                    {
+                        var col = (MeshCollider)sphere[i];
+                        meshcolConvex = col.convex;
+                    }
+                    //ClosestPoint does not work with non-convex mesh colliders and terrain colliders
+                    if (sphere[i] is not TerrainCollider && meshcolConvex)
                     {
                         end = sphere[i].ClosestPoint(origin);
                     }

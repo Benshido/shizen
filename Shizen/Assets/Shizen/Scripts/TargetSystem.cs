@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TargetSystem : MonoBehaviour
 {
@@ -35,11 +36,16 @@ public class TargetSystem : MonoBehaviour
 
     private void Update()
     {
-        var deadOnes = targets.Where(x => x == null || !x.GetComponent<EnemyHP>().IsAlive).ToList();
-        for (int i = 0; i < deadOnes.Count; i++) { targets.Remove(deadOnes[i]); lockOn = false; }
-
         if (targets.Count > 0)
         {
+            var deadOnes = targets.Where(x => x == null || x.GetComponent<EnemyHP>().IsAlive == false).ToList();
+            for (int i = 0; i < deadOnes.Count; i++)
+            {
+                targets.Remove(deadOnes[i]);
+                lockOn = false;
+                deadOnes[i].GetComponent<Outline>().enabled = false;
+            }
+
             var smallestAngle = targetMaxAngle;
             if (!lockOn)
             {
@@ -91,9 +97,8 @@ public class TargetSystem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<EnemyHP>())
+        if (other.gameObject.TryGetComponent(out EnemyHP hp) && hp.IsAlive)
         {
-
             targets.Add(other.gameObject);
             var outline = other.GetComponent<Outline>();
             if (!outline)

@@ -109,7 +109,7 @@ public class PlayerAnimatorController : MonoBehaviour
         {
             for (int i = 0; i < elem.Count; i++)
             {
-                elem[i].SetInteger("ComboStage", index);
+               if(elem[i]!=null) elem[i].SetInteger("ComboStage", index);
             }
         }
     }
