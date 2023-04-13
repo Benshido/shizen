@@ -20,6 +20,7 @@ public class PlayerDamageColObj : MonoBehaviour
             if (other.gameObject.TryGetComponent(out EnemyHP hp))
             {
                 hp.TakeAttack(damage);
+                Debug.Log(gameObject.name + damage);
                 if (destroyOnEnemyHit) StartCoroutine(Destroying());
             }
         }
@@ -36,7 +37,7 @@ public class PlayerDamageColObj : MonoBehaviour
     private IEnumerator Destroying()
     {
         yield return new WaitForSecondsRealtime(enemyHitDestrDelay);
-        
+
         Destroy(destroyThis);
     }
 }
