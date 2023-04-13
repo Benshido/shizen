@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 1611201788164094748}
   m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1611201787765778900
 MonoBehaviour:
@@ -59,6 +59,8 @@ MonoBehaviour:
     m_Bits: 1
   raycastStart: {fileID: 0}
   GroundObject: {fileID: 0}
+  raycastToWallStart: {fileID: 1611201787765778903}
+  raycastToWallLength: 1
 --- !u!95 &1611201787765778902
 Animator:
   serializedVersion: 5

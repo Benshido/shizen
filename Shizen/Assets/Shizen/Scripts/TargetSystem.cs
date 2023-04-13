@@ -30,16 +30,26 @@ public class TargetSystem : MonoBehaviour
         get { return target; }
     }
     private GameObject target;
+    public Vector3 AimTarget
+    {
+        get { return aimTarget; }
+    }
+    private Vector3 aimTarget;
 
     private bool alteredLockonLine = false;
 
     private void Update()
     {
-        var deadOnes = targets.Where(x => x == null || !x.GetComponent<EnemyHP>().IsAlive).ToList();
-        for (int i = 0; i < deadOnes.Count; i++) { targets.Remove(deadOnes[i]); lockOn = false; }
-
         if (targets.Count > 0)
         {
+            var deadOnes = targets.Where(x => x == null || x.GetComponent<EnemyHP>().IsAlive == false).ToList();
+            for (int i = 0; i < deadOnes.Count; i++)
+            {
+                targets.Remove(deadOnes[i]);
+                lockOn = false;
+                deadOnes[i].GetComponent<Outline>().enabled = false;
+            }
+
             var smallestAngle = targetMaxAngle;
             if (!lockOn)
             {
@@ -67,6 +77,7 @@ public class TargetSystem : MonoBehaviour
                     var outline1 = target.GetComponent<Outline>();
                     outline1.OutlineWidth = targetedOutlineWidth;
                     outline1.OutlineColor = targetedOutlineColor;
+                    if (smallestAngle < targetMaxAngle / 3) aimTarget = sortedTargList[0].transform.position;
                 }
                 else target = null;
 
@@ -86,14 +97,19 @@ public class TargetSystem : MonoBehaviour
             lockOn = !lockOn;
             alteredLockonLine = false;
         }
+        aimTarget = Vector3.zero;
+    }
+
+    public void SetAimTarget(Vector3 pos)
+    {
+        aimTarget = pos;
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<EnemyHP>())
+        if (other.gameObject.TryGetComponent(out EnemyHP hp) && hp.IsAlive)
         {
-
             targets.Add(other.gameObject);
             var outline = other.GetComponent<Outline>();
             if (!outline)

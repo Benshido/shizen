@@ -74,10 +74,10 @@ public class PlayerAnimatorController : MonoBehaviour
                 animator.SetBool("Falling", !playerMovement.IsGrounded);
             }
         }
-        else
+        else if(!animator.GetBool("Dead"))
         {
             playerMovement.CanMove(0);
-            //animator.SetTrigger("Dead");
+            animator.SetBool("Dead", true);
         }
     }
 
@@ -109,7 +109,7 @@ public class PlayerAnimatorController : MonoBehaviour
         {
             for (int i = 0; i < elem.Count; i++)
             {
-                elem[i].SetInteger("ComboStage", index);
+               if(elem[i]!=null) elem[i].SetInteger("ComboStage", index);
             }
         }
     }

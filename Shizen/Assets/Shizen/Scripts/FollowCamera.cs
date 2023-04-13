@@ -7,6 +7,7 @@ public class FollowCamera : MonoBehaviour
     private Transform cam;
     [SerializeField] Transform playerModel = null;
     [SerializeField] Transform camParent = null;
+    [SerializeField] Transform aimCam = null;
     [SerializeField] TargetSystem targSyst = null;
     public Transform PlayerModel { get { return playerModel; } }
     [SerializeField] PlayerMovement player = null;
@@ -93,7 +94,7 @@ public class FollowCamera : MonoBehaviour
                 lastComboCount = pSkills.ComboCount;
             }
 
-            if (rotateToTarget)
+            if (rotateToTarget && !pSkills.IsAiming)
             {
                 targRotTimer += Time.unscaledDeltaTime;
                 if (targSyst.Target == null) { targRotTimer = targRotDuration; }
@@ -111,19 +112,45 @@ public class FollowCamera : MonoBehaviour
                     player.transform.rotation = Quaternion.RotateTowards(player.transform.rotation, y, 10 * Time.unscaledDeltaTime * 800);
                 }
             }
+
         }
 
-        var camNewPos = transform.position;
-
-        if (Physics.Raycast(target.position, transform.position - target.position, out RaycastHit hit, Mathf.Abs(transform.localPosition.z), ignore))
+        var multiplier = Time.unscaledDeltaTime * 15f;
+        if (pSkills.IsAiming)
         {
-            camNewPos = hit.point;
-        }
+            //look in aiming direction
+            var Y = camParent.transform.rotation;
+            player.transform.rotation = Quaternion.RotateTowards(player.transform.rotation, Y, 1 * Time.unscaledDeltaTime * 800);
 
-        cam.position = camNewPos;
-        camNewPos = cam.localPosition;
-        camNewPos += new Vector3(0, 0.05f, 0.1f);
-        cam.localPosition = camNewPos;
+            if (cam.transform.position != aimCam.transform.position)
+            {
+                cam.transform.position = Vector3.Lerp(cam.transform.position, aimCam.transform.position, multiplier);
+            }
+            else if(Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit))
+            {
+                targSyst.SetAimTarget(hit.point);
+            }
+        }
+        else
+        {
+            var camNewPos = transform.position;
+
+            if (Physics.Raycast(target.position, transform.position - target.position, out RaycastHit hit, Mathf.Abs(transform.localPosition.z), ignore))
+            {
+                camNewPos = hit.point;
+            }
+            if (Vector3.Distance(camNewPos, transform.position) < Vector3.Distance(cam.position, transform.position))
+            {
+                cam.transform.position = Vector3.Lerp(cam.transform.position, camNewPos, multiplier);
+            }
+            else
+            {
+                cam.position = camNewPos;
+                camNewPos = cam.localPosition;
+                camNewPos += new Vector3(0, 0.05f, 0.1f);
+                cam.localPosition = camNewPos;
+            }
+        }
     }
 
     private void CursorLock()

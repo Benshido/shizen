@@ -7,6 +7,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] Elements element;
     [SerializeField] bool hasSetTarget = false;
     [SerializeField] bool breakComboOnTriggerExit = false;
+
     [SerializeField] bool stickToGround;
     [SerializeField] float maxGroundRange = 5f;
     [SerializeField] float groundOffset = 1f;
@@ -14,6 +15,10 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] LayerMask IsGround;
     [SerializeField] Transform raycastStart;
     [SerializeField] Transform GroundObject;
+
+    [SerializeField] bool DestroyOnHitWall = false;
+    [SerializeField] Transform raycastToWallStart;
+    [SerializeField] float raycastToWallLength;
     private TargetSystem TargSyst;
     private bool rotate = false;
     private float rotateSpeed = 4;
@@ -23,9 +28,12 @@ public class PlayerAttack : MonoBehaviour
     private GameObject targObj = null;
     private bool resetOnDestroy = false;
 
+    private Vector3 lastPosition = Vector3.zero;
+
     // Start is called before the first frame update
     void Awake()
     {
+        lastPosition = transform.position;
         animator = GetComponent<Animator>();
         pAnimController = FindObjectOfType<PlayerAnimatorController>();
         targetRotationObj = FindObjectOfType<FollowCamera>().PlayerModel;
@@ -47,7 +55,7 @@ public class PlayerAttack : MonoBehaviour
                 {
                     resetOnDestroy = true;
                     Destroy(gameObject);
-                }               
+                }
             }
             else
             {
@@ -73,6 +81,21 @@ public class PlayerAttack : MonoBehaviour
 
             transform.rotation = Quaternion.Lerp(transform.rotation, targRot, Time.unscaledDeltaTime * 30);
         }
+        if (DestroyOnHitWall && raycastToWallStart != null)
+        {
+            RaycastHit hitWall;
+            if (Physics.Raycast(raycastToWallStart.position, transform.forward, out hitWall, IsGround) ||
+                Physics.Raycast(lastPosition, raycastToWallStart.position - lastPosition, out hitWall, Vector3.Distance(raycastToWallStart.position, lastPosition), IsGround))
+            {
+                if (hitWall.distance <= raycastToWallLength && !hitWall.collider.isTrigger)
+                {
+                    Debug.Log(hitWall.transform.name);
+                    Destroy(gameObject);
+                }
+            }
+            lastPosition = raycastToWallStart.position;
+        }
+
 
         RaycastHit hit;
         if (stickToGround && Physics.Raycast(raycastStart.position, Vector3.down, out hit, maxGroundRange, IsGround))
@@ -95,6 +118,13 @@ public class PlayerAttack : MonoBehaviour
         rotate = true;
         rotateSpeed = rotateSpd;
         frozenTargetRot = targetRotationObj.rotation;
+    }
+
+    public void SetRotationEqualCameraAim()
+    {
+        rotate = false;
+        if (TargSyst.AimTarget != Vector3.zero) transform.rotation = Quaternion.LookRotation(TargSyst.AimTarget);
+        else { rotate = true; frozenTargetRot = Camera.main.transform.rotation; }
     }
 
     public void AimToEnemyTarg(float rotateSpd)

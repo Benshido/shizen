@@ -4837,6 +4837,37 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &1955599605599522762
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7985815583382795157}
+  m_Layer: 3
+  m_Name: WallDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7985815583382795157
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955599605599522762}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.192, z: -0.115}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6571486191917291247}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5630927800790788923
 GameObject:
   m_ObjectHideFlags: 0
@@ -4910,6 +4941,7 @@ Transform:
   - {fileID: 6681128128750633837}
   - {fileID: 6681128129342384971}
   - {fileID: 382975161}
+  - {fileID: 7985815583382795157}
   m_Father: {fileID: 7969847255447744468}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5075,6 +5107,9 @@ MonoBehaviour:
     m_Bits: 1
   raycastStart: {fileID: 7969847255447744468}
   GroundObject: {fileID: 7969847255447744468}
+  DestroyOnHitWall: 0
+  raycastToWallStart: {fileID: 7985815583382795157}
+  raycastToWallLength: 0
 --- !u!95 &6571486192176570596
 Animator:
   serializedVersion: 5
