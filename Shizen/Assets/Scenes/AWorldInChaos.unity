@@ -611,7 +611,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hint
+  m_text: 'Tip:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1069,7 +1069,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You can press "J" to show a log of all dialogue
+  m_text: Missed some dialogue? You can press "J" to show a log of all dialogue
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2121,7 +2121,8 @@ AudioSource:
   m_GameObject: {fileID: 1344934239}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8324791927883226813, guid: 75b90765dbf89ff43a7636b4493a21ed,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 5c774d398073a6a4c8b0b683eb8447c7, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -3195,6 +3196,11 @@ PrefabInstance:
       propertyPath: waypoints.Array.data[0]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6038775469254216912, guid: 2a999a4444288264d919e785585f94b4,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e4be09921db13c9418c7261209b2d193, type: 2}
     - target: {fileID: 6038775469261446106, guid: 2a999a4444288264d919e785585f94b4,
         type: 3}
       propertyPath: m_RootOrder
@@ -3255,6 +3261,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DeadEnvironment
       objectReference: {fileID: 0}
+    - target: {fileID: 6038775469503033722, guid: 2a999a4444288264d919e785585f94b4,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e4be09921db13c9418c7261209b2d193, type: 2}
     - target: {fileID: 6110091127083426672, guid: 2a999a4444288264d919e785585f94b4,
         type: 3}
       propertyPath: player

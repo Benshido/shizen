@@ -5,11 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class LoadNextLevel : MonoBehaviour
 {
+    int currentSceneBuildIndex;
+
     private void OnTriggerEnter(Collider other)
     {
         // gets the curent screen
         //Scene sceneLoaded = SceneManager.GetActiveScene();
         // loads next level
-        SceneManager.LoadScene(2);
+        currentSceneBuildIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneBuildIndex + 1);
     }
 }

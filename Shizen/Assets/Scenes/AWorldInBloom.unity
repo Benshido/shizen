@@ -1257,6 +1257,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6038775469254216912, guid: 86e8e9fa0e0661c4ca0f267480e81acf,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e4be09921db13c9418c7261209b2d193, type: 2}
     - target: {fileID: 6038775469261446106, guid: 86e8e9fa0e0661c4ca0f267480e81acf,
         type: 3}
       propertyPath: m_RootOrder
@@ -1322,6 +1327,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 82.51
       objectReference: {fileID: 0}
+    - target: {fileID: 6038775469503033722, guid: 86e8e9fa0e0661c4ca0f267480e81acf,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e4be09921db13c9418c7261209b2d193, type: 2}
     - target: {fileID: 6038775469575756614, guid: 86e8e9fa0e0661c4ca0f267480e81acf,
         type: 3}
       propertyPath: m_NavMeshData
@@ -1416,7 +1426,8 @@ AudioSource:
   m_GameObject: {fileID: 1274195754}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8324791927883226813, guid: 75b90765dbf89ff43a7636b4493a21ed,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 9ee2108dec585d947a5ddd99def9af60, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1

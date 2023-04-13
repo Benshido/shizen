@@ -22,6 +22,9 @@ public class EnemyHP : MonoBehaviour
         hitPoints -= damage;
         if (hitPoints <= 0) IsAlive = false;
 
-        gameObject.transform.parent.gameObject.GetComponent<EnemyAIController>().RespondToAttack(IsAlive);
+        if (gameObject.transform.parent != null && gameObject.transform.parent.gameObject.GetComponent<EnemyAIController>())
+        {
+            gameObject.transform.parent.gameObject.GetComponent<EnemyAIController>().RespondToAttack(IsAlive);
+        }
     }
 }
