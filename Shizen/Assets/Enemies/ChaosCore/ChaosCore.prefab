@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 5825886639944042851}
   - component: {fileID: 5825886639944042879}
   - component: {fileID: 1410916921}
+  - component: {fileID: 1410916927}
   m_Layer: 7
   m_Name: ChaosCore
   m_TagString: Enemy
@@ -202,7 +203,7 @@ Transform:
   - {fileID: 5825886639525519833}
   - {fileID: 5825886639184072696}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5825886639944042849
 MeshFilter:
@@ -308,3 +309,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHitPoints: 50
+  hitPointsValue: {fileID: 0}
+--- !u!114 &1410916927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5825886639944042850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4915e8aa5e9b2964eb1714b33b15faba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hp: {fileID: 1410916921}
+  anim: {fileID: 0}
