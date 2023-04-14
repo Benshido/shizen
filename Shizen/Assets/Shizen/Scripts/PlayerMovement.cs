@@ -271,16 +271,13 @@ public class PlayerMovement : MonoBehaviour
             charController.Move((externalForces + movementAndDir) * Time.unscaledDeltaTime);
         }
 
-        //quick test on time slowing/speeding up
+      /*  //quick test on time slowing/speeding up
         if (Input.GetKeyDown(KeyCode.P))
         {
             if (Time.timeScale == 1)
                 Time.timeScale = 0.01f;
             else { Time.timeScale = 1; }
-        }
-
-        //if (Input.GetKeyDown(KeyCode.E)) Time.timeScale = 1;
-
+        }*/
     }
 
     /* private void SetSlopeSlideVelocity()

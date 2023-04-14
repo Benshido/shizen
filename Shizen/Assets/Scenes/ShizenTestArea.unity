@@ -381,6 +381,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 7451839048866838449, guid: cac21b8418c5bb84aa7939154c118660,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451839048866838449, guid: cac21b8418c5bb84aa7939154c118660,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7934501584685698896, guid: cac21b8418c5bb84aa7939154c118660,
         type: 3}
       propertyPath: m_Name
@@ -469,6 +479,16 @@ PrefabInstance:
     - target: {fileID: 8204300579749231311, guid: cac21b8418c5bb84aa7939154c118660,
         type: 3}
       propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579096373973730037, guid: cac21b8418c5bb84aa7939154c118660,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579096373973730037, guid: cac21b8418c5bb84aa7939154c118660,
+        type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
