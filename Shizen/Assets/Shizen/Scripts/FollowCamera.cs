@@ -128,7 +128,7 @@ public class FollowCamera : MonoBehaviour
             }
             else if(Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit))
             {
-                targSyst.SetAimTarget(hit.point);
+                targSyst.SetAimTarget(hit);
             }
         }
         else

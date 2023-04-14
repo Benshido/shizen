@@ -121,9 +121,20 @@ public class PlayerAttack : MonoBehaviour
 
     public void SetRotationEqualCameraAim()
     {
-        rotate = false;
-        if (TargSyst.AimTarget != Vector3.zero) transform.rotation = Quaternion.LookRotation(TargSyst.AimTarget);
-        else { rotate = true; frozenTargetRot = Camera.main.transform.rotation; }
+        rotate = true;
+        rotateSpeed = 100;
+        if (TargSyst.AimTarget != Vector3.zero)
+        {
+            var targpos = TargSyst.AimTarget - transform.position;
+            var targRot = Quaternion.LookRotation(targpos, Vector3.up);
+            frozenTargetRot = targRot;
+        }
+        else
+        {
+          //  var targpos = Camera.main.transform.position - transform.position;
+           // var targRot = Quaternion.LookRotation(targpos, Vector3.up);
+            frozenTargetRot = Camera.main.transform.rotation;
+        }
     }
 
     public void AimToEnemyTarg(float rotateSpd)

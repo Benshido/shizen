@@ -20,7 +20,7 @@ public class PlayerDamageColObj : MonoBehaviour
             if (other.gameObject.TryGetComponent(out EnemyHP hp))
             {
                 hp.TakeAttack(damage);
-                Debug.Log(gameObject.name + damage);
+                //Debug.Log(gameObject.name + damage);
                 if (destroyOnEnemyHit) StartCoroutine(Destroying());
             }
         }

@@ -46,6 +46,7 @@ public class TargetSystem : MonoBehaviour
             for (int i = 0; i < deadOnes.Count; i++)
             {
                 targets.Remove(deadOnes[i]);
+                aimTarget = Vector3.zero;
                 lockOn = false;
                 deadOnes[i].GetComponent<Outline>().enabled = false;
             }
@@ -77,9 +78,11 @@ public class TargetSystem : MonoBehaviour
                     var outline1 = target.GetComponent<Outline>();
                     outline1.OutlineWidth = targetedOutlineWidth;
                     outline1.OutlineColor = targetedOutlineColor;
-                    if (smallestAngle < targetMaxAngle / 3) aimTarget = sortedTargList[0].transform.position;
+                    if (smallestAngle < 20) aimTarget = sortedTargList[0].transform.position;
+                    else aimTarget = Vector3.zero;
+                    Debug.Log(aimTarget);
                 }
-                else target = null;
+                else target = null; 
 
                 targets = sortedTargList;
             }
@@ -97,12 +100,14 @@ public class TargetSystem : MonoBehaviour
             lockOn = !lockOn;
             alteredLockonLine = false;
         }
-        aimTarget = Vector3.zero;
+        // aimTarget = Vector3.zero;
     }
 
-    public void SetAimTarget(Vector3 pos)
+    public void SetAimTarget(RaycastHit hit)
     {
-        aimTarget = pos;
+        if (hit.distance <= 50)
+            aimTarget = hit.point;
+        else { aimTarget = Vector3.zero; }
     }
 
 
